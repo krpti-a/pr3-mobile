@@ -84,6 +84,15 @@ static void id_range(char *out, size_t cap, uint32_t n) {
     snprintf(out + k, cap - k, "]");
 }
 
+// Owns every part the game knows (the profile file may predate parts added later, e.g. the Donkey).
+static void own_everything(CPU *c, uint32_t json) {
+    char buf[4096];
+    id_range(buf, sizeof buf, vec_count(A_HatVecDat, A_HatVecOff));  replace_item(c, json, "hatArray", buf);
+    id_range(buf, sizeof buf, vec_count(A_HeadVecDat, A_HeadVecOff)); replace_item(c, json, "headArray", buf);
+    id_range(buf, sizeof buf, vec_count(A_BodyVecDat, A_BodyVecOff)); replace_item(c, json, "bodyArray", buf);
+    id_range(buf, sizeof buf, vec_count(A_FootVecDat, A_FootVecOff)); replace_item(c, json, "feetArray", buf);
+}
+
 // Builds the experimental (all unlocked) profile on top of a fresh default character and writes it to the current Settings path.
 static void create_unlocked_profile(CPU *c, uint32_t S) {
     ST32(S + 0x38, 0);                                          // drop the other profile's JSON (leaked: tiny)
@@ -134,7 +143,7 @@ static void switch_profile(CPU *c, int mode) {
     char full[1100]; snprintf(full, sizeof full, "%s/%s", rt_documents_root, name);
     ST32(S + 0x34, rt_new_cstr(name));
     g_mode = mode;
-    if (file_exists(full)) gcall(c, A_LoadSettings, &S, 1);
+    if (file_exists(full)) { gcall(c, A_LoadSettings, &S, 1); if (mode && LD32(S + 0x38)) own_everything(c, LD32(S + 0x38)); }
     else if (mode) create_unlocked_profile(c, S);
     else { ST32(S + 0x38, 0); gcall(c, A_SaveSettings, &S, 1); }   // writes a fresh default character
     fprintf(stderr, "[pr3] profile: %s\n", mode ? "experimental" : "normal");

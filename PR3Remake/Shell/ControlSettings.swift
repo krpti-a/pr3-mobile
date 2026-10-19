@@ -5,6 +5,8 @@ import Foundation
 struct ControlSettings: Equatable {
     enum Movement: Int { case joystick = 0, buttons = 1 }
 
+    /// The original game's own thumbstick and item button; every other option is off then.
+    var original = false
     var movement: Movement = .joystick
     /// The stick / d-pad only steers left and right; jumping (and crouching) then needs their own buttons.
     var horizontalOnly = false
@@ -28,13 +30,13 @@ final class ControlStore {
 
     private init() {
         var s = ControlSettings()
-        if defaults.object(forKey: "ctl.movement") != nil {
-            s.movement = ControlSettings.Movement(rawValue: defaults.integer(forKey: "ctl.movement")) ?? .joystick
-            s.horizontalOnly = defaults.bool(forKey: "ctl.horizontalOnly")
-            s.showJump = defaults.bool(forKey: "ctl.showJump")
-            s.showCrouch = defaults.bool(forKey: "ctl.showCrouch")
-            s.showItem = defaults.object(forKey: "ctl.showItem") == nil ? true : defaults.bool(forKey: "ctl.showItem")
-        }
+        func has(_ key: String) -> Bool { defaults.object(forKey: key) != nil }
+        if has("ctl.movement") { s.movement = ControlSettings.Movement(rawValue: defaults.integer(forKey: "ctl.movement")) ?? .joystick }
+        if has("ctl.original") { s.original = defaults.bool(forKey: "ctl.original") }
+        if has("ctl.horizontalOnly") { s.horizontalOnly = defaults.bool(forKey: "ctl.horizontalOnly") }
+        if has("ctl.showJump") { s.showJump = defaults.bool(forKey: "ctl.showJump") }
+        if has("ctl.showCrouch") { s.showCrouch = defaults.bool(forKey: "ctl.showCrouch") }
+        if has("ctl.showItem") { s.showItem = defaults.bool(forKey: "ctl.showItem") }
         s.normalize()
         settings = s
     }
@@ -46,6 +48,7 @@ final class ControlStore {
         guard s != settings else { return }
         settings = s
         defaults.set(s.movement.rawValue, forKey: "ctl.movement")
+        defaults.set(s.original, forKey: "ctl.original")
         defaults.set(s.horizontalOnly, forKey: "ctl.horizontalOnly")
         defaults.set(s.showJump, forKey: "ctl.showJump")
         defaults.set(s.showCrouch, forKey: "ctl.showCrouch")

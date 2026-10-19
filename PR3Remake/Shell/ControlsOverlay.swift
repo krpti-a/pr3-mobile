@@ -244,6 +244,7 @@ final class ControlsOverlay: UIView {
     private let gear = GlassButton(symbol: "gearshape.fill")
     private let panel = UIVisualEffectView(effect: UIBlurEffect(style: .systemThinMaterialDark))
     private let movementPicker = UISegmentedControl(items: ["Joystick", "Buttons"])
+    private let originalSwitch = UISwitch()
     private let horizontalSwitch = UISwitch(), jumpSwitch = UISwitch(), crouchSwitch = UISwitch(), itemSwitch = UISwitch()
     private let controllerLabel = UILabel()
     private let store = ControlStore.shared
@@ -255,6 +256,7 @@ final class ControlsOverlay: UIView {
     var touchMask: Int32 {
         guard inLevel, !touchControlsHidden else { return 0 }
         let s = store.settings
+        if s.original { return 0 }                                      // the game reads its own thumbstick
         var m: Int32 = s.movement == .buttons ? dpad.bits : joystick.bits
         if s.showJump && jump.isPressed { m |= 4 }
         if s.showCrouch && crouch.isPressed { m |= 8 }
@@ -271,7 +273,6 @@ final class ControlsOverlay: UIView {
         buildPanel()
         store.onChange = { [weak self] in self?.settingsChanged() }
         settingsChanged()
-        pr3_hud_config(0, 0, 0)                      // the original thumbstick and item button give way to these
         #if DEBUG
         if UserDefaults.standard.bool(forKey: "showPanel") { panel.isHidden = false }     // launch argument: -showPanel 1
         #endif
@@ -294,9 +295,10 @@ final class ControlsOverlay: UIView {
             let r = UIStackView(arrangedSubviews: [label(text, weight: .regular), toggle]); r.distribution = .equalSpacing; r.alignment = .center; return r
         }
         movementPicker.addTarget(self, action: #selector(movementChanged), for: .valueChanged)
-        for sw in [horizontalSwitch, jumpSwitch, crouchSwitch, itemSwitch] { sw.addTarget(self, action: #selector(switchChanged), for: .valueChanged) }
+        for sw in [originalSwitch, horizontalSwitch, jumpSwitch, crouchSwitch, itemSwitch] { sw.addTarget(self, action: #selector(switchChanged), for: .valueChanged) }
         controllerLabel.font = .systemFont(ofSize: 12); controllerLabel.textColor = UIColor(white: 1, alpha: 0.6)
-        let stack = UIStackView(arrangedSubviews: [label("Controls", size: 18, weight: .bold), movementPicker,
+        let stack = UIStackView(arrangedSubviews: [label("Controls", size: 18, weight: .bold), row("Original controls", originalSwitch),
+                                                   label("The game's own thumbstick and item button.", size: 12, weight: .regular, alpha: 0.6), movementPicker,
                                                    row("Sideways only", horizontalSwitch),
                                                    label("Steer left and right; jumping uses its own button.", size: 12, weight: .regular, alpha: 0.6),
                                                    label("Buttons", size: 13, weight: .semibold, alpha: 0.6),
@@ -315,7 +317,7 @@ final class ControlsOverlay: UIView {
     @objc private func movementChanged() { store.update { $0.movement = movementPicker.selectedSegmentIndex == 1 ? .buttons : .joystick } }
     @objc private func switchChanged() {
         store.update {
-            $0.horizontalOnly = horizontalSwitch.isOn; $0.showJump = jumpSwitch.isOn; $0.showCrouch = crouchSwitch.isOn; $0.showItem = itemSwitch.isOn
+            $0.original = originalSwitch.isOn; $0.horizontalOnly = horizontalSwitch.isOn; $0.showJump = jumpSwitch.isOn; $0.showCrouch = crouchSwitch.isOn; $0.showItem = itemSwitch.isOn
         }
         settingsChanged()                                                       // normalisation may have changed a switch back
     }
@@ -324,10 +326,17 @@ final class ControlsOverlay: UIView {
 
     private func settingsChanged() {
         let s = store.settings
+        originalSwitch.isOn = s.original
         movementPicker.selectedSegmentIndex = s.movement == .buttons ? 1 : 0
         horizontalSwitch.isOn = s.horizontalOnly
         jumpSwitch.isOn = s.showJump; jumpSwitch.isEnabled = !s.horizontalOnly
         crouchSwitch.isOn = s.showCrouch; itemSwitch.isOn = s.showItem
+        // With the original controls every other option is off (and dimmed).
+        let others = !s.original
+        for control in [movementPicker, horizontalSwitch, crouchSwitch, itemSwitch] as [UIControl] { control.isEnabled = others; control.alpha = others ? 1 : 0.35 }
+        jumpSwitch.isEnabled = others && !s.horizontalOnly; jumpSwitch.alpha = others ? 1 : 0.35
+        pr3_hud_config(s.original ? 1 : 0, s.original ? 1 : 0, 0)       // the original thumbstick and item button: only in "original controls"
+        pr3_hud_item_pos(-1, -1)
         dpad.horizontalOnly = s.horizontalOnly
         joystick.horizontalOnly = s.horizontalOnly
         setNeedsLayout()
@@ -366,7 +375,7 @@ final class ControlsOverlay: UIView {
         let m = Metrics(u: max(0.8, min(1.6, bounds.height / 402)))
         let k = bounds.height / 320                                     // points per game point
         let safe = safeAreaInsets
-        let show = inLevel && !touchControlsHidden
+        let show = inLevel && !touchControlsHidden && !s.original
         gear.isHidden = !inLevel
         joystick.isHidden = !(show && s.movement == .joystick)
         dpad.isHidden = !(show && s.movement == .buttons)

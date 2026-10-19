@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 ART = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'art', 'menu', 'experimental-bg.webp')
 
-TOP = 30                                                                  # rows cut from the top of the scaled picture (at 480 px width)
+TOP = 4                                                                   # rows cut from the top of the scaled picture (at 480 px width): keeps the castle below the label
 
 def make(src, dst):
     tile = Image.open(src).convert('RGBA'); w, h = tile.size; k = w / 512.0
@@ -16,7 +16,7 @@ def make(src, dst):
     bg = bg.resize((round(bg.width * f), round(bg.height * f)), Image.Resampling.LANCZOS).crop((0, TOP * (x1 - x0) // 480, x1 - x0, TOP * (x1 - x0) // 480 + y1 - y0))
     out = tile.copy(); out.paste(bg, (x0, y0)); out.putalpha(tile.getchannel('A'))
     d = ImageDraw.Draw(out)
-    box = [int(112 * k), int(338 * k), int(400 * k), int(404 * k)]        # label box like the original, lower to leave the castle visible
+    box = [int(124 * k), int(214 * k), int(388 * k), int(297 * k)]        # where the original tiles have their label (centre)
     d.rounded_rectangle(box, radius=int(14 * k), fill=(196, 222, 246, 255), outline=(20, 40, 120, 255), width=max(2, int(3 * k)))
     def font(sz):
         for p in ('/System/Library/Fonts/Supplemental/Comic Sans MS Bold.ttf', '/System/Library/Fonts/Supplemental/Chalkboard.ttc'):
