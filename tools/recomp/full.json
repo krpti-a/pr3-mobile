@@ -27,6 +27,7 @@
   "MainMenu::InitThumbList()": "wrap_MainMenu_InitThumbList",
   "PlatformRacing3::HandleEvent(Event*)": "wrap_PlatformRacing3_HandleEvent",
   "Player::ShowHats()": "wrap_Player_ShowHats",
-  "PartDescriptions::Init()": "wrap_PartDescriptions_Init"
+  "PartDescriptions::Init()": "wrap_PartDescriptions_Init",
+  "Minimap::DrawBlocks()": "wrap_Minimap_DrawBlocks"
  }
 }
