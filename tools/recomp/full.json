@@ -37,7 +37,11 @@
   "GamePlayMenu::GamePlayMenu()": "wrap_GamePlayMenu_ctor",
   "GamePlayMenu::AddRetryButton()": "wrap_GamePlayMenu_AddRetryButton",
   "ActionContainer::Draw(UIObject*)": "wrap_ActionContainer_Draw",
-  "GamePlayMenu::UpdateThumbstick()": "wrap_GamePlayMenu_UpdateThumbstick"
+  "GamePlayMenu::UpdateThumbstick()": "wrap_GamePlayMenu_UpdateThumbstick",
+  "RK_SFX::RK_SFX(char const*, bool)": "wrap_RK_SFX_ctor",
+  "RK_SFX::Play(bool)": "wrap_RK_SFX_Play",
+  "PlayGameSFX(e_GameSfx)": "wrap_PlayGameSFX",
+  "ActivePlayer::TouchBlock(Block*, int)": "wrap_ActivePlayer_TouchBlock"
  },
  "cpatches": {
   "BlockMap::Render()": [

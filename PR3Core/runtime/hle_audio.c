@@ -113,7 +113,7 @@ void hle__alcDestroyContext(CPU *c) { (void)c; }
 void hle__alcCloseDevice(CPU *c) { c->r[0] = 1; }
 void hle__alGetError(CPU *c) { c->r[0] = (uint32_t)alGetError(); }
 void hle__alGenBuffers(CPU *c) { ALuint ids[64]; ALsizei n = (ALsizei)c->r[0]; if (n > 64) n = 64; alGenBuffers(n, ids); for (int i = 0; i < n; i++) ST32(c->r[1] + 4 * i, ids[i]); }
-void hle__alGenSources(CPU *c) { ALuint ids[64]; ALsizei n = (ALsizei)c->r[0]; if (n > 64) n = 64; alGenSources(n, ids); for (int i = 0; i < n; i++) ST32(c->r[1] + 4 * i, ids[i]); }
+static int g_srcs; void hle__alGenSources(CPU *c) { ALuint ids[64]; ALsizei n = (ALsizei)c->r[0]; if (n > 64) n = 64; alGenSources(n, ids); g_srcs += n; if (getenv("PR3_AUDIOLOG")) fprintf(stderr, "[al] genSources(%d) -> %u, total %d, err 0x%x\n", n, ids[0], g_srcs, alGetError()); for (int i = 0; i < n; i++) ST32(c->r[1] + 4 * i, ids[i]); }
 void hle__alDeleteSources(CPU *c) { ALuint ids[64]; ALsizei n = (ALsizei)c->r[0]; if (n > 64) n = 64; for (int i = 0; i < n; i++) ids[i] = LD32(c->r[1] + 4 * i); alDeleteSources(n, ids); }
 void hle__alGetSourcei(CPU *c) { ALint v = 0; alGetSourcei(c->r[0], c->r[1], &v); ST32(c->r[2], (uint32_t)v); }
 void hle__alSourcei(CPU *c) { alSourcei(c->r[0], c->r[1], (ALint)c->r[2]); }
