@@ -8,6 +8,8 @@ keeps the original's position on the head), written to <Name>.png / <Name>@2x.pn
 as a white silhouette (the game multiplies it by the player's colour and draws the base over it)."""
 import sys, os, json
 from PIL import Image, ImageFilter
+import numpy as np
+from scipy import ndimage as ndi
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 ART = os.path.join(ROOT, 'art', 'hats')
@@ -17,6 +19,64 @@ HATS = {'party': ('PartyHat', 'party-hat'), 'top': ('TopHat', 'top-hat'), 'pirat
 def whiten(im):
     r, g, b, a = im.split(); w = Image.new('L', im.size, 255)
     return Image.merge('RGBA', (w, w, w, a))
+
+# Hats whose supplied colour layer has the right shape but sits a little off the coloured area of the sprite (the translucent
+# interior, which the game tints from underneath): its position and scale are fitted to that area. The fit is made on the @2x
+# sprite and reused (as fractions of the canvas) for the 1x one.
+FIT = {'top', 'party', 'pirate', 'nurse', 'boundy', 'happy'}
+FITS = {}
+
+def coloured_area(base, guide):
+    """Translucent interior of the sprite near the supplied layer: where the tinted layer shows through."""
+    a = np.array(base.split()[3]).astype(int); g = np.array(guide.split()[3]) > 128
+    r = max(1, round(3 * base.width / 256))
+    dist = ndi.distance_transform_edt(a > 0)
+    core = ndi.binary_opening((a > 0) & (a < 250) & (dist > r), np.ones((3, 3)))
+    lab, n = ndi.label(core); near = ndi.binary_dilation(g, iterations=6 * r); keep = np.zeros_like(core)
+    for i in range(1, n + 1):
+        comp = lab == i
+        if comp.sum() >= 12 * r * r and (comp & near).sum() >= 0.2 * comp.sum(): keep |= comp
+    return keep, a
+
+def fit_color(out_base, out_col, key):
+    W = out_base.width
+    if key in FITS:                                                     # 1x: reuse the @2x fit
+        fx, fy, sc = FITS[key]; dx, dy = round(fx * W), round(fy * W)
+    else:
+        area, a = coloured_area(out_base, out_col)
+        g0 = out_col.split()[3]
+        if not area.any(): return out_col
+        outside = a == 0
+        gm = np.array(g0) > 128; cx, cy = ndi.center_of_mass(gm)
+        best = (-9, 0, 0, 1.0)
+        for sc in np.arange(0.90, 1.101, 0.02):
+            m = Image.new('L', g0.size, 0)
+            scaled = g0.transform(g0.size, Image.AFFINE, (1 / sc, 0, cx - cx / sc, 0, 1 / sc, cy - cy / sc), resample=Image.BILINEAR)
+            sm = np.array(scaled) > 128
+            for dy in range(-18, 19):
+                for dx in range(-18, 19):
+                    t = np.roll(np.roll(sm, dy, axis=0), dx, axis=1)
+                    score = (t & area).sum() / area.sum() - 0.6 * (t & outside).sum() / max(1, t.sum())
+                    if score > best[0]: best = (score, dx, dy, sc)
+        _, dx, dy, sc = best
+        FITS[key] = (dx / W, dy / W, sc)
+        print('  fit', key, 'dx', dx, 'dy', dy, 'scale %.2f' % sc, 'score %.3f' % best[0])
+    gm = np.array(out_col.split()[3]) > 0; cx, cy = ndi.center_of_mass(gm)
+    ch = out_col.split()[3].transform(out_col.size, Image.AFFINE, (1 / sc, 0, cx - cx / sc - dx, 0, 1 / sc, cy - cy / sc - dy), resample=Image.BILINEAR)
+    k = max(1, round(W / 256))
+    solid = ndi.binary_fill_holes(ndi.binary_closing(np.array(out_base.split()[3]) > 8, structure=np.ones((3, 3)), iterations=3 * k))
+    inside = ndi.binary_erosion(solid, iterations=k)                                                            # no colour outside the sprite's outline
+    ch = Image.fromarray(np.where(inside, np.array(ch), 0).astype(np.uint8))
+    w = Image.new('L', out_col.size, 255)
+    return Image.merge('RGBA', (w, w, w, ch))
+
+# After the fit, hats that sit awkwardly on the player's head are moved (pixels of the @2x canvas; the 1x canvas gets half).
+SHIFT = {'TopHat': (15, 0), 'PartyHat': (10, 0), 'PirateHat': (11, -3), 'NurseHat': (6, 0), 'HappyHat': (10, 0), 'SharkFin': (20, 0),
+         'Parasail': (8, 0), 'BaseballHat': (21, -6)}
+
+def shift_image(im, dx, dy):
+    out = Image.new('RGBA', im.size, (0, 0, 0, 0)); out.alpha_composite(im, (max(dx, 0), max(dy, 0)), (max(-dx, 0), max(-dy, 0)))
+    return out
 
 def build(data, key, suffix):
     game, cname = HATS[key]
@@ -39,12 +99,20 @@ def build(data, key, suffix):
     out_col = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     cx, cy = x0 + round(px * f), y0 + round(py * f)
     out_col.alpha_composite(c, (max(cx, 0), max(cy, 0)), (max(-cx, 0), max(-cy, 0))) if True else None
+    if key in FIT: out_col = fit_color(out_base, out_col, key)
     return out_base, out_col
 
 data = sys.argv[1]
 for key, (game, _) in HATS.items():
-    for suffix in ('.png', '@2x.png'):
+    for suffix in ('@2x.png', '.png'):                                   # @2x first: the colour-layer fit is made there
         if not os.path.exists(os.path.join(data, game + suffix)): continue
         b, c = build(data, key, suffix)
         b.save(os.path.join(data, game + suffix))
         c.save(os.path.join(data, game + '_Color' + suffix))
+for name, (dx, dy) in SHIFT.items():
+    for suffix in ('@2x.png', '.png'):
+        for part in ('', '_Color'):
+            f = os.path.join(data, name + part + suffix)
+            if not os.path.exists(f): continue
+            im = Image.open(f).convert('RGBA'); k = im.width / 256.0
+            shift_image(im, round(dx * k), round(dy * k)).save(f)
