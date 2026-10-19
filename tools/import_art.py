@@ -23,7 +23,7 @@ def whiten(im):
 # Hats whose supplied colour layer has the right shape but sits a little off the coloured area of the sprite (the translucent
 # interior, which the game tints from underneath): its position and scale are fitted to that area. The fit is made on the @2x
 # sprite and reused (as fractions of the canvas) for the 1x one.
-FIT = set()                                                             # (fitting the layer to the sprite was worse than using the artist's own placement)
+FIT = {'boundy', 'happy'}                                                  # layer fitted to the hat's coloured area (artist placement was off for these two)
 FITS = {}
 CLIP = {'boundy', 'nurse'}
 FLAT = set()                                       # (cutting the hat out under the layer lost its shading: the hat's own translucent shading must stay on top)
