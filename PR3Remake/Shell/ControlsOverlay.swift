@@ -382,7 +382,7 @@ final class ControlsOverlay: UIView {
         jump.isHidden = !(show && s.showJump)
         crouch.isHidden = !(show && s.showCrouch)
         item.isHidden = !(show && s.showItem)
-        let right = bounds.width - max(safe.right, 0) - m.edge
+        let right = bounds.width - max(safe.right, 0) - m.edge * 0.35
         let bottom = bounds.height - max(safe.bottom, 8) - m.edge * 0.7
         let left = max(safe.left, 0) + m.edge
         // Settings gear: right beside the timer (the game draws it at the top right).
