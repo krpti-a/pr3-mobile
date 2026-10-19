@@ -25,6 +25,7 @@
  "chunk": 60,
  "wraps": {
   "MainMenu::InitThumbList()": "wrap_MainMenu_InitThumbList",
-  "PlatformRacing3::HandleEvent(Event*)": "wrap_PlatformRacing3_HandleEvent"
+  "PlatformRacing3::HandleEvent(Event*)": "wrap_PlatformRacing3_HandleEvent",
+  "Player::ShowHats()": "wrap_Player_ShowHats"
  }
 }

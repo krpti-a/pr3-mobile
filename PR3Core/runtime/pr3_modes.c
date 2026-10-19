@@ -96,6 +96,7 @@ static void create_unlocked_profile(CPU *c, uint32_t S) {
     // Levels unlock by the sum of the "medal" values in "campaign" (PR3Socket::CountMyMedals); one entry that is not a
     // real level supplies enough medals for every level without marking any of them as completed.
     replace_item(c, json, "campaign", "{\"0\":{\"timeMS\":0,\"medal\":9999}}");
+    if (getenv("PR3_DEBUG_HAT")) { char h[32]; snprintf(h, sizeof h, "%d", atoi(getenv("PR3_DEBUG_HAT"))); replace_item(c, json, "hat", h); }   // test aid
     replace_item(c, json, "prizes", "[]");                      // nothing left to win
     gcall(c, A_SaveSettings, &S, 1);
 }

@@ -17,6 +17,7 @@ VENV="$ROOT/tools/.venv"
 if [ ! -x "$VENV/bin/python" ]; then python3 -m venv "$VENV"; fi
 "$VENV/bin/pip" install -q capstone pillow
 PY="$VENV/bin/python"
+"$PY" "$ROOT/tools/fix_data.py" "$DATA"                  # repairs defects of the original data (empty propeller-hat colour layer)
 "$PY" "$ROOT/tools/make_unlocked_art.py" "$DATA"      # main-menu tile of the "all unlocked" single-player mode
 export PR3_BIN="$DATA/PR3.armv7"
 export PR3_SYMS="$TMP/syms.txt"
