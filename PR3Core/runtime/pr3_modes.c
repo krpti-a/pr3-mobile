@@ -24,6 +24,7 @@ void f_49aac_orig(CPU *c);
 
 // Calls a guest function from inside another guest call (below the caller's stack pointer).
 static uint32_t gcall(CPU *cur, uint32_t addr, const uint32_t *args, int n) {
+    if (!cur) { uint32_t ret[2] = {0, 0}; rt_call(addr, (uint32_t *)args, n, ret); return ret[0]; }
     CPU c; memset(&c, 0, sizeof c);
     int extra = n > 4 ? n - 4 : 0;
     uint32_t sp = (cur->sp - 0x1000) & ~7u;
@@ -46,11 +47,27 @@ static uint32_t guest_string(const char *s) { uint32_t o = rt_malloc(8); ST32(o,
 static uint32_t settings_object(void) { return LD32(LD32(A_SettingsOff + LD32(A_SettingsDat))); }
 static uint32_t vec_count(uint32_t dat, uint32_t off) { uint32_t v = LD32(dat) + off; return (LD32(v + 4) - LD32(v)) / 4; }
 
+// The running game edits a copy of the user (stats, parts, colours, medals) held by the offline socket; the original copies it
+// back into Settings with OfflineSocket::SaveToSettings (vtable slot) at some events only (a finished level). Before the
+// settings are written the shell does it too, so nothing the player changed is lost. `cur` is NULL outside guest code.
+void pr3_sync_user(CPU *cur) {
+    enum { A_SocketDat = 0xfc690, A_SocketOff = 0xfc470, A_OfflineSaveToSettings = 0xfbb70 };
+    uint32_t mgr = LD32(LD32(LD32(A_SocketDat) + A_SocketOff));
+    if (!mgr) return;
+    uint32_t sock = LD32(mgr);
+    if (!sock) return;
+    uint32_t vptr = LD32(sock);
+    if (getenv("PR3_DEBUG_MODES")) fprintf(stderr, "[pr3] sync user: manager 0x%x socket 0x%x vptr 0x%x\n", mgr, sock, vptr);
+    for (int i = 0; i < 64; i++) {
+        if (LD32(vptr + 4 * i) == A_OfflineSaveToSettings) { gcall(cur, A_OfflineSaveToSettings, &sock, 1); return; }
+    }
+}
+
 // ---- profiles -----------------------------------------------------------------------------------------------------
 #define NORMAL_FILE   "Settings.dat"
 #define UNLOCKED_FILE "Settings_unlocked.dat"
 static int g_mode;                          // 0 = normal profile, 1 = all unlocked
-static char g_dir[1024];                    // directory of the Settings file (from the original's own path)
+extern char rt_documents_root[1024];
 
 static int file_exists(const char *p) { FILE *f = fopen(p, "rb"); if (f) { fclose(f); return 1; } return 0; }
 
@@ -87,15 +104,14 @@ static void switch_profile(CPU *c, int mode) {
     if (mode == g_mode) return;
     uint32_t S = settings_object();
     if (!S) return;
+    pr3_sync_user(c);
     gcall(c, A_SaveSettings, &S, 1);                            // keep the profile we are leaving
-    if (!g_dir[0]) {
-        const char *cur = rt_cstr(LD32(S + 0x34)); const char *slash = strrchr(cur, '/');
-        if (slash) { size_t n = (size_t)(slash - cur); if (n >= sizeof g_dir) n = sizeof g_dir - 1; memcpy(g_dir, cur, n); g_dir[n] = 0; }
-    }
-    char path[1100]; snprintf(path, sizeof path, "%s/%s", g_dir, mode ? UNLOCKED_FILE : NORMAL_FILE);
-    ST32(S + 0x34, rt_new_cstr(path));
+    // The game keeps a relative name ("Settings.dat") and resolves it inside the Documents folder itself.
+    const char *name = mode ? UNLOCKED_FILE : NORMAL_FILE;
+    char full[1100]; snprintf(full, sizeof full, "%s/%s", rt_documents_root, name);
+    ST32(S + 0x34, rt_new_cstr(name));
     g_mode = mode;
-    if (file_exists(path)) gcall(c, A_LoadSettings, &S, 1);
+    if (file_exists(full)) gcall(c, A_LoadSettings, &S, 1);
     else if (mode) create_unlocked_profile(c, S);
     else { ST32(S + 0x38, 0); gcall(c, A_SaveSettings, &S, 1); }   // writes a fresh default character
     fprintf(stderr, "[pr3] profile: %s\n", mode ? "all unlocked" : "normal");

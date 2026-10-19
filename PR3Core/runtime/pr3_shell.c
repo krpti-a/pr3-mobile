@@ -98,6 +98,7 @@ void pr3_touch(int phase, int touch_id, float x, float y) {
 void pr3_save(void) {
     if (!g_booted) return;
     uint32_t slot = 0x843c + LD32(0x846c), settings = LD32(LD32(slot));
+    { void pr3_sync_user(CPU *); pr3_sync_user(NULL); }
     if (settings) rt_call(0x63740, &settings, 1, NULL);         // Settings::SaveSettings
 }
 
