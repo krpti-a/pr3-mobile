@@ -95,8 +95,18 @@ void pr3_touch(int phase, int touch_id, float x, float y) {
 // The original saved its Settings.dat (character, unlocked parts, campaign progress) in -applicationWillResignActive:
 // (0x8408). iOS apps are suspended or killed without further notice, so the shell calls this when the app leaves the
 // foreground and every few seconds while playing (a wall-clock timer in the shell).
+// The game edits a copy of the user (stats, parts, colours) held by the offline socket and copies it into Settings with
+// OfflineSocket::SaveToSettings only at some events (a finished level); do it before the settings are written.
+static void sync_user(void) {
+    uint32_t mgr = LD32(LD32(LD32(0xfc690) + 0xfc470));      // SocketManager
+    uint32_t sock = mgr ? LD32(mgr) : 0, vptr = sock ? LD32(sock) : 0;
+    for (int i = 0; vptr && i < 64; i++)
+        if (LD32(vptr + 4 * i) == 0xfbb70) { rt_call(0xfbb70, &sock, 1, NULL); return; }   // OfflineSocket::SaveToSettings
+}
+
 void pr3_save(void) {
     if (!g_booted) return;
+    sync_user();
     uint32_t slot = 0x843c + LD32(0x846c), settings = LD32(LD32(slot));
     { void pr3_sync_user(CPU *); pr3_sync_user(NULL); }
     if (settings) rt_call(0x63740, &settings, 1, NULL);         // Settings::SaveSettings
