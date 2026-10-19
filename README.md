@@ -4,8 +4,8 @@ This is the **original 2010 iOS game, ported** — not a re-creation. The game's
 rendering, menus, items, effects: everything the original app did offline) is statically recompiled to C and runs
 inside a small native iOS shell (SwiftUI + OpenGL ES + OpenAL). Art, levels and sounds are the original files.
 
-You need your own copy of the original app, `Platform Racing 3.ipa` (32-bit, iOS 4.3). Nothing from it is
-included here and none of it may be redistributed.
+The original `Platform Racing 3.ipa` (32-bit, iOS 4.3) is included at `original/Platform Racing 3.ipa`, so the
+build works from this checkout. You can also pass a different IPA path to `tools/build_game.sh`.
 
 ## How it works
 
@@ -28,12 +28,27 @@ C locals; VFP and the NEON subset the game uses are supported. Calls into the OS
 `objc_msgSend` …) go to the runtime above. The game thinks it is still running on a 2010 iPhone: it still draws a
 320×480 portrait framebuffer rotated by 90°, counts frames at 30 fps and talks to its original touch API.
 
-## Build
+## Build and run
 
-1. `tools/build_game.sh "/path/to/Platform Racing 3.ipa"` — extracts the data and generates `PR3Core/generated` (~10 s).
-2. `python3 tools/gen_xcodeproj.py` — writes `PR3Remake.xcodeproj` (re-run if you add source files).
-   For a real device set your team and a unique bundle id: `PR3_TEAM=ABCDE12345 PR3_BUNDLE_ID=com.you.pr3 python3 tools/gen_xcodeproj.py`
-3. Open `PR3Remake.xcodeproj`, choose the simulator or your iPhone (set **Signing → Team** if you did not pass `PR3_TEAM`), Run.
+From the repository root, run these commands in order:
+
+```sh
+./tools/build_game.sh
+python3 tools/gen_xcodeproj.py
+open PR3Remake.xcodeproj
+```
+
+`build_game.sh` reads `original/Platform Racing 3.ipa` by default. To use a copy elsewhere, run
+`./tools/build_game.sh "/path/to/Platform Racing 3.ipa"` instead. It extracts the original game data and generates
+`PR3Core/generated`; the project generator then adds those files to Xcode. In Xcode, select the **PR3Remake** scheme,
+choose an iOS Simulator or your iPhone, and press **Run**. For a physical iPhone, select your Apple development team
+under **Signing & Capabilities**, or set it before generating the project:
+
+```sh
+PR3_TEAM=ABCDE12345 PR3_BUNDLE_ID=com.you.pr3 python3 tools/gen_xcodeproj.py
+```
+
+If you add or remove source files, rerun `python3 tools/gen_xcodeproj.py` before building.
 
 Requirements: Xcode 15+, Python 3 (the scripts create `tools/.venv` with Capstone). Landscape only, iOS 16+.
 Generated C is compiled with `-ffp-contract=off` on purpose: the original's `vmla` rounds the product before the
@@ -75,7 +90,7 @@ The `original` branch is the faithful port plus bug fixes only. `main` adds, on 
 
 ## Verification (why you can trust the port)
 
-`tools/verify/run_all.sh "/path/to/Platform Racing 3.ipa"` re-runs everything below (~15 min):
+`tools/verify/run_all.sh "original/Platform Racing 3.ipa"` re-runs everything below (~15 min):
 
 1. **Instruction-level differential test** (`tools/verify/collect.py`, `run.py`). All 49,807 distinct non-branch
    instruction encodings in the game's code are executed on random registers, flags, VFP/NEON state and memory in

@@ -1,11 +1,16 @@
 #!/bin/bash
-# Converts your own copy of the original Platform Racing 3 iOS app into everything the Xcode project needs:
+# Converts the bundled (or an explicitly supplied) Platform Racing 3 iOS app into everything the Xcode project needs:
 #   - PR3Remake/Resources/GameData     original data files (art, levels, sounds) + PR3.code (the armv7 code image)
 #   - PR3Core/generated                the original game code statically recompiled to C
-# usage: tools/build_game.sh "/path/to/Platform Racing 3.ipa"
+# usage: tools/build_game.sh ["/path/to/Platform Racing 3.ipa"]
 set -euo pipefail
-IPA="${1:?path to Platform Racing 3.ipa}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+IPA="${1:-$ROOT/original/Platform Racing 3.ipa}"
+if [ ! -f "$IPA" ]; then
+  echo "IPA not found: $IPA" >&2
+  echo 'Place your copy at original/Platform Racing 3.ipa or pass its path as the first argument.' >&2
+  exit 1
+fi
 TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
 unzip -q "$IPA" 'Payload/PR3.app/*' -d "$TMP"
 APP="$TMP/Payload/PR3.app"
