@@ -21,7 +21,11 @@
   "___-[MG",
   "___-[Tapjoy"
  ],
- "overrides": {},
+ "overrides": {
+  "LodeFlate_inflate(ucvector*, unsigned char const*, unsigned long, unsigned long)": "override_LodeFlate_inflate",
+  "adler32(unsigned char const*, unsigned int)": "override_adler32",
+  "unfilter(unsigned char*, unsigned char const*, unsigned int, unsigned int, unsigned int)": "override_unfilter"
+ },
  "chunk": 60,
  "wraps": {
   "MainMenu::InitThumbList()": "wrap_MainMenu_InitThumbList",

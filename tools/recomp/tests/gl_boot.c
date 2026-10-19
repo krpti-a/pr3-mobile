@@ -14,10 +14,11 @@
 #include <OpenGL/gl.h>
 #include <OpenGL/glext.h>
 #include <sys/resource.h>
+#include <time.h>
 
 void rt_gl_set_log(int);
 void rt_gl_set_draw_limit(int);
-extern uint32_t rt_gl_calls, rt_gl_draws;
+extern uint32_t rt_gl_calls, rt_gl_draws, rt_gl_reads; extern double rt_gl_read_ms;
 
 static void save_ppm(const char *path, int w, int h) {
     uint8_t *px = malloc(w * h * 4);
@@ -87,7 +88,10 @@ int main(int argc, char **argv) {
             if (page) rt_call(0xdef48, &page, 1, NULL);
         }
         if (getenv("GLOG_AT") && i == atoi(getenv("GLOG_AT"))) rt_gl_set_log(getenv("GLOG_N") ? atoi(getenv("GLOG_N")) : 400);
+        struct timespec t0, t1; clock_gettime(CLOCK_MONOTONIC, &t0);
         pr3_frame(1000.0 / 30.0);
+        if (getenv("READLOG")) { static uint32_t last; if (rt_gl_reads != last) { fprintf(stderr, "[reads] frame %d: +%u\n", i, rt_gl_reads - last); last = rt_gl_reads; } }
+        if (getenv("FRAMETIME")) { glFinish(); clock_gettime(CLOCK_MONOTONIC, &t1); double ms = (t1.tv_sec - t0.tv_sec) * 1e3 + (t1.tv_nsec - t0.tv_nsec) / 1e6; if (ms > atof(getenv("FRAMETIME"))) fprintf(stderr, "[time] frame %d: %.1f ms (gl calls %u, draws %u)\n", i, ms, rt_gl_calls, rt_gl_draws); }
         int want = i % every == 0;
         if (getenv("SAVE_FRAMES")) { want = 0; char *sf = strdup(getenv("SAVE_FRAMES")); for (char *tok = strtok(sf, ","); tok; tok = strtok(NULL, ",")) if (atoi(tok) == i) want = 1; free(sf); }
         if (want) { char p[512]; snprintf(p, sizeof p, "%s/frame_%03d.ppm", out, i); save_ppm(p, W, H); }
@@ -96,5 +100,6 @@ int main(int argc, char **argv) {
     pr3_save();
     { void rt_objc_stats(void); rt_objc_stats(); }
     { struct rusage ru; getrusage(RUSAGE_SELF, &ru); fprintf(stderr, "gl calls %u draws %u maxrss %.1f MB\n", rt_gl_calls, rt_gl_draws, ru.ru_maxrss / 1048576.0); }
+    if (getenv("READLOG")) fprintf(stderr, "[reads] total %u, %.1f ms in glReadPixels\n", rt_gl_reads, rt_gl_read_ms);
     return 0;
 }

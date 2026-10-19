@@ -121,7 +121,7 @@ target = {
     "SWIFT_OBJC_BRIDGING_HEADER": f"{APP}/PR3Remake-Bridging-Header.h",
     "HEADER_SEARCH_PATHS": "(\"$(SRCROOT)/PR3Core/include\", \"$(SRCROOT)/PR3Core/generated\")",
     "OTHER_CFLAGS": "(\"-w\", \"-ffp-contract=off\", \"-DRT_GL_REAL\", \"-DRT_AUDIO_REAL\")",
-    "OTHER_LDFLAGS": "(\"-framework\", OpenGLES, \"-framework\", QuartzCore, \"-framework\", AudioToolbox, \"-framework\", OpenAL, \"-framework\", CoreFoundation)",
+    "OTHER_LDFLAGS": "(\"-framework\", OpenGLES, \"-framework\", QuartzCore, \"-framework\", AudioToolbox, \"-framework\", OpenAL, \"-framework\", CoreFoundation, \"-lz\")",
 }
 if os.environ.get("PR3_TEAM"): target["DEVELOPMENT_TEAM"] = os.environ["PR3_TEAM"]
 def cfg(id_, name, settings):

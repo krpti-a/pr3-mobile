@@ -1,5 +1,6 @@
 // OpenGL ES 1.1 calls made by the original engine, forwarded to the host GL (or logged when RT_GL_NULL).
 #include "arm_rt.h"
+#include <time.h>
 #if defined(RT_GL_REAL)
   #if defined(__APPLE__)
     #include <TargetConditionals.h>
@@ -53,7 +54,7 @@ typedef unsigned int GLenum, GLuint; typedef int GLint, GLsizei; typedef float G
 #endif
 static float AF(CPU *c, int i) { return F32_BITS(c->r[i]); }
 static float SF(CPU *c, int i) { return LDF(c->sp + 4 * i); }      // float argument on the stack
-uint32_t rt_gl_calls, rt_gl_draws;
+uint32_t rt_gl_calls, rt_gl_draws, rt_gl_reads; double rt_gl_read_ms;
 float rt_gl_scale = 1.0f;
 int rt_wide_off;                 // widescreen: points added on each side of the 480-point game screen (see "Widescreen" below)
 static int vp_scaled = 1;        // the 320x480 screen viewport is scaled; the 480x320 art-capture viewport (block pictures) is not      // framebuffer pixels per game point (the game addresses a 320 x 480 portrait screen)
@@ -174,8 +175,11 @@ void hle__glReadPixels(CPU *c) {
     // (x, y, w, h, format, type, pixels) -> format/type/pixels on the stack
     uint32_t fmt = LD32(c->sp), type = LD32(c->sp + 4), pix = LD32(c->sp + 8);
     (void)fmt; (void)type; (void)pix;
+    rt_gl_reads++;
     GLOG("glReadPixels %d %d %d %d", (int)c->r[0], (int)c->r[1], (int)c->r[2], (int)c->r[3]);
+    struct timespec t0, t1; clock_gettime(CLOCK_MONOTONIC, &t0);
     G(glReadPixels((GLint)c->r[0], (GLint)c->r[1], (GLsizei)c->r[2], (GLsizei)c->r[3], fmt, type, rt_ptr(pix)));
+    clock_gettime(CLOCK_MONOTONIC, &t1); rt_gl_read_ms += (t1.tv_sec - t0.tv_sec) * 1e3 + (t1.tv_nsec - t0.tv_nsec) / 1e6;
     if (getenv("PR3_DUMP_READ")) {       // debugging aid: dump every framebuffer read-back
         static int n; char name[128]; snprintf(name, sizeof name, "%s/read_%03d_%dx%d.pam", getenv("PR3_DUMP_READ"), n++, (int)c->r[2], (int)c->r[3]);
         FILE *f = fopen(name, "wb"); if (f) { fprintf(f, "P7\nWIDTH %d\nHEIGHT %d\nDEPTH 4\nMAXVAL 255\nTUPLTYPE RGB_ALPHA\nENDHDR\n", (int)c->r[2], (int)c->r[3]); fwrite(rt_ptr(pix), 4, c->r[2] * c->r[3], f); fclose(f); }
