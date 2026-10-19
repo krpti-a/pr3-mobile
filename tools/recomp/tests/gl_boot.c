@@ -52,6 +52,8 @@ int main(int argc, char **argv) {
     if (getenv("TAPS")) { char *s = strdup(getenv("TAPS")); for (char *tok = strtok(s, ","); tok && ntaps < 64; tok = strtok(NULL, ",")) { sscanf(tok, "%d:%d:%d", &tap_f[ntaps], &tap_x[ntaps], &tap_y[ntaps]); ntaps++; } }
     int hold_f1[16], hold_f2[16], hold_x[16], hold_y[16], nholds = 0;
     if (getenv("HOLDS")) { char *s2 = strdup(getenv("HOLDS")); for (char *tok = strtok(s2, ","); tok && nholds < 16; tok = strtok(NULL, ",")) { sscanf(tok, "%d:%d:%d:%d", &hold_f1[nholds], &hold_f2[nholds], &hold_x[nholds], &hold_y[nholds]); nholds++; } }
+    int drag_f1[8], drag_f2[8], drag_x1[8], drag_y1[8], drag_x2[8], drag_y2[8], ndrags = 0;     // DRAGS="f1:f2:x1:y1:x2:y2,..." swipe in landscape game coordinates
+    if (getenv("DRAGS")) { char *s3 = strdup(getenv("DRAGS")); for (char *tok = strtok(s3, ","); tok && ndrags < 8; tok = strtok(NULL, ",")) { sscanf(tok, "%d:%d:%d:%d:%d:%d", &drag_f1[ndrags], &drag_f2[ndrags], &drag_x1[ndrags], &drag_y1[ndrags], &drag_x2[ndrags], &drag_y2[ndrags]); ndrags++; } }
     int dl_frame = getenv("PR3_LIMIT_FRAME") ? atoi(getenv("PR3_LIMIT_FRAME")) : 1 << 30, dl = getenv("PR3_DRAW_LIMIT") ? atoi(getenv("PR3_DRAW_LIMIT")) : -1;
     const char *out = getenv("PR3_OUT") ? getenv("PR3_OUT") : ".";
 
@@ -70,6 +72,12 @@ int main(int argc, char **argv) {
             else if (i > hold_f1[k] && i < hold_f2[k]) pr3_touch(1, 500 + k, xp, yp);
             else if (i == hold_f2[k]) pr3_touch(3, 500 + k, xp, yp);
         }
+        for (int k = 0; k < ndrags; k++) {
+            if (i < drag_f1[k] || i > drag_f2[k]) continue;
+            float t = drag_f2[k] > drag_f1[k] ? (float)(i - drag_f1[k]) / (drag_f2[k] - drag_f1[k]) : 1.0f, xp, yp;
+            to_portrait((int)(drag_x1[k] + (drag_x2[k] - drag_x1[k]) * t), (int)(drag_y1[k] + (drag_y2[k] - drag_y1[k]) * t), &xp, &yp);
+            pr3_touch(i == drag_f1[k] ? 0 : (i == drag_f2[k] ? 3 : 1), 700 + k, xp, yp);
+        }
         if (getenv("FINISH_AT") && i == atoi(getenv("FINISH_AT"))) {      // test aid: make the player cross the finish line (OfflineGamePage::IFinished)
             uint32_t slot = 0x1b7b8 + LD32(0x1b83c), mainmgr = LD32(LD32(slot)), page = LD32(mainmgr + 0x104);
             fprintf(stderr, "[test] finishing level: MainMgr 0x%x page 0x%x\n", mainmgr, page);
@@ -81,6 +89,7 @@ int main(int argc, char **argv) {
         if (getenv("SAVE_FRAMES")) { want = 0; char *sf = strdup(getenv("SAVE_FRAMES")); for (char *tok = strtok(sf, ","); tok; tok = strtok(NULL, ",")) if (atoi(tok) == i) want = 1; free(sf); }
         if (want) { char p[512]; snprintf(p, sizeof p, "%s/frame_%03d.ppm", out, i); save_ppm(p, W, H); }
     }
+    if (getenv("PR3_DEBUG_MODES")) { void pr3_modes_dump(void); pr3_modes_dump(); }
     pr3_save();
     { void rt_objc_stats(void); rt_objc_stats(); }
     { struct rusage ru; getrusage(RUSAGE_SELF, &ru); fprintf(stderr, "gl calls %u draws %u maxrss %.1f MB\n", rt_gl_calls, rt_gl_draws, ru.ru_maxrss / 1048576.0); }

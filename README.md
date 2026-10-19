@@ -42,6 +42,15 @@ add, and fused multiply-adds would change the physics.
 Controls are the original's: the on-screen thumbstick (left/right/up/down), item button at the bottom right,
 tap the menus. Progress is saved by the game itself in the app's Documents folder (`Settings.dat`).
 
+## Game modes and saves
+
+The main menu has two single-player tiles (swipe the row): **Single Player** (the original, progress as in 2010) and
+**Single Player – All Unlocked**, a second profile with every hat, head, body and feet part and every level open. Each
+profile has its own save file in the app's Documents folder (`Settings.dat`, `Settings_unlocked.dat`), written by the
+game itself when the app leaves the foreground and every 10 seconds. The tile is added by wrapping two original
+functions (`PR3Core/runtime/pr3_modes.c`, `wraps` in `tools/recomp/full.json`); its artwork is generated from the
+original one by `tools/make_unlocked_art.py`.
+
 ## What works
 
 - Everything the original did without its servers: title, menus, the character screen, all 50 single-player levels

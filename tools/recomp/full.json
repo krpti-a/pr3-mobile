@@ -22,5 +22,9 @@
   "___-[Tapjoy"
  ],
  "overrides": {},
- "chunk": 60
+ "chunk": 60,
+ "wraps": {
+  "MainMenu::InitThumbList()": "wrap_MainMenu_InitThumbList",
+  "PlatformRacing3::HandleEvent(Event*)": "wrap_PlatformRacing3_HandleEvent"
+ }
 }

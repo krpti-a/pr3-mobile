@@ -18,6 +18,9 @@ def main():
     overrides = {}      # addr -> C symbol
     for name, csym in cfg.get('overrides', {}).items():
         overrides[by_name[name]] = csym
+    wraps = {}          # addr -> C symbol: the original is kept as f_<addr>_orig and f_<addr> calls the wrapper
+    for name, csym in cfg.get('wraps', {}).items():
+        wraps[by_name[name]] = csym
     roots = []
     for r in cfg['roots']:
         if r == '*':
@@ -39,6 +42,7 @@ def main():
             refs.add(a); continue
         end = recomp.func_end(a)
         body, g = recomp.gen_function(name, a, end)
+        if a in wraps: body = body.replace('void f_%x(CPU *c)' % a, 'void f_%x_orig(CPU *c)' % a, 1)
         done[a] = body
         for m in re.findall(r'UNIMPL\("([^"]*)"\)', body): unsupported.setdefault(a, []).append(m)
         for t in g.callees:
@@ -63,6 +67,7 @@ def main():
         f.write('#ifndef GEN_DECLS_H\n#define GEN_DECLS_H\n#include "arm_rt.h"\n')
         allf = sorted(set(done) | set(missing) | set(overrides))
         for a in allf: f.write('void f_%x(CPU *c);\n' % a)
+        for a in wraps: f.write('void f_%x_orig(CPU *c);\n' % a)
         for a in stub_addrs: f.write('void stub_%x(CPU *c);\n' % a)
         f.write('#endif\n')
     with open(os.path.join(out, 'gen_stubs.c'), 'w') as f:
@@ -75,6 +80,9 @@ def main():
                 seen.add(m)
                 f.write('__attribute__((weak)) void hle_%s(CPU *c) { rt_unhandled_import("%s", c); }\n' % (m, nm))
             f.write('void stub_%x(CPU *c) { hle_%s(c); }\n' % (a, m))
+        for a, cs in sorted(wraps.items()):
+            f.write('__attribute__((weak)) void %s(CPU *c) { f_%x_orig(c); }\n' % (cs, a))
+            f.write('void f_%x(CPU *c) { %s(c); }  /* wrapper */\n' % (a, cs))
         osyms = set()
         for a in sorted(set(missing) | set(overrides)):
             nm = names.get(a, 'sub_%x' % a)

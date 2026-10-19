@@ -7,653 +7,228 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		092B94CBD98B47F675C4B300 /* gen_036.c in Sources */ = {isa = PBXBuildFile; fileRef = F8BF8674E2859342BBD07E1E /* gen_036.c */; };
-		0DC60BC92692F71E476EE92B /* gen_037.c in Sources */ = {isa = PBXBuildFile; fileRef = F4F66138C5D1A1D4553EA023 /* gen_037.c */; };
-		0E1C6FA257A5B8E9F9E760AC /* gen_022.c in Sources */ = {isa = PBXBuildFile; fileRef = FB518D41133DFEEC071229A1 /* gen_022.c */; };
-		120C02B8D374DA55796FF007 /* gen_062.c in Sources */ = {isa = PBXBuildFile; fileRef = 10715C8901E0E07F197631D2 /* gen_062.c */; };
-		1407183FCBE6A49941E502D0 /* gen_047.c in Sources */ = {isa = PBXBuildFile; fileRef = DBFECB2ACED4A7B75CD85048 /* gen_047.c */; };
-		1539FA00497A0C790694D8F6 /* gen_stubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DA3C2D469409ADA00CE92C5 /* gen_stubs.c */; };
-		154925BBB2BB4ABBA66B2E3D /* gen_057.c in Sources */ = {isa = PBXBuildFile; fileRef = BBB7EE3030976B8CA029AC7A /* gen_057.c */; };
-		1678A66072D09EC1F00DBE7C /* gen_043.c in Sources */ = {isa = PBXBuildFile; fileRef = 30BA21A7E523CBE8BA5BFA68 /* gen_043.c */; };
-		1ACFED3BCBBB4A59A2F84F42 /* gen_035.c in Sources */ = {isa = PBXBuildFile; fileRef = D44CBB97AB888DA6DC84EC9C /* gen_035.c */; };
-		1E47CB31D3804CA5184CA6AC /* gen_054.c in Sources */ = {isa = PBXBuildFile; fileRef = BD5400AC0F82FBB6C0063176 /* gen_054.c */; };
-		252B9C99C31C0A76567C3667 /* gen_005.c in Sources */ = {isa = PBXBuildFile; fileRef = ACFCFA2DF26F6E45DDEC2FAA /* gen_005.c */; };
-		266BCB2919DACFD3629A1C68 /* gen_binds.c in Sources */ = {isa = PBXBuildFile; fileRef = 333E2DA00EFDD9412D2E9F9D /* gen_binds.c */; };
-		28013CB1AAD0E177074237F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80682A187638843CB5D250F2 /* Assets.xcassets */; };
-		3A2CD3000ADDE6D527317344 /* gen_016.c in Sources */ = {isa = PBXBuildFile; fileRef = 174D4B0FC6A02B5E219D6BD0 /* gen_016.c */; };
-		41359B7E1AF551BD0B3CDC66 /* gen_013.c in Sources */ = {isa = PBXBuildFile; fileRef = 1FD84A35E5C266FCABC9C34F /* gen_013.c */; };
-		423E9FEFA8F2639783E158C6 /* gen_042.c in Sources */ = {isa = PBXBuildFile; fileRef = 07ACDEF2CD981F47F97D11BF /* gen_042.c */; };
-		476B18054963EA4C0B1B42E2 /* gen_030.c in Sources */ = {isa = PBXBuildFile; fileRef = C1793FD302591BE6E3D4FAEB /* gen_030.c */; };
-		4CA1F5CAD1EF1217BEA5AAF2 /* gen_033.c in Sources */ = {isa = PBXBuildFile; fileRef = A9F7E3AF1F8600F8E7816868 /* gen_033.c */; };
-		5005F1A1A2880C2E62139A2C /* gen_001.c in Sources */ = {isa = PBXBuildFile; fileRef = 17C348D5DC58CF5B4C7A8875 /* gen_001.c */; };
-		532A774EC61E6631E9AC0767 /* hle_libc.c in Sources */ = {isa = PBXBuildFile; fileRef = 70A350F1DCE3141F149FEB57 /* hle_libc.c */; };
-		535435FB510C2965FED77483 /* gen_060.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F5B408ACC5F4950C5A06447 /* gen_060.c */; };
-		5A5C96EC48C246B70AF3F942 /* gen_061.c in Sources */ = {isa = PBXBuildFile; fileRef = 71B5489EEA2E22405ABC3606 /* gen_061.c */; };
-		5DC540C48B50F3C48832D1DC /* gen_040.c in Sources */ = {isa = PBXBuildFile; fileRef = B7F8DCC9CC4C2AF2717781F4 /* gen_040.c */; };
-		5F0C97AAA7C949D477D69E8C /* gen_065.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CE14954DCBDF0317BCAA3 /* gen_065.c */; };
-		60262B3ABB6806B567E586AE /* gen_029.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A2F10C6F7329D6A0F2F8883 /* gen_029.c */; };
-		613E6A069C12C978AB50C3A0 /* gen_018.c in Sources */ = {isa = PBXBuildFile; fileRef = 74983EAE2EF1CA73B896D994 /* gen_018.c */; };
-		64D11C509A21871D6BD7026A /* hle_gl.c in Sources */ = {isa = PBXBuildFile; fileRef = D5BED4464EB7243AB3480132 /* hle_gl.c */; };
-		6673DC01EE2D3F1B53A0E44E /* hle_audio.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C777FC5C9C85BA9948AE368 /* hle_audio.c */; };
-		680744A598C697BA21A2F3AF /* gen_046.c in Sources */ = {isa = PBXBuildFile; fileRef = 669DF3653246D30B35CD0070 /* gen_046.c */; };
-		6AFE37CFF496C193FA4BBEF5 /* rt.c in Sources */ = {isa = PBXBuildFile; fileRef = C77ECF4CD4C973F3EA04A312 /* rt.c */; };
-		6BF1BD5871BF08D070761673 /* gen_004.c in Sources */ = {isa = PBXBuildFile; fileRef = EF6C589B1FA0CDCF6942D3BB /* gen_004.c */; };
-		70560E6B26AF85281919F218 /* gen_007.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F0CC38B4460C85F89E39278 /* gen_007.c */; };
-		787FB544DC3E0A0140F9AB83 /* gen_055.c in Sources */ = {isa = PBXBuildFile; fileRef = 31940CB2574CF0A198049D2D /* gen_055.c */; };
-		79CAD11647E1A65DEDCB34F0 /* gen_052.c in Sources */ = {isa = PBXBuildFile; fileRef = 06BC7B6C03426F88CE0D407B /* gen_052.c */; };
-		7A1DF3D5D692C6ED8F0494B8 /* gen_017.c in Sources */ = {isa = PBXBuildFile; fileRef = 699F80F7D05F0DE5789F51A9 /* gen_017.c */; };
-		7D756278A8978BA858625C65 /* gen_000.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DA7E6C5D3A01F1F58D573DF /* gen_000.c */; };
-		8003A7E4344050A3C52899DD /* gen_038.c in Sources */ = {isa = PBXBuildFile; fileRef = FCD29D023A9A674A3500AC0D /* gen_038.c */; };
-		84A9EAA0600A34A57321B1D8 /* GLGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22632E4BBDD0C3E402CC9661 /* GLGameView.swift */; };
-		88371D34E400085CFF2C087A /* hle_objc.c in Sources */ = {isa = PBXBuildFile; fileRef = 67EA2719799888BCFCD8F1E7 /* hle_objc.c */; };
-		8ED9E5D23A803DF1D719700D /* gen_031.c in Sources */ = {isa = PBXBuildFile; fileRef = BADC47717AB2DBC74FE072B5 /* gen_031.c */; };
-		8EDD32BA40B6184F1EE3E97B /* gen_045.c in Sources */ = {isa = PBXBuildFile; fileRef = 734FBE10ECF18E7918F9CD7C /* gen_045.c */; };
-		9111E597795E7ACD49C1357B /* gen_058.c in Sources */ = {isa = PBXBuildFile; fileRef = 400D3CC565E8D59D72004786 /* gen_058.c */; };
-		930DDFEFFDF7F47717A26C0E /* gen_024.c in Sources */ = {isa = PBXBuildFile; fileRef = 0975285CCD0133FCD6DFF743 /* gen_024.c */; };
-		9B49818A0D88961E27F1C362 /* gen_064.c in Sources */ = {isa = PBXBuildFile; fileRef = 24016819DDA7D3476C32749B /* gen_064.c */; };
-		9DB91E7B7DEBE4591B3578DB /* pr3_shell.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C284C68B981FB13152105 /* pr3_shell.c */; };
-		9E8CB31638771E2F8656F575 /* gen_021.c in Sources */ = {isa = PBXBuildFile; fileRef = E5D24DBCA3E68A847ACE46AA /* gen_021.c */; };
-		9ED9C60A4CC96119AD846DA0 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB04D0B6A5D85944894E09A0 /* GameViewController.swift */; };
-		A08F08F196577DBC9329D711 /* gen_049.c in Sources */ = {isa = PBXBuildFile; fileRef = 09B53A9ADE52E5F41A3E9312 /* gen_049.c */; };
-		A8071E11FA9A71959A9BE40E /* gen_034.c in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD531C35344B8F3B77132E /* gen_034.c */; };
-		AC053EFF4431E382149CCA97 /* PR3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC99D30851D6AFCA5E0FE58 /* PR3App.swift */; };
-		AD2B1DD2DD2D299E44BAEC1B /* gen_002.c in Sources */ = {isa = PBXBuildFile; fileRef = 1FC9CD7C89759A3D8352D188 /* gen_002.c */; };
-		B4978D738A2D7540EE79A693 /* gen_051.c in Sources */ = {isa = PBXBuildFile; fileRef = 36F0F8FF87C1AB5524188895 /* gen_051.c */; };
-		B5695E4D137959C892835056 /* gen_020.c in Sources */ = {isa = PBXBuildFile; fileRef = 05DE83CCA4A57BA374604830 /* gen_020.c */; };
-		B5A5295A6AC4B8762655701F /* gen_026.c in Sources */ = {isa = PBXBuildFile; fileRef = 54759D2B2DC55A2F29591BC9 /* gen_026.c */; };
-		B5DB07A994AA2DEAFD1D7C4E /* gen_053.c in Sources */ = {isa = PBXBuildFile; fileRef = CCAC977EB877851EC84C4BC0 /* gen_053.c */; };
-		B6D02408AEA5ACFCF6F7AE8A /* gen_010.c in Sources */ = {isa = PBXBuildFile; fileRef = 2511FEF1DCF0C968A6B03513 /* gen_010.c */; };
-		B877C2F545F03B683D9AEA77 /* gen_041.c in Sources */ = {isa = PBXBuildFile; fileRef = DA9483D2301F7407AF051C74 /* gen_041.c */; };
-		BAD84C6DBB05F4F81D0D3B55 /* gen_014.c in Sources */ = {isa = PBXBuildFile; fileRef = 61CA220354E7839C4EF661C8 /* gen_014.c */; };
-		BB297CF6CC0CF252DBC746EA /* gen_025.c in Sources */ = {isa = PBXBuildFile; fileRef = E6F78F941862F1B39520FAAB /* gen_025.c */; };
-		BB493B94FD6E18B9F7708B40 /* gen_015.c in Sources */ = {isa = PBXBuildFile; fileRef = 5C6ED4642B6BB6487C8E586D /* gen_015.c */; };
-		BBB3E42FDC7921A5D634ABB0 /* hle_stdio.c in Sources */ = {isa = PBXBuildFile; fileRef = 6B556C13D44CE5A07AC52C82 /* hle_stdio.c */; };
-		C371F86A85735BFA885D1415 /* gen_059.c in Sources */ = {isa = PBXBuildFile; fileRef = 957D9B7346CC3FDDF36D2F5E /* gen_059.c */; };
-		C5782DD72B1828D33B78486A /* gen_067.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FFA9A6D2E4BABFA5FE1AF9F /* gen_067.c */; };
-		C8CAA05827CA7F99823475B0 /* gen_008.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A86CD0359402152AD052D3E /* gen_008.c */; };
-		CB4E8ADFBF8DE3DC1F475B7C /* gen_009.c in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF4116DC938AE7CEFF43AA /* gen_009.c */; };
-		D2A8FC4CD66A87E38D38A348 /* gen_039.c in Sources */ = {isa = PBXBuildFile; fileRef = 9DE83A9C7C9456B6F6305F6D /* gen_039.c */; };
-		D3E70774A4C2012BBA7663A8 /* gen_066.c in Sources */ = {isa = PBXBuildFile; fileRef = D538BCF6E6E17EBCEB60026D /* gen_066.c */; };
-		D3F867B42003F5E7127A03C9 /* gen_028.c in Sources */ = {isa = PBXBuildFile; fileRef = 3336497004A2B99C6A4ADB2F /* gen_028.c */; };
-		DB66284BE81F78E2C7DC692A /* hle_cxx.c in Sources */ = {isa = PBXBuildFile; fileRef = 01DED148664B377366B10DB6 /* hle_cxx.c */; };
-		DBD0F10C28E9EF2D38611575 /* gen_003.c in Sources */ = {isa = PBXBuildFile; fileRef = 2547F799D92E898DE842149A /* gen_003.c */; };
-		DC8E0A931C495F890982AE70 /* gen_011.c in Sources */ = {isa = PBXBuildFile; fileRef = 6705470B09D40F861C97140D /* gen_011.c */; };
-		DD7D2C961C92D38E01555195 /* gen_012.c in Sources */ = {isa = PBXBuildFile; fileRef = 97DE22C92FA85967BF9CC505 /* gen_012.c */; };
-		DD9D28FB1468E5A504549428 /* gen_056.c in Sources */ = {isa = PBXBuildFile; fileRef = CD03B7C506B20F15FAB003B7 /* gen_056.c */; };
-		E55075370411D27EBD5B4A16 /* gen_050.c in Sources */ = {isa = PBXBuildFile; fileRef = 39F8E54AF0CA6AC75CD1C7D7 /* gen_050.c */; };
-		E7742A64AEB86061C8C5ED4B /* gen_027.c in Sources */ = {isa = PBXBuildFile; fileRef = C9CFDDA161AADE41E997069E /* gen_027.c */; };
-		E8A89FDDA0FB4267A298E966 /* gen_044.c in Sources */ = {isa = PBXBuildFile; fileRef = F6243D2C8362E604A6E1F310 /* gen_044.c */; };
-		ED54553B013B5282712C0609 /* gen_048.c in Sources */ = {isa = PBXBuildFile; fileRef = 20BC1670A3246D018E5EF7E3 /* gen_048.c */; };
-		EE732F88A84146FF17EC6CF7 /* gen_019.c in Sources */ = {isa = PBXBuildFile; fileRef = AA3977491BF4A583C479A0EC /* gen_019.c */; };
-		F22C76DE06739B79216DF70E /* gen_063.c in Sources */ = {isa = PBXBuildFile; fileRef = 64B0C101780CC3F8358F859E /* gen_063.c */; };
-		F532BEDC13FE4506C79D3376 /* gen_023.c in Sources */ = {isa = PBXBuildFile; fileRef = 014B477CFC6BFDBDF85C3AE5 /* gen_023.c */; };
-		F6B0216F74466FEBCF914D61 /* gen_032.c in Sources */ = {isa = PBXBuildFile; fileRef = 2E761B5BB59E175FDBFBD945 /* gen_032.c */; };
-		F6DE8ACC56499D1B9B2370A8 /* gen_006.c in Sources */ = {isa = PBXBuildFile; fileRef = 1793B62C7F135A73C98056F5 /* gen_006.c */; };
-		F9F94BBC3EE7B3E3169DA027 /* gen_table.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C8B59D876E7E0B5B526CD9B /* gen_table.c */; };
-		FCBBB397D933C06A374C94D3 /* GameData in Resources */ = {isa = PBXBuildFile; fileRef = 8E5771D3A5DA48643C5D6D9F /* GameData */; };
+		7D756278A8978BA858625C65 = {isa = PBXBuildFile; fileRef = 7DA7E6C5D3A01F1F58D573DF; };
+		5005F1A1A2880C2E62139A2C = {isa = PBXBuildFile; fileRef = 17C348D5DC58CF5B4C7A8875; };
+		AD2B1DD2DD2D299E44BAEC1B = {isa = PBXBuildFile; fileRef = 1FC9CD7C89759A3D8352D188; };
+		DBD0F10C28E9EF2D38611575 = {isa = PBXBuildFile; fileRef = 2547F799D92E898DE842149A; };
+		6BF1BD5871BF08D070761673 = {isa = PBXBuildFile; fileRef = EF6C589B1FA0CDCF6942D3BB; };
+		252B9C99C31C0A76567C3667 = {isa = PBXBuildFile; fileRef = ACFCFA2DF26F6E45DDEC2FAA; };
+		F6DE8ACC56499D1B9B2370A8 = {isa = PBXBuildFile; fileRef = 1793B62C7F135A73C98056F5; };
+		70560E6B26AF85281919F218 = {isa = PBXBuildFile; fileRef = 1F0CC38B4460C85F89E39278; };
+		C8CAA05827CA7F99823475B0 = {isa = PBXBuildFile; fileRef = 4A86CD0359402152AD052D3E; };
+		CB4E8ADFBF8DE3DC1F475B7C = {isa = PBXBuildFile; fileRef = 7ACF4116DC938AE7CEFF43AA; };
+		B6D02408AEA5ACFCF6F7AE8A = {isa = PBXBuildFile; fileRef = 2511FEF1DCF0C968A6B03513; };
+		DC8E0A931C495F890982AE70 = {isa = PBXBuildFile; fileRef = 6705470B09D40F861C97140D; };
+		DD7D2C961C92D38E01555195 = {isa = PBXBuildFile; fileRef = 97DE22C92FA85967BF9CC505; };
+		41359B7E1AF551BD0B3CDC66 = {isa = PBXBuildFile; fileRef = 1FD84A35E5C266FCABC9C34F; };
+		BAD84C6DBB05F4F81D0D3B55 = {isa = PBXBuildFile; fileRef = 61CA220354E7839C4EF661C8; };
+		BB493B94FD6E18B9F7708B40 = {isa = PBXBuildFile; fileRef = 5C6ED4642B6BB6487C8E586D; };
+		3A2CD3000ADDE6D527317344 = {isa = PBXBuildFile; fileRef = 174D4B0FC6A02B5E219D6BD0; };
+		7A1DF3D5D692C6ED8F0494B8 = {isa = PBXBuildFile; fileRef = 699F80F7D05F0DE5789F51A9; };
+		613E6A069C12C978AB50C3A0 = {isa = PBXBuildFile; fileRef = 74983EAE2EF1CA73B896D994; };
+		EE732F88A84146FF17EC6CF7 = {isa = PBXBuildFile; fileRef = AA3977491BF4A583C479A0EC; };
+		B5695E4D137959C892835056 = {isa = PBXBuildFile; fileRef = 05DE83CCA4A57BA374604830; };
+		9E8CB31638771E2F8656F575 = {isa = PBXBuildFile; fileRef = E5D24DBCA3E68A847ACE46AA; };
+		0E1C6FA257A5B8E9F9E760AC = {isa = PBXBuildFile; fileRef = FB518D41133DFEEC071229A1; };
+		F532BEDC13FE4506C79D3376 = {isa = PBXBuildFile; fileRef = 014B477CFC6BFDBDF85C3AE5; };
+		930DDFEFFDF7F47717A26C0E = {isa = PBXBuildFile; fileRef = 0975285CCD0133FCD6DFF743; };
+		BB297CF6CC0CF252DBC746EA = {isa = PBXBuildFile; fileRef = E6F78F941862F1B39520FAAB; };
+		B5A5295A6AC4B8762655701F = {isa = PBXBuildFile; fileRef = 54759D2B2DC55A2F29591BC9; };
+		E7742A64AEB86061C8C5ED4B = {isa = PBXBuildFile; fileRef = C9CFDDA161AADE41E997069E; };
+		D3F867B42003F5E7127A03C9 = {isa = PBXBuildFile; fileRef = 3336497004A2B99C6A4ADB2F; };
+		60262B3ABB6806B567E586AE = {isa = PBXBuildFile; fileRef = 5A2F10C6F7329D6A0F2F8883; };
+		476B18054963EA4C0B1B42E2 = {isa = PBXBuildFile; fileRef = C1793FD302591BE6E3D4FAEB; };
+		8ED9E5D23A803DF1D719700D = {isa = PBXBuildFile; fileRef = BADC47717AB2DBC74FE072B5; };
+		F6B0216F74466FEBCF914D61 = {isa = PBXBuildFile; fileRef = 2E761B5BB59E175FDBFBD945; };
+		4CA1F5CAD1EF1217BEA5AAF2 = {isa = PBXBuildFile; fileRef = A9F7E3AF1F8600F8E7816868; };
+		A8071E11FA9A71959A9BE40E = {isa = PBXBuildFile; fileRef = 1FFD531C35344B8F3B77132E; };
+		1ACFED3BCBBB4A59A2F84F42 = {isa = PBXBuildFile; fileRef = D44CBB97AB888DA6DC84EC9C; };
+		092B94CBD98B47F675C4B300 = {isa = PBXBuildFile; fileRef = F8BF8674E2859342BBD07E1E; };
+		0DC60BC92692F71E476EE92B = {isa = PBXBuildFile; fileRef = F4F66138C5D1A1D4553EA023; };
+		8003A7E4344050A3C52899DD = {isa = PBXBuildFile; fileRef = FCD29D023A9A674A3500AC0D; };
+		D2A8FC4CD66A87E38D38A348 = {isa = PBXBuildFile; fileRef = 9DE83A9C7C9456B6F6305F6D; };
+		5DC540C48B50F3C48832D1DC = {isa = PBXBuildFile; fileRef = B7F8DCC9CC4C2AF2717781F4; };
+		B877C2F545F03B683D9AEA77 = {isa = PBXBuildFile; fileRef = DA9483D2301F7407AF051C74; };
+		423E9FEFA8F2639783E158C6 = {isa = PBXBuildFile; fileRef = 07ACDEF2CD981F47F97D11BF; };
+		1678A66072D09EC1F00DBE7C = {isa = PBXBuildFile; fileRef = 30BA21A7E523CBE8BA5BFA68; };
+		E8A89FDDA0FB4267A298E966 = {isa = PBXBuildFile; fileRef = F6243D2C8362E604A6E1F310; };
+		8EDD32BA40B6184F1EE3E97B = {isa = PBXBuildFile; fileRef = 734FBE10ECF18E7918F9CD7C; };
+		680744A598C697BA21A2F3AF = {isa = PBXBuildFile; fileRef = 669DF3653246D30B35CD0070; };
+		1407183FCBE6A49941E502D0 = {isa = PBXBuildFile; fileRef = DBFECB2ACED4A7B75CD85048; };
+		ED54553B013B5282712C0609 = {isa = PBXBuildFile; fileRef = 20BC1670A3246D018E5EF7E3; };
+		A08F08F196577DBC9329D711 = {isa = PBXBuildFile; fileRef = 09B53A9ADE52E5F41A3E9312; };
+		E55075370411D27EBD5B4A16 = {isa = PBXBuildFile; fileRef = 39F8E54AF0CA6AC75CD1C7D7; };
+		B4978D738A2D7540EE79A693 = {isa = PBXBuildFile; fileRef = 36F0F8FF87C1AB5524188895; };
+		79CAD11647E1A65DEDCB34F0 = {isa = PBXBuildFile; fileRef = 06BC7B6C03426F88CE0D407B; };
+		B5DB07A994AA2DEAFD1D7C4E = {isa = PBXBuildFile; fileRef = CCAC977EB877851EC84C4BC0; };
+		1E47CB31D3804CA5184CA6AC = {isa = PBXBuildFile; fileRef = BD5400AC0F82FBB6C0063176; };
+		787FB544DC3E0A0140F9AB83 = {isa = PBXBuildFile; fileRef = 31940CB2574CF0A198049D2D; };
+		DD9D28FB1468E5A504549428 = {isa = PBXBuildFile; fileRef = CD03B7C506B20F15FAB003B7; };
+		154925BBB2BB4ABBA66B2E3D = {isa = PBXBuildFile; fileRef = BBB7EE3030976B8CA029AC7A; };
+		9111E597795E7ACD49C1357B = {isa = PBXBuildFile; fileRef = 400D3CC565E8D59D72004786; };
+		C371F86A85735BFA885D1415 = {isa = PBXBuildFile; fileRef = 957D9B7346CC3FDDF36D2F5E; };
+		535435FB510C2965FED77483 = {isa = PBXBuildFile; fileRef = 0F5B408ACC5F4950C5A06447; };
+		5A5C96EC48C246B70AF3F942 = {isa = PBXBuildFile; fileRef = 71B5489EEA2E22405ABC3606; };
+		120C02B8D374DA55796FF007 = {isa = PBXBuildFile; fileRef = 10715C8901E0E07F197631D2; };
+		F22C76DE06739B79216DF70E = {isa = PBXBuildFile; fileRef = 64B0C101780CC3F8358F859E; };
+		9B49818A0D88961E27F1C362 = {isa = PBXBuildFile; fileRef = 24016819DDA7D3476C32749B; };
+		5F0C97AAA7C949D477D69E8C = {isa = PBXBuildFile; fileRef = 2C5CE14954DCBDF0317BCAA3; };
+		D3E70774A4C2012BBA7663A8 = {isa = PBXBuildFile; fileRef = D538BCF6E6E17EBCEB60026D; };
+		C5782DD72B1828D33B78486A = {isa = PBXBuildFile; fileRef = 7FFA9A6D2E4BABFA5FE1AF9F; };
+		266BCB2919DACFD3629A1C68 = {isa = PBXBuildFile; fileRef = 333E2DA00EFDD9412D2E9F9D; };
+		1539FA00497A0C790694D8F6 = {isa = PBXBuildFile; fileRef = 7DA3C2D469409ADA00CE92C5; };
+		F9F94BBC3EE7B3E3169DA027 = {isa = PBXBuildFile; fileRef = 2C8B59D876E7E0B5B526CD9B; };
+		6673DC01EE2D3F1B53A0E44E = {isa = PBXBuildFile; fileRef = 3C777FC5C9C85BA9948AE368; };
+		DB66284BE81F78E2C7DC692A = {isa = PBXBuildFile; fileRef = 01DED148664B377366B10DB6; };
+		64D11C509A21871D6BD7026A = {isa = PBXBuildFile; fileRef = D5BED4464EB7243AB3480132; };
+		532A774EC61E6631E9AC0767 = {isa = PBXBuildFile; fileRef = 70A350F1DCE3141F149FEB57; };
+		88371D34E400085CFF2C087A = {isa = PBXBuildFile; fileRef = 67EA2719799888BCFCD8F1E7; };
+		BBB3E42FDC7921A5D634ABB0 = {isa = PBXBuildFile; fileRef = 6B556C13D44CE5A07AC52C82; };
+		89E3EA225F5E327C1ECFC8A1 = {isa = PBXBuildFile; fileRef = E320BDDC87B7E5F8A8892B4A; };
+		9DB91E7B7DEBE4591B3578DB = {isa = PBXBuildFile; fileRef = 6D0C284C68B981FB13152105; };
+		6AFE37CFF496C193FA4BBEF5 = {isa = PBXBuildFile; fileRef = C77ECF4CD4C973F3EA04A312; };
+		AC053EFF4431E382149CCA97 = {isa = PBXBuildFile; fileRef = 5EC99D30851D6AFCA5E0FE58; };
+		84A9EAA0600A34A57321B1D8 = {isa = PBXBuildFile; fileRef = 22632E4BBDD0C3E402CC9661; };
+		9ED9C60A4CC96119AD846DA0 = {isa = PBXBuildFile; fileRef = FB04D0B6A5D85944894E09A0; };
+		FCBBB397D933C06A374C94D3 = {isa = PBXBuildFile; fileRef = 8E5771D3A5DA48643C5D6D9F; };
+		28013CB1AAD0E177074237F6 = {isa = PBXBuildFile; fileRef = 80682A187638843CB5D250F2; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		014B477CFC6BFDBDF85C3AE5 /* gen_023.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_023.c; sourceTree = "<group>"; };
-		01DED148664B377366B10DB6 /* hle_cxx.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hle_cxx.c; sourceTree = "<group>"; };
-		05DE83CCA4A57BA374604830 /* gen_020.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_020.c; sourceTree = "<group>"; };
-		06BC7B6C03426F88CE0D407B /* gen_052.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_052.c; sourceTree = "<group>"; };
-		07ACDEF2CD981F47F97D11BF /* gen_042.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_042.c; sourceTree = "<group>"; };
-		0975285CCD0133FCD6DFF743 /* gen_024.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_024.c; sourceTree = "<group>"; };
-		09B53A9ADE52E5F41A3E9312 /* gen_049.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_049.c; sourceTree = "<group>"; };
-		0F5B408ACC5F4950C5A06447 /* gen_060.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_060.c; sourceTree = "<group>"; };
-		10715C8901E0E07F197631D2 /* gen_062.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_062.c; sourceTree = "<group>"; };
-		174D4B0FC6A02B5E219D6BD0 /* gen_016.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_016.c; sourceTree = "<group>"; };
-		1793B62C7F135A73C98056F5 /* gen_006.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_006.c; sourceTree = "<group>"; };
-		17C348D5DC58CF5B4C7A8875 /* gen_001.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_001.c; sourceTree = "<group>"; };
-		1F0CC38B4460C85F89E39278 /* gen_007.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_007.c; sourceTree = "<group>"; };
-		1FC9CD7C89759A3D8352D188 /* gen_002.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_002.c; sourceTree = "<group>"; };
-		1FD84A35E5C266FCABC9C34F /* gen_013.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_013.c; sourceTree = "<group>"; };
-		1FFD531C35344B8F3B77132E /* gen_034.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_034.c; sourceTree = "<group>"; };
-		20BC1670A3246D018E5EF7E3 /* gen_048.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_048.c; sourceTree = "<group>"; };
-		22632E4BBDD0C3E402CC9661 /* GLGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLGameView.swift; sourceTree = "<group>"; };
-		24016819DDA7D3476C32749B /* gen_064.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_064.c; sourceTree = "<group>"; };
-		2511FEF1DCF0C968A6B03513 /* gen_010.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_010.c; sourceTree = "<group>"; };
-		2547F799D92E898DE842149A /* gen_003.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_003.c; sourceTree = "<group>"; };
-		29A2E10E13C2FA90F452947A /* arm_rt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = arm_rt.h; sourceTree = "<group>"; };
-		2C5CE14954DCBDF0317BCAA3 /* gen_065.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_065.c; sourceTree = "<group>"; };
-		2C8B59D876E7E0B5B526CD9B /* gen_table.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_table.c; sourceTree = "<group>"; };
-		2E761B5BB59E175FDBFBD945 /* gen_032.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_032.c; sourceTree = "<group>"; };
-		30BA21A7E523CBE8BA5BFA68 /* gen_043.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_043.c; sourceTree = "<group>"; };
-		31940CB2574CF0A198049D2D /* gen_055.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_055.c; sourceTree = "<group>"; };
-		3336497004A2B99C6A4ADB2F /* gen_028.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_028.c; sourceTree = "<group>"; };
-		333E2DA00EFDD9412D2E9F9D /* gen_binds.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_binds.c; sourceTree = "<group>"; };
-		36F0F8FF87C1AB5524188895 /* gen_051.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_051.c; sourceTree = "<group>"; };
-		38A007151ABE87CC01A5B6E9 /* PR3Remake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PR3Remake.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		39F8E54AF0CA6AC75CD1C7D7 /* gen_050.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_050.c; sourceTree = "<group>"; };
-		3C777FC5C9C85BA9948AE368 /* hle_audio.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hle_audio.c; sourceTree = "<group>"; };
-		400D3CC565E8D59D72004786 /* gen_058.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_058.c; sourceTree = "<group>"; };
-		4A86CD0359402152AD052D3E /* gen_008.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_008.c; sourceTree = "<group>"; };
-		54759D2B2DC55A2F29591BC9 /* gen_026.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_026.c; sourceTree = "<group>"; };
-		5A2F10C6F7329D6A0F2F8883 /* gen_029.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_029.c; sourceTree = "<group>"; };
-		5C6ED4642B6BB6487C8E586D /* gen_015.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_015.c; sourceTree = "<group>"; };
-		5EC99D30851D6AFCA5E0FE58 /* PR3App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PR3App.swift; sourceTree = "<group>"; };
-		61CA220354E7839C4EF661C8 /* gen_014.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_014.c; sourceTree = "<group>"; };
-		64B0C101780CC3F8358F859E /* gen_063.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_063.c; sourceTree = "<group>"; };
-		669DF3653246D30B35CD0070 /* gen_046.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_046.c; sourceTree = "<group>"; };
-		6705470B09D40F861C97140D /* gen_011.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_011.c; sourceTree = "<group>"; };
-		67EA2719799888BCFCD8F1E7 /* hle_objc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hle_objc.c; sourceTree = "<group>"; };
-		683E8AA720BB396E9EF67BED /* PR3Remake-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PR3Remake-Bridging-Header.h"; sourceTree = "<group>"; };
-		699F80F7D05F0DE5789F51A9 /* gen_017.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_017.c; sourceTree = "<group>"; };
-		6B556C13D44CE5A07AC52C82 /* hle_stdio.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hle_stdio.c; sourceTree = "<group>"; };
-		6D0C284C68B981FB13152105 /* pr3_shell.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pr3_shell.c; sourceTree = "<group>"; };
-		70A350F1DCE3141F149FEB57 /* hle_libc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hle_libc.c; sourceTree = "<group>"; };
-		71B5489EEA2E22405ABC3606 /* gen_061.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_061.c; sourceTree = "<group>"; };
-		734FBE10ECF18E7918F9CD7C /* gen_045.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_045.c; sourceTree = "<group>"; };
-		74983EAE2EF1CA73B896D994 /* gen_018.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_018.c; sourceTree = "<group>"; };
-		7ACF4116DC938AE7CEFF43AA /* gen_009.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_009.c; sourceTree = "<group>"; };
-		7DA3C2D469409ADA00CE92C5 /* gen_stubs.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_stubs.c; sourceTree = "<group>"; };
-		7DA7E6C5D3A01F1F58D573DF /* gen_000.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_000.c; sourceTree = "<group>"; };
-		7FFA9A6D2E4BABFA5FE1AF9F /* gen_067.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_067.c; sourceTree = "<group>"; };
-		80682A187638843CB5D250F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = PR3Remake/Assets.xcassets; sourceTree = "<group>"; };
-		8E5771D3A5DA48643C5D6D9F /* GameData */ = {isa = PBXFileReference; lastKnownFileType = folder; name = GameData; path = PR3Remake/Resources/GameData; sourceTree = "<group>"; };
-		957D9B7346CC3FDDF36D2F5E /* gen_059.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_059.c; sourceTree = "<group>"; };
-		97DE22C92FA85967BF9CC505 /* gen_012.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_012.c; sourceTree = "<group>"; };
-		9BE9FD26D481BC63765D7CD7 /* gen_decls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gen_decls.h; sourceTree = "<group>"; };
-		9DE83A9C7C9456B6F6305F6D /* gen_039.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_039.c; sourceTree = "<group>"; };
-		A9F7E3AF1F8600F8E7816868 /* gen_033.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_033.c; sourceTree = "<group>"; };
-		AA3977491BF4A583C479A0EC /* gen_019.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_019.c; sourceTree = "<group>"; };
-		ACFCFA2DF26F6E45DDEC2FAA /* gen_005.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_005.c; sourceTree = "<group>"; };
-		B7F8DCC9CC4C2AF2717781F4 /* gen_040.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_040.c; sourceTree = "<group>"; };
-		BADC47717AB2DBC74FE072B5 /* gen_031.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_031.c; sourceTree = "<group>"; };
-		BBB7EE3030976B8CA029AC7A /* gen_057.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_057.c; sourceTree = "<group>"; };
-		BD5400AC0F82FBB6C0063176 /* gen_054.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_054.c; sourceTree = "<group>"; };
-		C1793FD302591BE6E3D4FAEB /* gen_030.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_030.c; sourceTree = "<group>"; };
-		C77ECF4CD4C973F3EA04A312 /* rt.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = rt.c; sourceTree = "<group>"; };
-		C9CFDDA161AADE41E997069E /* gen_027.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_027.c; sourceTree = "<group>"; };
-		CCAC977EB877851EC84C4BC0 /* gen_053.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_053.c; sourceTree = "<group>"; };
-		CD03B7C506B20F15FAB003B7 /* gen_056.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_056.c; sourceTree = "<group>"; };
-		D44CBB97AB888DA6DC84EC9C /* gen_035.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_035.c; sourceTree = "<group>"; };
-		D538BCF6E6E17EBCEB60026D /* gen_066.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_066.c; sourceTree = "<group>"; };
-		D5BED4464EB7243AB3480132 /* hle_gl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hle_gl.c; sourceTree = "<group>"; };
-		D6E28ADC20ECF98846DDA695 /* pr3_shell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pr3_shell.h; sourceTree = "<group>"; };
-		DA9483D2301F7407AF051C74 /* gen_041.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_041.c; sourceTree = "<group>"; };
-		DBFECB2ACED4A7B75CD85048 /* gen_047.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_047.c; sourceTree = "<group>"; };
-		E5D24DBCA3E68A847ACE46AA /* gen_021.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_021.c; sourceTree = "<group>"; };
-		E6F78F941862F1B39520FAAB /* gen_025.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_025.c; sourceTree = "<group>"; };
-		EF6C589B1FA0CDCF6942D3BB /* gen_004.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_004.c; sourceTree = "<group>"; };
-		F4F66138C5D1A1D4553EA023 /* gen_037.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_037.c; sourceTree = "<group>"; };
-		F6243D2C8362E604A6E1F310 /* gen_044.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_044.c; sourceTree = "<group>"; };
-		F8BF8674E2859342BBD07E1E /* gen_036.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_036.c; sourceTree = "<group>"; };
-		FB04D0B6A5D85944894E09A0 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		FB518D41133DFEEC071229A1 /* gen_022.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_022.c; sourceTree = "<group>"; };
-		FCD29D023A9A674A3500AC0D /* gen_038.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_038.c; sourceTree = "<group>"; };
+		7DA7E6C5D3A01F1F58D573DF = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_000.c; sourceTree = "<group>"; };
+		17C348D5DC58CF5B4C7A8875 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_001.c; sourceTree = "<group>"; };
+		1FC9CD7C89759A3D8352D188 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_002.c; sourceTree = "<group>"; };
+		2547F799D92E898DE842149A = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_003.c; sourceTree = "<group>"; };
+		EF6C589B1FA0CDCF6942D3BB = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_004.c; sourceTree = "<group>"; };
+		ACFCFA2DF26F6E45DDEC2FAA = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_005.c; sourceTree = "<group>"; };
+		1793B62C7F135A73C98056F5 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_006.c; sourceTree = "<group>"; };
+		1F0CC38B4460C85F89E39278 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_007.c; sourceTree = "<group>"; };
+		4A86CD0359402152AD052D3E = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_008.c; sourceTree = "<group>"; };
+		7ACF4116DC938AE7CEFF43AA = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_009.c; sourceTree = "<group>"; };
+		2511FEF1DCF0C968A6B03513 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_010.c; sourceTree = "<group>"; };
+		6705470B09D40F861C97140D = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_011.c; sourceTree = "<group>"; };
+		97DE22C92FA85967BF9CC505 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_012.c; sourceTree = "<group>"; };
+		1FD84A35E5C266FCABC9C34F = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_013.c; sourceTree = "<group>"; };
+		61CA220354E7839C4EF661C8 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_014.c; sourceTree = "<group>"; };
+		5C6ED4642B6BB6487C8E586D = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_015.c; sourceTree = "<group>"; };
+		174D4B0FC6A02B5E219D6BD0 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_016.c; sourceTree = "<group>"; };
+		699F80F7D05F0DE5789F51A9 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_017.c; sourceTree = "<group>"; };
+		74983EAE2EF1CA73B896D994 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_018.c; sourceTree = "<group>"; };
+		AA3977491BF4A583C479A0EC = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_019.c; sourceTree = "<group>"; };
+		05DE83CCA4A57BA374604830 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_020.c; sourceTree = "<group>"; };
+		E5D24DBCA3E68A847ACE46AA = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_021.c; sourceTree = "<group>"; };
+		FB518D41133DFEEC071229A1 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_022.c; sourceTree = "<group>"; };
+		014B477CFC6BFDBDF85C3AE5 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_023.c; sourceTree = "<group>"; };
+		0975285CCD0133FCD6DFF743 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_024.c; sourceTree = "<group>"; };
+		E6F78F941862F1B39520FAAB = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_025.c; sourceTree = "<group>"; };
+		54759D2B2DC55A2F29591BC9 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_026.c; sourceTree = "<group>"; };
+		C9CFDDA161AADE41E997069E = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_027.c; sourceTree = "<group>"; };
+		3336497004A2B99C6A4ADB2F = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_028.c; sourceTree = "<group>"; };
+		5A2F10C6F7329D6A0F2F8883 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_029.c; sourceTree = "<group>"; };
+		C1793FD302591BE6E3D4FAEB = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_030.c; sourceTree = "<group>"; };
+		BADC47717AB2DBC74FE072B5 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_031.c; sourceTree = "<group>"; };
+		2E761B5BB59E175FDBFBD945 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_032.c; sourceTree = "<group>"; };
+		A9F7E3AF1F8600F8E7816868 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_033.c; sourceTree = "<group>"; };
+		1FFD531C35344B8F3B77132E = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_034.c; sourceTree = "<group>"; };
+		D44CBB97AB888DA6DC84EC9C = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_035.c; sourceTree = "<group>"; };
+		F8BF8674E2859342BBD07E1E = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_036.c; sourceTree = "<group>"; };
+		F4F66138C5D1A1D4553EA023 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_037.c; sourceTree = "<group>"; };
+		FCD29D023A9A674A3500AC0D = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_038.c; sourceTree = "<group>"; };
+		9DE83A9C7C9456B6F6305F6D = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_039.c; sourceTree = "<group>"; };
+		B7F8DCC9CC4C2AF2717781F4 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_040.c; sourceTree = "<group>"; };
+		DA9483D2301F7407AF051C74 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_041.c; sourceTree = "<group>"; };
+		07ACDEF2CD981F47F97D11BF = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_042.c; sourceTree = "<group>"; };
+		30BA21A7E523CBE8BA5BFA68 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_043.c; sourceTree = "<group>"; };
+		F6243D2C8362E604A6E1F310 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_044.c; sourceTree = "<group>"; };
+		734FBE10ECF18E7918F9CD7C = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_045.c; sourceTree = "<group>"; };
+		669DF3653246D30B35CD0070 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_046.c; sourceTree = "<group>"; };
+		DBFECB2ACED4A7B75CD85048 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_047.c; sourceTree = "<group>"; };
+		20BC1670A3246D018E5EF7E3 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_048.c; sourceTree = "<group>"; };
+		09B53A9ADE52E5F41A3E9312 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_049.c; sourceTree = "<group>"; };
+		39F8E54AF0CA6AC75CD1C7D7 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_050.c; sourceTree = "<group>"; };
+		36F0F8FF87C1AB5524188895 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_051.c; sourceTree = "<group>"; };
+		06BC7B6C03426F88CE0D407B = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_052.c; sourceTree = "<group>"; };
+		CCAC977EB877851EC84C4BC0 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_053.c; sourceTree = "<group>"; };
+		BD5400AC0F82FBB6C0063176 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_054.c; sourceTree = "<group>"; };
+		31940CB2574CF0A198049D2D = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_055.c; sourceTree = "<group>"; };
+		CD03B7C506B20F15FAB003B7 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_056.c; sourceTree = "<group>"; };
+		BBB7EE3030976B8CA029AC7A = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_057.c; sourceTree = "<group>"; };
+		400D3CC565E8D59D72004786 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_058.c; sourceTree = "<group>"; };
+		957D9B7346CC3FDDF36D2F5E = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_059.c; sourceTree = "<group>"; };
+		0F5B408ACC5F4950C5A06447 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_060.c; sourceTree = "<group>"; };
+		71B5489EEA2E22405ABC3606 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_061.c; sourceTree = "<group>"; };
+		10715C8901E0E07F197631D2 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_062.c; sourceTree = "<group>"; };
+		64B0C101780CC3F8358F859E = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_063.c; sourceTree = "<group>"; };
+		24016819DDA7D3476C32749B = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_064.c; sourceTree = "<group>"; };
+		2C5CE14954DCBDF0317BCAA3 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_065.c; sourceTree = "<group>"; };
+		D538BCF6E6E17EBCEB60026D = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_066.c; sourceTree = "<group>"; };
+		7FFA9A6D2E4BABFA5FE1AF9F = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_067.c; sourceTree = "<group>"; };
+		333E2DA00EFDD9412D2E9F9D = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_binds.c; sourceTree = "<group>"; };
+		9BE9FD26D481BC63765D7CD7 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gen_decls.h; sourceTree = "<group>"; };
+		7DA3C2D469409ADA00CE92C5 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_stubs.c; sourceTree = "<group>"; };
+		2C8B59D876E7E0B5B526CD9B = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_table.c; sourceTree = "<group>"; };
+		29A2E10E13C2FA90F452947A = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = arm_rt.h; sourceTree = "<group>"; };
+		D6E28ADC20ECF98846DDA695 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pr3_shell.h; sourceTree = "<group>"; };
+		3C777FC5C9C85BA9948AE368 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hle_audio.c; sourceTree = "<group>"; };
+		01DED148664B377366B10DB6 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hle_cxx.c; sourceTree = "<group>"; };
+		D5BED4464EB7243AB3480132 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hle_gl.c; sourceTree = "<group>"; };
+		70A350F1DCE3141F149FEB57 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hle_libc.c; sourceTree = "<group>"; };
+		67EA2719799888BCFCD8F1E7 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hle_objc.c; sourceTree = "<group>"; };
+		6B556C13D44CE5A07AC52C82 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hle_stdio.c; sourceTree = "<group>"; };
+		E320BDDC87B7E5F8A8892B4A = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pr3_modes.c; sourceTree = "<group>"; };
+		6D0C284C68B981FB13152105 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pr3_shell.c; sourceTree = "<group>"; };
+		C77ECF4CD4C973F3EA04A312 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = rt.c; sourceTree = "<group>"; };
+		5EC99D30851D6AFCA5E0FE58 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PR3App.swift; sourceTree = "<group>"; };
+		683E8AA720BB396E9EF67BED = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PR3Remake-Bridging-Header.h; sourceTree = "<group>"; };
+		22632E4BBDD0C3E402CC9661 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLGameView.swift; sourceTree = "<group>"; };
+		FB04D0B6A5D85944894E09A0 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		8E5771D3A5DA48643C5D6D9F = {isa = PBXFileReference; lastKnownFileType = folder; name = GameData; path = PR3Remake/Resources/GameData; sourceTree = "<group>"; };
+		80682A187638843CB5D250F2 = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = PR3Remake/Assets.xcassets; sourceTree = "<group>"; };
+		38A007151ABE87CC01A5B6E9 = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PR3Remake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F04A73FA86BD7FFE10CE9ADB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
+		F04A73FA86BD7FFE10CE9ADB = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1696BA116EFCCFFEA6F34D09 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				38A007151ABE87CC01A5B6E9 /* PR3Remake.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		367C9D8FFD3CD03A58B0A5F4 /* runtime */ = {
-			isa = PBXGroup;
-			children = (
-				3C777FC5C9C85BA9948AE368 /* hle_audio.c */,
-				01DED148664B377366B10DB6 /* hle_cxx.c */,
-				D5BED4464EB7243AB3480132 /* hle_gl.c */,
-				70A350F1DCE3141F149FEB57 /* hle_libc.c */,
-				67EA2719799888BCFCD8F1E7 /* hle_objc.c */,
-				6B556C13D44CE5A07AC52C82 /* hle_stdio.c */,
-				6D0C284C68B981FB13152105 /* pr3_shell.c */,
-				C77ECF4CD4C973F3EA04A312 /* rt.c */,
-			);
-			path = runtime;
-			sourceTree = "<group>";
-		};
-		55E2F2964FECE8316621D9DD /* PR3Remake */ = {
-			isa = PBXGroup;
-			children = (
-				6077DDBA08E358E3F9446B58 /* Shell */,
-				5EC99D30851D6AFCA5E0FE58 /* PR3App.swift */,
-				683E8AA720BB396E9EF67BED /* PR3Remake-Bridging-Header.h */,
-			);
-			path = PR3Remake;
-			sourceTree = "<group>";
-		};
-		5DA7300D393775B930C0C57C /* PR3Core */ = {
-			isa = PBXGroup;
-			children = (
-				C1C141E5FD6905D99FB5C493 /* generated */,
-				77273B72F0479A5BCAB70069 /* include */,
-				367C9D8FFD3CD03A58B0A5F4 /* runtime */,
-			);
-			path = PR3Core;
-			sourceTree = "<group>";
-		};
-		6077DDBA08E358E3F9446B58 /* Shell */ = {
-			isa = PBXGroup;
-			children = (
-				22632E4BBDD0C3E402CC9661 /* GLGameView.swift */,
-				FB04D0B6A5D85944894E09A0 /* GameViewController.swift */,
-			);
-			path = Shell;
-			sourceTree = "<group>";
-		};
-		77273B72F0479A5BCAB70069 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				29A2E10E13C2FA90F452947A /* arm_rt.h */,
-				D6E28ADC20ECF98846DDA695 /* pr3_shell.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		8506DDB6453484895B4F193F = {
-			isa = PBXGroup;
-			children = (
-				5DA7300D393775B930C0C57C /* PR3Core */,
-				55E2F2964FECE8316621D9DD /* PR3Remake */,
-				8E5771D3A5DA48643C5D6D9F /* GameData */,
-				80682A187638843CB5D250F2 /* Assets.xcassets */,
-				1696BA116EFCCFFEA6F34D09 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		C1C141E5FD6905D99FB5C493 /* generated */ = {
-			isa = PBXGroup;
-			children = (
-				7DA7E6C5D3A01F1F58D573DF /* gen_000.c */,
-				17C348D5DC58CF5B4C7A8875 /* gen_001.c */,
-				1FC9CD7C89759A3D8352D188 /* gen_002.c */,
-				2547F799D92E898DE842149A /* gen_003.c */,
-				EF6C589B1FA0CDCF6942D3BB /* gen_004.c */,
-				ACFCFA2DF26F6E45DDEC2FAA /* gen_005.c */,
-				1793B62C7F135A73C98056F5 /* gen_006.c */,
-				1F0CC38B4460C85F89E39278 /* gen_007.c */,
-				4A86CD0359402152AD052D3E /* gen_008.c */,
-				7ACF4116DC938AE7CEFF43AA /* gen_009.c */,
-				2511FEF1DCF0C968A6B03513 /* gen_010.c */,
-				6705470B09D40F861C97140D /* gen_011.c */,
-				97DE22C92FA85967BF9CC505 /* gen_012.c */,
-				1FD84A35E5C266FCABC9C34F /* gen_013.c */,
-				61CA220354E7839C4EF661C8 /* gen_014.c */,
-				5C6ED4642B6BB6487C8E586D /* gen_015.c */,
-				174D4B0FC6A02B5E219D6BD0 /* gen_016.c */,
-				699F80F7D05F0DE5789F51A9 /* gen_017.c */,
-				74983EAE2EF1CA73B896D994 /* gen_018.c */,
-				AA3977491BF4A583C479A0EC /* gen_019.c */,
-				05DE83CCA4A57BA374604830 /* gen_020.c */,
-				E5D24DBCA3E68A847ACE46AA /* gen_021.c */,
-				FB518D41133DFEEC071229A1 /* gen_022.c */,
-				014B477CFC6BFDBDF85C3AE5 /* gen_023.c */,
-				0975285CCD0133FCD6DFF743 /* gen_024.c */,
-				E6F78F941862F1B39520FAAB /* gen_025.c */,
-				54759D2B2DC55A2F29591BC9 /* gen_026.c */,
-				C9CFDDA161AADE41E997069E /* gen_027.c */,
-				3336497004A2B99C6A4ADB2F /* gen_028.c */,
-				5A2F10C6F7329D6A0F2F8883 /* gen_029.c */,
-				C1793FD302591BE6E3D4FAEB /* gen_030.c */,
-				BADC47717AB2DBC74FE072B5 /* gen_031.c */,
-				2E761B5BB59E175FDBFBD945 /* gen_032.c */,
-				A9F7E3AF1F8600F8E7816868 /* gen_033.c */,
-				1FFD531C35344B8F3B77132E /* gen_034.c */,
-				D44CBB97AB888DA6DC84EC9C /* gen_035.c */,
-				F8BF8674E2859342BBD07E1E /* gen_036.c */,
-				F4F66138C5D1A1D4553EA023 /* gen_037.c */,
-				FCD29D023A9A674A3500AC0D /* gen_038.c */,
-				9DE83A9C7C9456B6F6305F6D /* gen_039.c */,
-				B7F8DCC9CC4C2AF2717781F4 /* gen_040.c */,
-				DA9483D2301F7407AF051C74 /* gen_041.c */,
-				07ACDEF2CD981F47F97D11BF /* gen_042.c */,
-				30BA21A7E523CBE8BA5BFA68 /* gen_043.c */,
-				F6243D2C8362E604A6E1F310 /* gen_044.c */,
-				734FBE10ECF18E7918F9CD7C /* gen_045.c */,
-				669DF3653246D30B35CD0070 /* gen_046.c */,
-				DBFECB2ACED4A7B75CD85048 /* gen_047.c */,
-				20BC1670A3246D018E5EF7E3 /* gen_048.c */,
-				09B53A9ADE52E5F41A3E9312 /* gen_049.c */,
-				39F8E54AF0CA6AC75CD1C7D7 /* gen_050.c */,
-				36F0F8FF87C1AB5524188895 /* gen_051.c */,
-				06BC7B6C03426F88CE0D407B /* gen_052.c */,
-				CCAC977EB877851EC84C4BC0 /* gen_053.c */,
-				BD5400AC0F82FBB6C0063176 /* gen_054.c */,
-				31940CB2574CF0A198049D2D /* gen_055.c */,
-				CD03B7C506B20F15FAB003B7 /* gen_056.c */,
-				BBB7EE3030976B8CA029AC7A /* gen_057.c */,
-				400D3CC565E8D59D72004786 /* gen_058.c */,
-				957D9B7346CC3FDDF36D2F5E /* gen_059.c */,
-				0F5B408ACC5F4950C5A06447 /* gen_060.c */,
-				71B5489EEA2E22405ABC3606 /* gen_061.c */,
-				10715C8901E0E07F197631D2 /* gen_062.c */,
-				64B0C101780CC3F8358F859E /* gen_063.c */,
-				24016819DDA7D3476C32749B /* gen_064.c */,
-				2C5CE14954DCBDF0317BCAA3 /* gen_065.c */,
-				D538BCF6E6E17EBCEB60026D /* gen_066.c */,
-				7FFA9A6D2E4BABFA5FE1AF9F /* gen_067.c */,
-				333E2DA00EFDD9412D2E9F9D /* gen_binds.c */,
-				9BE9FD26D481BC63765D7CD7 /* gen_decls.h */,
-				7DA3C2D469409ADA00CE92C5 /* gen_stubs.c */,
-				2C8B59D876E7E0B5B526CD9B /* gen_table.c */,
-			);
-			path = generated;
-			sourceTree = "<group>";
-		};
+		C1C141E5FD6905D99FB5C493 = {isa = PBXGroup; children = (7DA7E6C5D3A01F1F58D573DF, 17C348D5DC58CF5B4C7A8875, 1FC9CD7C89759A3D8352D188, 2547F799D92E898DE842149A, EF6C589B1FA0CDCF6942D3BB, ACFCFA2DF26F6E45DDEC2FAA, 1793B62C7F135A73C98056F5, 1F0CC38B4460C85F89E39278, 4A86CD0359402152AD052D3E, 7ACF4116DC938AE7CEFF43AA, 2511FEF1DCF0C968A6B03513, 6705470B09D40F861C97140D, 97DE22C92FA85967BF9CC505, 1FD84A35E5C266FCABC9C34F, 61CA220354E7839C4EF661C8, 5C6ED4642B6BB6487C8E586D, 174D4B0FC6A02B5E219D6BD0, 699F80F7D05F0DE5789F51A9, 74983EAE2EF1CA73B896D994, AA3977491BF4A583C479A0EC, 05DE83CCA4A57BA374604830, E5D24DBCA3E68A847ACE46AA, FB518D41133DFEEC071229A1, 014B477CFC6BFDBDF85C3AE5, 0975285CCD0133FCD6DFF743, E6F78F941862F1B39520FAAB, 54759D2B2DC55A2F29591BC9, C9CFDDA161AADE41E997069E, 3336497004A2B99C6A4ADB2F, 5A2F10C6F7329D6A0F2F8883, C1793FD302591BE6E3D4FAEB, BADC47717AB2DBC74FE072B5, 2E761B5BB59E175FDBFBD945, A9F7E3AF1F8600F8E7816868, 1FFD531C35344B8F3B77132E, D44CBB97AB888DA6DC84EC9C, F8BF8674E2859342BBD07E1E, F4F66138C5D1A1D4553EA023, FCD29D023A9A674A3500AC0D, 9DE83A9C7C9456B6F6305F6D, B7F8DCC9CC4C2AF2717781F4, DA9483D2301F7407AF051C74, 07ACDEF2CD981F47F97D11BF, 30BA21A7E523CBE8BA5BFA68, F6243D2C8362E604A6E1F310, 734FBE10ECF18E7918F9CD7C, 669DF3653246D30B35CD0070, DBFECB2ACED4A7B75CD85048, 20BC1670A3246D018E5EF7E3, 09B53A9ADE52E5F41A3E9312, 39F8E54AF0CA6AC75CD1C7D7, 36F0F8FF87C1AB5524188895, 06BC7B6C03426F88CE0D407B, CCAC977EB877851EC84C4BC0, BD5400AC0F82FBB6C0063176, 31940CB2574CF0A198049D2D, CD03B7C506B20F15FAB003B7, BBB7EE3030976B8CA029AC7A, 400D3CC565E8D59D72004786, 957D9B7346CC3FDDF36D2F5E, 0F5B408ACC5F4950C5A06447, 71B5489EEA2E22405ABC3606, 10715C8901E0E07F197631D2, 64B0C101780CC3F8358F859E, 24016819DDA7D3476C32749B, 2C5CE14954DCBDF0317BCAA3, D538BCF6E6E17EBCEB60026D, 7FFA9A6D2E4BABFA5FE1AF9F, 333E2DA00EFDD9412D2E9F9D, 9BE9FD26D481BC63765D7CD7, 7DA3C2D469409ADA00CE92C5, 2C8B59D876E7E0B5B526CD9B); name = generated; path = generated; sourceTree = "<group>"; };
+		77273B72F0479A5BCAB70069 = {isa = PBXGroup; children = (29A2E10E13C2FA90F452947A, D6E28ADC20ECF98846DDA695); name = include; path = include; sourceTree = "<group>"; };
+		367C9D8FFD3CD03A58B0A5F4 = {isa = PBXGroup; children = (3C777FC5C9C85BA9948AE368, 01DED148664B377366B10DB6, D5BED4464EB7243AB3480132, 70A350F1DCE3141F149FEB57, 67EA2719799888BCFCD8F1E7, 6B556C13D44CE5A07AC52C82, E320BDDC87B7E5F8A8892B4A, 6D0C284C68B981FB13152105, C77ECF4CD4C973F3EA04A312); name = runtime; path = runtime; sourceTree = "<group>"; };
+		5DA7300D393775B930C0C57C = {isa = PBXGroup; children = (C1C141E5FD6905D99FB5C493, 77273B72F0479A5BCAB70069, 367C9D8FFD3CD03A58B0A5F4); name = PR3Core; path = PR3Core; sourceTree = "<group>"; };
+		6077DDBA08E358E3F9446B58 = {isa = PBXGroup; children = (22632E4BBDD0C3E402CC9661, FB04D0B6A5D85944894E09A0); name = Shell; path = Shell; sourceTree = "<group>"; };
+		55E2F2964FECE8316621D9DD = {isa = PBXGroup; children = (6077DDBA08E358E3F9446B58, 5EC99D30851D6AFCA5E0FE58, 683E8AA720BB396E9EF67BED); name = PR3Remake; path = PR3Remake; sourceTree = "<group>"; };
+		8506DDB6453484895B4F193F = {isa = PBXGroup; children = (5DA7300D393775B930C0C57C, 55E2F2964FECE8316621D9DD, 8E5771D3A5DA48643C5D6D9F, 80682A187638843CB5D250F2, 1696BA116EFCCFFEA6F34D09); sourceTree = "<group>"; };
+		1696BA116EFCCFFEA6F34D09 = {isa = PBXGroup; children = (38A007151ABE87CC01A5B6E9); name = Products; sourceTree = "<group>"; };
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0E8A3AD980EC179856012B7E /* PR3Remake */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7436D412F105AF0BD9F7FE6C /* Build configuration list for PBXNativeTarget "PR3Remake" */;
-			buildPhases = (
-				8CBC06C0033C9AD3DA2B3A4E /* Sources */,
-				F04A73FA86BD7FFE10CE9ADB /* Frameworks */,
-				50584C23ADDEB78D723AEE0D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = PR3Remake;
-			productName = PR3Remake;
-			productReference = 38A007151ABE87CC01A5B6E9 /* PR3Remake.app */;
-			productType = "com.apple.product-type.application";
-		};
+		0E8A3AD980EC179856012B7E = {isa = PBXNativeTarget; buildConfigurationList = 7436D412F105AF0BD9F7FE6C; buildPhases = (8CBC06C0033C9AD3DA2B3A4E, F04A73FA86BD7FFE10CE9ADB, 50584C23ADDEB78D723AEE0D); buildRules = (); dependencies = (); name = PR3Remake; productName = PR3Remake; productReference = 38A007151ABE87CC01A5B6E9; productType = "com.apple.product-type.application"; };
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		98F54143AB4E86B28C3AFEE0 /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
-			};
-			buildConfigurationList = 9B7BD8E6CE978BD112E80E00 /* Build configuration list for PBXProject "PR3Remake" */;
-			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-				Base,
-			);
-			mainGroup = 8506DDB6453484895B4F193F;
-			productRefGroup = 1696BA116EFCCFFEA6F34D09 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				0E8A3AD980EC179856012B7E /* PR3Remake */,
-			);
-		};
+		98F54143AB4E86B28C3AFEE0 = {isa = PBXProject; attributes = {BuildIndependentTargetsInParallel = 1; LastSwiftUpdateCheck = 1500; LastUpgradeCheck = 1500; }; buildConfigurationList = 9B7BD8E6CE978BD112E80E00; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = 8506DDB6453484895B4F193F; productRefGroup = 1696BA116EFCCFFEA6F34D09; projectDirPath = ""; projectRoot = ""; targets = (0E8A3AD980EC179856012B7E); };
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		50584C23ADDEB78D723AEE0D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FCBBB397D933C06A374C94D3 /* GameData in Resources */,
-				28013CB1AAD0E177074237F6 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
+		50584C23ADDEB78D723AEE0D = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (FCBBB397D933C06A374C94D3, 28013CB1AAD0E177074237F6); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8CBC06C0033C9AD3DA2B3A4E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7D756278A8978BA858625C65 /* gen_000.c in Sources */,
-				5005F1A1A2880C2E62139A2C /* gen_001.c in Sources */,
-				AD2B1DD2DD2D299E44BAEC1B /* gen_002.c in Sources */,
-				DBD0F10C28E9EF2D38611575 /* gen_003.c in Sources */,
-				6BF1BD5871BF08D070761673 /* gen_004.c in Sources */,
-				252B9C99C31C0A76567C3667 /* gen_005.c in Sources */,
-				F6DE8ACC56499D1B9B2370A8 /* gen_006.c in Sources */,
-				70560E6B26AF85281919F218 /* gen_007.c in Sources */,
-				C8CAA05827CA7F99823475B0 /* gen_008.c in Sources */,
-				CB4E8ADFBF8DE3DC1F475B7C /* gen_009.c in Sources */,
-				B6D02408AEA5ACFCF6F7AE8A /* gen_010.c in Sources */,
-				DC8E0A931C495F890982AE70 /* gen_011.c in Sources */,
-				DD7D2C961C92D38E01555195 /* gen_012.c in Sources */,
-				41359B7E1AF551BD0B3CDC66 /* gen_013.c in Sources */,
-				BAD84C6DBB05F4F81D0D3B55 /* gen_014.c in Sources */,
-				BB493B94FD6E18B9F7708B40 /* gen_015.c in Sources */,
-				3A2CD3000ADDE6D527317344 /* gen_016.c in Sources */,
-				7A1DF3D5D692C6ED8F0494B8 /* gen_017.c in Sources */,
-				613E6A069C12C978AB50C3A0 /* gen_018.c in Sources */,
-				EE732F88A84146FF17EC6CF7 /* gen_019.c in Sources */,
-				B5695E4D137959C892835056 /* gen_020.c in Sources */,
-				9E8CB31638771E2F8656F575 /* gen_021.c in Sources */,
-				0E1C6FA257A5B8E9F9E760AC /* gen_022.c in Sources */,
-				F532BEDC13FE4506C79D3376 /* gen_023.c in Sources */,
-				930DDFEFFDF7F47717A26C0E /* gen_024.c in Sources */,
-				BB297CF6CC0CF252DBC746EA /* gen_025.c in Sources */,
-				B5A5295A6AC4B8762655701F /* gen_026.c in Sources */,
-				E7742A64AEB86061C8C5ED4B /* gen_027.c in Sources */,
-				D3F867B42003F5E7127A03C9 /* gen_028.c in Sources */,
-				60262B3ABB6806B567E586AE /* gen_029.c in Sources */,
-				476B18054963EA4C0B1B42E2 /* gen_030.c in Sources */,
-				8ED9E5D23A803DF1D719700D /* gen_031.c in Sources */,
-				F6B0216F74466FEBCF914D61 /* gen_032.c in Sources */,
-				4CA1F5CAD1EF1217BEA5AAF2 /* gen_033.c in Sources */,
-				A8071E11FA9A71959A9BE40E /* gen_034.c in Sources */,
-				1ACFED3BCBBB4A59A2F84F42 /* gen_035.c in Sources */,
-				092B94CBD98B47F675C4B300 /* gen_036.c in Sources */,
-				0DC60BC92692F71E476EE92B /* gen_037.c in Sources */,
-				8003A7E4344050A3C52899DD /* gen_038.c in Sources */,
-				D2A8FC4CD66A87E38D38A348 /* gen_039.c in Sources */,
-				5DC540C48B50F3C48832D1DC /* gen_040.c in Sources */,
-				B877C2F545F03B683D9AEA77 /* gen_041.c in Sources */,
-				423E9FEFA8F2639783E158C6 /* gen_042.c in Sources */,
-				1678A66072D09EC1F00DBE7C /* gen_043.c in Sources */,
-				E8A89FDDA0FB4267A298E966 /* gen_044.c in Sources */,
-				8EDD32BA40B6184F1EE3E97B /* gen_045.c in Sources */,
-				680744A598C697BA21A2F3AF /* gen_046.c in Sources */,
-				1407183FCBE6A49941E502D0 /* gen_047.c in Sources */,
-				ED54553B013B5282712C0609 /* gen_048.c in Sources */,
-				A08F08F196577DBC9329D711 /* gen_049.c in Sources */,
-				E55075370411D27EBD5B4A16 /* gen_050.c in Sources */,
-				B4978D738A2D7540EE79A693 /* gen_051.c in Sources */,
-				79CAD11647E1A65DEDCB34F0 /* gen_052.c in Sources */,
-				B5DB07A994AA2DEAFD1D7C4E /* gen_053.c in Sources */,
-				1E47CB31D3804CA5184CA6AC /* gen_054.c in Sources */,
-				787FB544DC3E0A0140F9AB83 /* gen_055.c in Sources */,
-				DD9D28FB1468E5A504549428 /* gen_056.c in Sources */,
-				154925BBB2BB4ABBA66B2E3D /* gen_057.c in Sources */,
-				9111E597795E7ACD49C1357B /* gen_058.c in Sources */,
-				C371F86A85735BFA885D1415 /* gen_059.c in Sources */,
-				535435FB510C2965FED77483 /* gen_060.c in Sources */,
-				5A5C96EC48C246B70AF3F942 /* gen_061.c in Sources */,
-				120C02B8D374DA55796FF007 /* gen_062.c in Sources */,
-				F22C76DE06739B79216DF70E /* gen_063.c in Sources */,
-				9B49818A0D88961E27F1C362 /* gen_064.c in Sources */,
-				5F0C97AAA7C949D477D69E8C /* gen_065.c in Sources */,
-				D3E70774A4C2012BBA7663A8 /* gen_066.c in Sources */,
-				C5782DD72B1828D33B78486A /* gen_067.c in Sources */,
-				266BCB2919DACFD3629A1C68 /* gen_binds.c in Sources */,
-				1539FA00497A0C790694D8F6 /* gen_stubs.c in Sources */,
-				F9F94BBC3EE7B3E3169DA027 /* gen_table.c in Sources */,
-				6673DC01EE2D3F1B53A0E44E /* hle_audio.c in Sources */,
-				DB66284BE81F78E2C7DC692A /* hle_cxx.c in Sources */,
-				64D11C509A21871D6BD7026A /* hle_gl.c in Sources */,
-				532A774EC61E6631E9AC0767 /* hle_libc.c in Sources */,
-				88371D34E400085CFF2C087A /* hle_objc.c in Sources */,
-				BBB3E42FDC7921A5D634ABB0 /* hle_stdio.c in Sources */,
-				9DB91E7B7DEBE4591B3578DB /* pr3_shell.c in Sources */,
-				6AFE37CFF496C193FA4BBEF5 /* rt.c in Sources */,
-				AC053EFF4431E382149CCA97 /* PR3App.swift in Sources */,
-				84A9EAA0600A34A57321B1D8 /* GLGameView.swift in Sources */,
-				9ED9C60A4CC96119AD846DA0 /* GameViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
+		8CBC06C0033C9AD3DA2B3A4E = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (7D756278A8978BA858625C65, 5005F1A1A2880C2E62139A2C, AD2B1DD2DD2D299E44BAEC1B, DBD0F10C28E9EF2D38611575, 6BF1BD5871BF08D070761673, 252B9C99C31C0A76567C3667, F6DE8ACC56499D1B9B2370A8, 70560E6B26AF85281919F218, C8CAA05827CA7F99823475B0, CB4E8ADFBF8DE3DC1F475B7C, B6D02408AEA5ACFCF6F7AE8A, DC8E0A931C495F890982AE70, DD7D2C961C92D38E01555195, 41359B7E1AF551BD0B3CDC66, BAD84C6DBB05F4F81D0D3B55, BB493B94FD6E18B9F7708B40, 3A2CD3000ADDE6D527317344, 7A1DF3D5D692C6ED8F0494B8, 613E6A069C12C978AB50C3A0, EE732F88A84146FF17EC6CF7, B5695E4D137959C892835056, 9E8CB31638771E2F8656F575, 0E1C6FA257A5B8E9F9E760AC, F532BEDC13FE4506C79D3376, 930DDFEFFDF7F47717A26C0E, BB297CF6CC0CF252DBC746EA, B5A5295A6AC4B8762655701F, E7742A64AEB86061C8C5ED4B, D3F867B42003F5E7127A03C9, 60262B3ABB6806B567E586AE, 476B18054963EA4C0B1B42E2, 8ED9E5D23A803DF1D719700D, F6B0216F74466FEBCF914D61, 4CA1F5CAD1EF1217BEA5AAF2, A8071E11FA9A71959A9BE40E, 1ACFED3BCBBB4A59A2F84F42, 092B94CBD98B47F675C4B300, 0DC60BC92692F71E476EE92B, 8003A7E4344050A3C52899DD, D2A8FC4CD66A87E38D38A348, 5DC540C48B50F3C48832D1DC, B877C2F545F03B683D9AEA77, 423E9FEFA8F2639783E158C6, 1678A66072D09EC1F00DBE7C, E8A89FDDA0FB4267A298E966, 8EDD32BA40B6184F1EE3E97B, 680744A598C697BA21A2F3AF, 1407183FCBE6A49941E502D0, ED54553B013B5282712C0609, A08F08F196577DBC9329D711, E55075370411D27EBD5B4A16, B4978D738A2D7540EE79A693, 79CAD11647E1A65DEDCB34F0, B5DB07A994AA2DEAFD1D7C4E, 1E47CB31D3804CA5184CA6AC, 787FB544DC3E0A0140F9AB83, DD9D28FB1468E5A504549428, 154925BBB2BB4ABBA66B2E3D, 9111E597795E7ACD49C1357B, C371F86A85735BFA885D1415, 535435FB510C2965FED77483, 5A5C96EC48C246B70AF3F942, 120C02B8D374DA55796FF007, F22C76DE06739B79216DF70E, 9B49818A0D88961E27F1C362, 5F0C97AAA7C949D477D69E8C, D3E70774A4C2012BBA7663A8, C5782DD72B1828D33B78486A, 266BCB2919DACFD3629A1C68, 1539FA00497A0C790694D8F6, F9F94BBC3EE7B3E3169DA027, 6673DC01EE2D3F1B53A0E44E, DB66284BE81F78E2C7DC692A, 64D11C509A21871D6BD7026A, 532A774EC61E6631E9AC0767, 88371D34E400085CFF2C087A, BBB3E42FDC7921A5D634ABB0, 89E3EA225F5E327C1ECFC8A1, 9DB91E7B7DEBE4591B3578DB, 6AFE37CFF496C193FA4BBEF5, AC053EFF4431E382149CCA97, 84A9EAA0600A34A57321B1D8, 9ED9C60A4CC96119AD846DA0); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		0B785AF28C7C4F933310090D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J2NGZC4W5W;
-				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/PR3Core/include",
-					"$(SRCROOT)/PR3Core/generated",
-				);
-				INFOPLIST_KEY_CFBundleDisplayName = PR3;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UIRequiresFullScreen = YES;
-				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				MARKETING_VERSION = 1.0;
-				OTHER_CFLAGS = (
-					"-w",
-					"-ffp-contract=off",
-					"-DRT_GL_REAL",
-					"-DRT_AUDIO_REAL",
-				);
-				OTHER_LDFLAGS = (
-					"-framework",
-					OpenGLES,
-					"-framework",
-					QuartzCore,
-					"-framework",
-					AudioToolbox,
-					"-framework",
-					OpenAL,
-					"-framework",
-					CoreFoundation,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.akarpati.pr3remake;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "PR3Remake/PR3Remake-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		2178E4DC9A4050393C01F38D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J2NGZC4W5W;
-				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/PR3Core/include",
-					"$(SRCROOT)/PR3Core/generated",
-				);
-				INFOPLIST_KEY_CFBundleDisplayName = PR3;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UIRequiresFullScreen = YES;
-				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				MARKETING_VERSION = 1.0;
-				OTHER_CFLAGS = (
-					"-w",
-					"-ffp-contract=off",
-					"-DRT_GL_REAL",
-					"-DRT_AUDIO_REAL",
-				);
-				OTHER_LDFLAGS = (
-					"-framework",
-					OpenGLES,
-					"-framework",
-					QuartzCore,
-					"-framework",
-					AudioToolbox,
-					"-framework",
-					OpenAL,
-					"-framework",
-					CoreFoundation,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.akarpati.pr3remake;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "PR3Remake/PR3Remake-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		6FF876B6C00A1549E016EC49 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DEPRECATED_FUNCTIONS = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_OPTIMIZATION_LEVEL = 1;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		84D569BD43F5BFA6D3967F3E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DEPRECATED_FUNCTIONS = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_OPTIMIZATION_LEVEL = 1;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
+		84D569BD43F5BFA6D3967F3E = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; CLANG_WARN_DEPRECATED_FUNCTIONS = NO; DEBUG_INFORMATION_FORMAT = dwarf; ENABLE_TESTABILITY = YES; ENABLE_USER_SCRIPT_SANDBOXING = NO; GCC_C_LANGUAGE_STANDARD = gnu17; GCC_OPTIMIZATION_LEVEL = 1; IPHONEOS_DEPLOYMENT_TARGET = 16.0; ONLY_ACTIVE_ARCH = YES; SDKROOT = iphoneos; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; SWIFT_OPTIMIZATION_LEVEL = -Onone; SWIFT_VERSION = 5.0; }; name = Debug; };
+		6FF876B6C00A1549E016EC49 = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; CLANG_WARN_DEPRECATED_FUNCTIONS = NO; DEBUG_INFORMATION_FORMAT = dwarf-with-dsym; ENABLE_USER_SCRIPT_SANDBOXING = NO; GCC_C_LANGUAGE_STANDARD = gnu17; GCC_OPTIMIZATION_LEVEL = 1; IPHONEOS_DEPLOYMENT_TARGET = 16.0; SDKROOT = iphoneos; SWIFT_OPTIMIZATION_LEVEL = -O; SWIFT_VERSION = 5.0; VALIDATE_PRODUCT = YES; }; name = Release; };
+		0B785AF28C7C4F933310090D = {isa = XCBuildConfiguration; buildSettings = {ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = YES; HEADER_SEARCH_PATHS = ("$(SRCROOT)/PR3Core/include", "$(SRCROOT)/PR3Core/generated"); INFOPLIST_KEY_CFBundleDisplayName = PR3; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES; INFOPLIST_KEY_UILaunchScreen_Generation = YES; INFOPLIST_KEY_UIRequiresFullScreen = YES; INFOPLIST_KEY_UIStatusBarHidden = YES; INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"; INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"; MARKETING_VERSION = 1.0; OTHER_CFLAGS = ("-w", "-ffp-contract=off", "-DRT_GL_REAL", "-DRT_AUDIO_REAL"); OTHER_LDFLAGS = ("-framework", OpenGLES, "-framework", QuartzCore, "-framework", AudioToolbox, "-framework", OpenAL, "-framework", CoreFoundation); PRODUCT_BUNDLE_IDENTIFIER = com.example.pr3remake; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_OBJC_BRIDGING_HEADER = PR3Remake/PR3Remake-Bridging-Header.h; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Debug; };
+		2178E4DC9A4050393C01F38D = {isa = XCBuildConfiguration; buildSettings = {ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = YES; HEADER_SEARCH_PATHS = ("$(SRCROOT)/PR3Core/include", "$(SRCROOT)/PR3Core/generated"); INFOPLIST_KEY_CFBundleDisplayName = PR3; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES; INFOPLIST_KEY_UILaunchScreen_Generation = YES; INFOPLIST_KEY_UIRequiresFullScreen = YES; INFOPLIST_KEY_UIStatusBarHidden = YES; INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"; INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"; MARKETING_VERSION = 1.0; OTHER_CFLAGS = ("-w", "-ffp-contract=off", "-DRT_GL_REAL", "-DRT_AUDIO_REAL"); OTHER_LDFLAGS = ("-framework", OpenGLES, "-framework", QuartzCore, "-framework", AudioToolbox, "-framework", OpenAL, "-framework", CoreFoundation); PRODUCT_BUNDLE_IDENTIFIER = com.example.pr3remake; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_OBJC_BRIDGING_HEADER = PR3Remake/PR3Remake-Bridging-Header.h; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7436D412F105AF0BD9F7FE6C /* Build configuration list for PBXNativeTarget "PR3Remake" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0B785AF28C7C4F933310090D /* Debug */,
-				2178E4DC9A4050393C01F38D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9B7BD8E6CE978BD112E80E00 /* Build configuration list for PBXProject "PR3Remake" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				84D569BD43F5BFA6D3967F3E /* Debug */,
-				6FF876B6C00A1549E016EC49 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
+		9B7BD8E6CE978BD112E80E00 = {isa = XCConfigurationList; buildConfigurations = (84D569BD43F5BFA6D3967F3E, 6FF876B6C00A1549E016EC49); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		7436D412F105AF0BD9F7FE6C = {isa = XCConfigurationList; buildConfigurations = (0B785AF28C7C4F933310090D, 2178E4DC9A4050393C01F38D); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
 /* End XCConfigurationList section */
 	};
-	rootObject = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+	rootObject = 98F54143AB4E86B28C3AFEE0;
 }

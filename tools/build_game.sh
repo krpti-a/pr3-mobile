@@ -14,8 +14,10 @@ rm -rf "$DATA"; mkdir -p "$DATA"
 rsync -a --exclude PR3 --exclude '*.plist' --exclude Seb1971 --exclude PkgInfo --exclude MainWindow.nib --exclude FBConnect.bundle "$APP"/ "$DATA"/
 lipo "$APP/PR3" -thin armv7 -output "$DATA/PR3.armv7"
 VENV="$ROOT/tools/.venv"
-if [ ! -x "$VENV/bin/python" ]; then python3 -m venv "$VENV"; "$VENV/bin/pip" install -q capstone; fi
+if [ ! -x "$VENV/bin/python" ]; then python3 -m venv "$VENV"; fi
+"$VENV/bin/pip" install -q capstone pillow
 PY="$VENV/bin/python"
+"$PY" "$ROOT/tools/make_unlocked_art.py" "$DATA"      # main-menu tile of the "all unlocked" single-player mode
 export PR3_BIN="$DATA/PR3.armv7"
 export PR3_SYMS="$TMP/syms.txt"
 python3 "$ROOT/tools/recomp/mksyms.py" "$PR3_BIN" "$PR3_SYMS"
