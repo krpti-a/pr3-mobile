@@ -1,0 +1,8 @@
+# Copyright-protected game data and code derived from your own copy of the original app: never commit or redistribute
+PR3Remake/Resources/GameData/
+PR3Remake/Assets.xcassets/AppIcon.appiconset/icon-1024.png
+PR3Core/generated/
+tools/.venv/
+*.xcuserstate
+xcuserdata/
+DerivedData/

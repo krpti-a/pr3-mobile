@@ -1,0 +1,33 @@
+#!/bin/bash
+# Converts your own copy of the original Platform Racing 3 iOS app into everything the Xcode project needs:
+#   - PR3Remake/Resources/GameData     original data files (art, levels, sounds) + PR3.code (the armv7 code image)
+#   - PR3Core/generated                the original game code statically recompiled to C
+# usage: tools/build_game.sh "/path/to/Platform Racing 3.ipa"
+set -euo pipefail
+IPA="${1:?path to Platform Racing 3.ipa}"
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
+unzip -q "$IPA" 'Payload/PR3.app/*' -d "$TMP"
+APP="$TMP/Payload/PR3.app"
+DATA="$ROOT/PR3Remake/Resources/GameData"
+rm -rf "$DATA"; mkdir -p "$DATA"
+rsync -a --exclude PR3 --exclude '*.plist' --exclude Seb1971 --exclude PkgInfo --exclude MainWindow.nib --exclude FBConnect.bundle "$APP"/ "$DATA"/
+lipo "$APP/PR3" -thin armv7 -output "$DATA/PR3.armv7"
+VENV="$ROOT/tools/.venv"
+if [ ! -x "$VENV/bin/python" ]; then python3 -m venv "$VENV"; "$VENV/bin/pip" install -q capstone; fi
+PY="$VENV/bin/python"
+export PR3_BIN="$DATA/PR3.armv7"
+export PR3_SYMS="$TMP/syms.txt"
+python3 "$ROOT/tools/recomp/mksyms.py" "$PR3_BIN" "$PR3_SYMS"
+python3 "$ROOT/tools/recomp/bind.py"
+rm -rf "$ROOT/PR3Core/generated"
+"$PY" "$ROOT/tools/recomp/gen.py" "$ROOT/tools/recomp/full.json" "$ROOT/PR3Core/generated"
+# Keep only the loadable segments and hide the Mach-O magic: the app loads this as plain data (see rt_init)
+python3 - "$DATA/PR3.armv7" "$DATA/PR3.code" <<'PY'
+import sys
+d = bytearray(open(sys.argv[1], 'rb').read()[:1167360 + 57344])
+d[0:4] = bytes(b ^ 0xff for b in d[0:4])
+open(sys.argv[2], 'wb').write(d)
+PY
+rm "$DATA/PR3.armv7"
+echo "Done. Open PR3Remake.xcodeproj (run tools/gen_xcodeproj.py first if you added files)."

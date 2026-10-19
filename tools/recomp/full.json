@@ -1,0 +1,26 @@
+{
+ "roots": [
+  "*"
+ ],
+ "skip_prefixes": [
+  "FB",
+  "MGTwitter",
+  "OA",
+  "TapJoy",
+  "Tapjoy",
+  "-[FB",
+  "+[FB",
+  "-[MG",
+  "+[MG",
+  "-[OA",
+  "+[OA",
+  "-[Tapjoy",
+  "+[Tapjoy",
+  "___-[FB",
+  "___-[OA",
+  "___-[MG",
+  "___-[Tapjoy"
+ ],
+ "overrides": {},
+ "chunk": 60
+}
