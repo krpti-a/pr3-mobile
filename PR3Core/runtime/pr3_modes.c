@@ -1,4 +1,4 @@
-// "Single Player - All Unlocked": a second single-player entry on the main menu with its own save file.
+// "Experimental": a second single-player entry on the main menu (every part and level unlocked) with its own save file.
 //
 // The original main menu is a ThumbButtonList built in MainMenu::InitThumbList (Single Player, Online Play, Options,
 // More Games). gen.py wraps two original functions (tools/recomp/full.json "wraps"):
@@ -67,7 +67,7 @@ void pr3_sync_user(CPU *cur) {
 // ---- profiles -----------------------------------------------------------------------------------------------------
 #define NORMAL_FILE   "Settings.dat"
 #define UNLOCKED_FILE "Settings_unlocked.dat"
-static int g_mode;                          // 0 = normal profile, 1 = all unlocked
+static int g_mode;                          // 0 = normal profile, 1 = experimental (everything unlocked)
 extern char rt_documents_root[1024];
 
 static int file_exists(const char *p) { FILE *f = fopen(p, "rb"); if (f) { fclose(f); return 1; } return 0; }
@@ -84,7 +84,7 @@ static void id_range(char *out, size_t cap, uint32_t n) {
     snprintf(out + k, cap - k, "]");
 }
 
-// Builds the all-unlocked profile on top of a fresh default character and writes it to the current Settings path.
+// Builds the experimental (all unlocked) profile on top of a fresh default character and writes it to the current Settings path.
 static void create_unlocked_profile(CPU *c, uint32_t S) {
     ST32(S + 0x38, 0);                                          // drop the other profile's JSON (leaked: tiny)
     gcall(c, A_CreateNewCharacter, &S, 1);
@@ -137,7 +137,7 @@ static void switch_profile(CPU *c, int mode) {
     if (file_exists(full)) gcall(c, A_LoadSettings, &S, 1);
     else if (mode) create_unlocked_profile(c, S);
     else { ST32(S + 0x38, 0); gcall(c, A_SaveSettings, &S, 1); }   // writes a fresh default character
-    fprintf(stderr, "[pr3] profile: %s\n", mode ? "all unlocked" : "normal");
+    fprintf(stderr, "[pr3] profile: %s\n", mode ? "experimental" : "normal");
 }
 
 // ---- hooks (see tools/recomp/full.json "wraps") --------------------------------------------------------------------
@@ -178,7 +178,7 @@ void wrap_MainMenu_InitThumbList(CPU *c) {
     uint32_t list = LD32(menu + 0x14b4);
     g_list = list;
     if (!list) return;
-    uint32_t args[7] = { list, guest_string("offlinePlayAll"), rt_new_cstr("SinglePlayerAll"), guest_string("Unlocked Play"),
+    uint32_t args[7] = { list, guest_string("offlinePlayAll"), rt_new_cstr("SinglePlayerExperimental"), guest_string("Experimental"),
                          guest_string(""), 0, 0 };
     uint32_t made = gcall(c, A_ThumbAdd, args, 7);
     if (getenv("PR3_DEBUG_MODES")) fprintf(stderr, "[pr3] new tile object 0x%x\n", made);

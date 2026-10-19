@@ -9,6 +9,12 @@ final class GameViewController: UIViewController {
     private var booted = false
     /// Points added on each side of the game's 480 x 320 landscape screen so that it fills the display (0 on 4:3 screens).
     private var wideOff = 0
+    private var overlay: ControlsOverlay!
+    private let gamepad = GamepadInput()
+    private let cursorView = UIView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+    private var cursor = CGPoint.zero
+    private var cursorDown = false
+    private var itemHeld = false
 
     override func loadView() { view = UIView(); view.backgroundColor = .black }
     override var prefersStatusBarHidden: Bool { true }
@@ -18,7 +24,27 @@ final class GameViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         layoutGameView()
-        if !booted && view.bounds.width > 0 { boot() }
+        updateSafeArea()
+        if !booted && view.bounds.width > view.bounds.height { boot() }      // wait for landscape: the wide layout depends on the display aspect
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // The game is landscape only: ask for it explicitly (the SwiftUI host does not always rotate by itself).
+        setNeedsUpdateOfSupportedInterfaceOrientations()
+        view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .landscape)) { _ in }
+    }
+
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        updateSafeArea()
+    }
+
+    /// The notch / rounded corners in game points: the in-level controls stay clear of them.
+    private func updateSafeArea() {
+        let k = max(0.1, min(view.bounds.width / 480, view.bounds.height / 320))
+        let insets = view.safeAreaInsets
+        pr3_set_safe(Int32(insets.left / k), Int32(insets.right / k))
     }
 
     private func layoutGameView() {
@@ -39,6 +65,21 @@ final class GameViewController: UIViewController {
         gameView = GLGameView(scale: scale, wideOff: wideOff)
         view.addSubview(gameView)
         layoutGameView()
+        updateSafeArea()
+        overlay = ControlsOverlay(frame: view.bounds)
+        overlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(overlay)
+        gameView.onTouchBegan = { [weak self] in self?.overlay.setTouchControlsHidden(false) }
+        cursorView.isHidden = true
+        cursorView.isUserInteractionEnabled = false
+        cursorView.backgroundColor = UIColor(white: 1, alpha: 0.85)
+        cursorView.layer.cornerRadius = 11
+        cursorView.layer.borderWidth = 2
+        cursorView.layer.borderColor = UIColor(red: 0.1, green: 0.2, blue: 0.5, alpha: 1).cgColor
+        view.addSubview(cursorView)
+        cursor = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
+        overlay.setControllerStatus(gamepad.connected)
+        gamepad.onConnectionChange = { [weak self] connected in self?.overlay.setControllerStatus(connected) }
 
         pr3_set_view_hooks({ GLGameView.current?.startUpdate() }, { GLGameView.current?.endUpdate() })
         let bundle = Bundle.main
@@ -93,11 +134,47 @@ final class GameViewController: UIViewController {
         }
     }
 
+    /// Merges touch and game-controller input into the game for this frame; with a controller and no level, a cursor taps the menus.
+    private func updateControls(dt: Double) {
+        let inLevel = pr3_in_level() != 0
+        overlay.update(inLevel: inLevel)
+        let pad = gamepad.poll()
+        if inLevel {
+            releaseCursor()
+            cursorView.isHidden = true
+            if pad.mask != 0 || pad.item { overlay.setTouchControlsHidden(true) }
+            pr3_input_set(overlay.touchMask | pad.mask)
+            if pad.item && !itemHeld { pr3_use_item() }
+            itemHeld = pad.item
+            return
+        }
+        pr3_input_set(0)
+        itemHeld = false
+        guard gamepad.connected else { releaseCursor(); cursorView.isHidden = true; return }
+        cursorView.isHidden = false
+        func curve(_ v: CGFloat) -> CGFloat { let m = max(0, abs(v) - 0.18) / 0.82; return (v < 0 ? -1 : 1) * m * m }
+        cursor.x = max(1, min(view.bounds.width - 1, cursor.x + curve(pad.cursor.x) * 520 * dt))
+        cursor.y = max(1, min(view.bounds.height - 1, cursor.y + curve(pad.cursor.y) * 520 * dt))
+        cursorView.center = cursor
+        let local = gameView.convert(cursor, from: view)
+        if pad.click && !cursorDown { cursorDown = true; pr3_touch(0, 9999, Float(local.x), Float(local.y)) }
+        else if pad.click { pr3_touch(1, 9999, Float(local.x), Float(local.y)) }
+        else if !pad.click && cursorDown { cursorDown = false; pr3_touch(3, 9999, Float(local.x), Float(local.y)) }
+    }
+
+    private func releaseCursor() {
+        guard cursorDown else { return }
+        cursorDown = false
+        let local = gameView.convert(cursor, from: view)
+        pr3_touch(3, 9999, Float(local.x), Float(local.y))
+    }
+
     @objc private func tick(_ link: CADisplayLink) {
         let now = link.timestamp
         let dt = lastTimestamp == 0 ? 33.333 : (now - lastTimestamp) * 1000
         lastTimestamp = now
         runScript(dt: dt)
+        updateControls(dt: dt / 1000)
         pr3_frame(dt)
         if now - lastSave >= 10 { lastSave = now; pr3_save() }   // iOS can kill a suspended app without notice
     }

@@ -75,6 +75,8 @@ static void release_touch(uint32_t id) {
 }
 
 void pr3_set_wide(int off) { rt_wide_off = off > 0 ? off : 0; }
+extern int rt_safe_left, rt_safe_right;
+void pr3_set_safe(int left, int right) { rt_safe_left = left > 0 ? left : 0; rt_safe_right = right > 0 ? right : 0; }
 // Is a level (a game page) on screen? MainMgr::page (+0x104), as used by OfflineGamePage.
 int rt_in_level(void) {
     uint32_t slot = 0x1b7b8 + LD32(0x1b83c), mgr = LD32(slot) ? LD32(LD32(slot)) : 0;

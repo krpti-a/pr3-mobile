@@ -15,6 +15,8 @@ final class GLGameView: UIView {
     private var nextTouchID: Int32 = 1000
 
     static weak var current: GLGameView?
+    /// Called when a finger touches the game (the shell then shows its touch controls again after a game controller was used).
+    var onTouchBegan: (() -> Void)?
 
     /// The game's portrait screen is 320 x 480 points. On a wider display the view is `wideOff` points taller on both sides
     /// (the landscape game area grows to the left and right, see pr3_set_wide).
@@ -80,7 +82,7 @@ final class GLGameView: UIView {
         }
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { forward(touches, phase: 0) }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { onTouchBegan?(); forward(touches, phase: 0) }
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) { forward(touches, phase: 1) }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) { forward(touches, phase: 3, release: true) }
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) { forward(touches, phase: 4, release: true) }

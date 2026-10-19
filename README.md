@@ -45,11 +45,23 @@ tap the menus. Progress is saved by the game itself in the app's Documents folde
 ## Game modes and saves
 
 The main menu has two single-player tiles (swipe the row): **Single Player** (the original, progress as in 2010) and
-**Single Player – All Unlocked**, a second profile with every hat, head, body and feet part and every level open. Each
+**Experimental**, a second single-player profile with every hat, head, body and feet part and every level open. Each
 profile has its own save file in the app's Documents folder (`Settings.dat`, `Settings_unlocked.dat`), written by the
 game itself when the app leaves the foreground and every 10 seconds. The tile is added by wrapping two original
-functions (`PR3Core/runtime/pr3_modes.c`, `wraps` in `tools/recomp/full.json`); its artwork is generated from the
-original one by `tools/make_unlocked_art.py`.
+functions (`PR3Core/runtime/pr3_modes.c`, `wraps` in `tools/recomp/full.json`); its artwork is built by `tools/make_unlocked_art.py` (background: `art/menu/experimental-bg.webp`).
+
+## Main branch additions
+
+The `original` branch is the faithful port plus bug fixes only. `main` adds, on top of it:
+
+- **Widescreen gameplay**: in a level the view grows to the display's aspect ratio (world, background and block culling fill the
+  screen, controls sit at the edges, outside the notch); menus keep the original 480×320 area. `PR3Core/runtime/pr3_wide.c`, `hle_gl.c`.
+- **Controls** (`PR3Remake/Shell/ControlsOverlay.swift`, `GamepadInput.swift`, `PR3Core/runtime/pr3_controls.c`): joystick or
+  d-pad, sideways-only steering, optional jump / crouch (super jump) buttons, item button; see-through when idle, touch areas
+  larger than the drawn buttons; settings behind the gear in a level. Game controllers (GameController framework) steer, jump,
+  crouch and use items, and drive a cursor in the menus.
+- **Experimental** profile (all hats, parts and levels), redrawn hats and the Donkey part (`art/`, `tools/import_art.py`).
+- **Faster loading**: the original's LodePNG hot paths are replaced by zlib / plain C (`pr3_speed.c`), output bit-identical.
 
 ## What works
 

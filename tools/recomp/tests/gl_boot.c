@@ -48,6 +48,8 @@ int main(int argc, char **argv) {
     const char *docs = getenv("PR3_DOCS") ? getenv("PR3_DOCS") : "/tmp/pr3_docs";
     if (pr3_boot(argv[1], getenv("PR3_RES"), docs, SC)) { fprintf(stderr, "boot failed\n"); return 1; }
     pr3_set_wide(wide_off);
+    if (getenv("HUDCFG")) { int a = 1, b = 1, c2 = 0; sscanf(getenv("HUDCFG"), "%d,%d,%d", &a, &b, &c2); pr3_hud_config(a, b, c2); }      // show stick, show item, x-only
+    int in_f1 = -1, in_f2 = -1, in_mask = 0; if (getenv("INPUT")) sscanf(getenv("INPUT"), "%d:%d:%d", &in_f1, &in_f2, &in_mask);     // shell input mask from frame f1 to f2
     if (getenv("GLOG")) rt_gl_set_log(atoi(getenv("GLOG")));
     { extern uint32_t rt_watch_lo, rt_watch_len; if (getenv("RT_WATCH")) { rt_watch_lo = (uint32_t)strtoul(getenv("RT_WATCH"), 0, 16); rt_watch_len = 16; } }
     int frames = argc > 2 ? atoi(argv[2]) : 3, every = argc > 3 ? atoi(argv[3]) : 1;
@@ -88,6 +90,7 @@ int main(int argc, char **argv) {
             if (page) rt_call(0xdef48, &page, 1, NULL);
         }
         if (getenv("GLOG_AT") && i == atoi(getenv("GLOG_AT"))) rt_gl_set_log(getenv("GLOG_N") ? atoi(getenv("GLOG_N")) : 400);
+        pr3_input_set(i >= in_f1 && i < in_f2 ? in_mask : 0);
         struct timespec t0, t1; clock_gettime(CLOCK_MONOTONIC, &t0);
         pr3_frame(1000.0 / 30.0);
         if (getenv("READLOG")) { static uint32_t last; if (rt_gl_reads != last) { fprintf(stderr, "[reads] frame %d: +%u\n", i, rt_gl_reads - last); last = rt_gl_reads; } }

@@ -3,6 +3,7 @@
 #include "arm_rt.h"
 
 extern int rt_wide_off;
+int rt_safe_left, rt_safe_right;      // notch / rounded corners, in game points (set by pr3_set_safe)
 void f_1933c_orig(CPU *c);
 void f_a0de0_orig(CPU *c);
 void f_a1310_orig(CPU *c);
@@ -35,22 +36,23 @@ void wrap_GamePlayMenu_ctor(CPU *c) {
     uint32_t menu = c->r[0];
     f_a0de0_orig(c);
     if (rt_wide_off <= 0) return;
-    shift_x(LD32(menu + 0xda8), -rt_wide_off); shift_x(LD32(menu + 0xdd4), -rt_wide_off); shift_x(LD32(menu + 0xdd0), -rt_wide_off);
-    shift_x(LD32(menu + 0xdd8), +rt_wide_off);
+    int l = -rt_wide_off + rt_safe_left, r = rt_wide_off - rt_safe_right;
+    shift_x(LD32(menu + 0xda8), l); shift_x(LD32(menu + 0xdd4), l); shift_x(LD32(menu + 0xdd0), l);
+    shift_x(LD32(menu + 0xdd8), r);
 }
 
 // GamePlayMenu::AddRetryButton(): retry button +0xddc (made on the first call)
 void wrap_GamePlayMenu_AddRetryButton(CPU *c) {
     uint32_t menu = c->r[0], before = LD32(menu + 0xddc);
     f_a1310_orig(c);
-    if (rt_wide_off > 0 && !before) shift_x(LD32(menu + 0xddc), -rt_wide_off);
+    if (rt_wide_off > 0 && !before) shift_x(LD32(menu + 0xddc), -rt_wide_off + rt_safe_left);
 }
 
 // GameTimer::Draw sets its text field's position every frame, then calls ActionContainer::Draw on itself: shift it there.
 void wrap_ActionContainer_Draw(CPU *c) {
     enum { VT_GameTimer = 0x127a3c };
     uint32_t o = c->r[0];
-    if (rt_wide_off > 0 && o && LD32(o) == VT_GameTimer) shift_x(LD32(o + 0x6d8), +rt_wide_off);
+    if (rt_wide_off > 0 && o && LD32(o) == VT_GameTimer) shift_x(LD32(o + 0x6d8), rt_wide_off - rt_safe_right);
     f_8e250_orig(c);
 }
 

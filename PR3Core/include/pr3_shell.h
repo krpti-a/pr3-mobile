@@ -19,4 +19,15 @@ float pr3_gl_scale(void);
 // Widescreen: the view is 320 x (480 + 2 * off) points; the game's own 480-point screen sits in the middle of it, and while a
 // level is shown the world is drawn over the whole view. Call before the first frame; touches stay in view coordinates.
 void pr3_set_wide(int off);
+// The display's unsafe borders (notch, rounded corners) in game points: the in-level controls stay inside them.
+void pr3_set_safe(int left, int right);
+
+// ---- In-level controls (see pr3_controls.c) ----
+// The shell's own controls drive the game's input flags: mask bit0 left, bit1 right, bit2 up (jump), bit3 down (crouch / super jump).
+void pr3_input_set(int mask);
+void pr3_use_item(void);
+// Which of the original's controls stay on screen: the thumbstick, the item button; and whether the thumbstick steers sideways only.
+void pr3_hud_config(int show_stick, int show_item, int stick_x_only);
+void pr3_hud_item_pos(double x, double y);   // item button centre in the widened screen's game points (x < 0: original place)
+int  pr3_in_level(void);
 #endif

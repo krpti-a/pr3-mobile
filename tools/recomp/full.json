@@ -36,7 +36,8 @@
   "MainMgr::SetBG(char const*)": "wrap_MainMgr_SetBG",
   "GamePlayMenu::GamePlayMenu()": "wrap_GamePlayMenu_ctor",
   "GamePlayMenu::AddRetryButton()": "wrap_GamePlayMenu_AddRetryButton",
-  "ActionContainer::Draw(UIObject*)": "wrap_ActionContainer_Draw"
+  "ActionContainer::Draw(UIObject*)": "wrap_ActionContainer_Draw",
+  "GamePlayMenu::UpdateThumbstick()": "wrap_GamePlayMenu_UpdateThumbstick"
  },
  "cpatches": {
   "BlockMap::Render()": [
