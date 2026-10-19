@@ -22,5 +22,8 @@
   "___-[Tapjoy"
  ],
  "overrides": {},
- "chunk": 60
+ "chunk": 60,
+ "wraps": {
+  "Player::ShowHats()": "wrap_Player_ShowHats"
+ }
 }
