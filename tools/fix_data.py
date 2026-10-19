@@ -41,7 +41,7 @@ def propeller_color(base_path, out_path):
     # and keep it well inside the sprite's own silhouette (the sides of the dome showed the colour past the outline)
     import numpy as np
     from scipy import ndimage as ndi
-    kk = int(round(k))
+    kk = max(1, int(round(k)))
     solid = ndi.binary_fill_holes(ndi.binary_closing(np.array(base.split()[3]) > 8, structure=np.ones((3, 3)), iterations=3 * kk))
     inside = ndi.binary_erosion(solid, iterations=3 * kk)
     a = Image.fromarray(np.where(inside, np.array(a), 0).astype(np.uint8))

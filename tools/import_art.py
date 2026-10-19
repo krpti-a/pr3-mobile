@@ -25,7 +25,8 @@ def whiten(im):
 # sprite and reused (as fractions of the canvas) for the 1x one.
 FIT = set()                                                             # (fitting the layer to the sprite was worse than using the artist's own placement)
 FITS = {}
-FLAT = {'top', 'pirate', 'nurse', 'happy', 'boundy'}
+CLIP = {'boundy', 'nurse'}
+FLAT = set()                                       # (cutting the hat out under the layer lost its shading: the hat's own translucent shading must stay on top)
 
 def coloured_area(base, guide):
     """Translucent interior of the sprite near the supplied layer: where the tinted layer shows through."""
@@ -105,6 +106,11 @@ def build(data, key, suffix):
     cx, cy = x0 + round(px * f), y0 + round(py * f)
     out_col.alpha_composite(c, (max(cx, 0), max(cy, 0)), (max(-cx, 0), max(-cy, 0))) if True else None
     if key in FIT: out_col = fit_color(out_base, out_col, key)
+    if key in CLIP:                                    # colour only where the hat's own silhouette is (the layer is a little larger than the hat)
+        k = max(1, round(W / 256))
+        solid = ndi.binary_fill_holes(ndi.binary_closing(np.array(out_base.split()[3]) > 8, structure=np.ones((3, 3)), iterations=3 * k))
+        inside = ndi.binary_erosion(solid, iterations=k)
+        out_col.putalpha(Image.fromarray(np.where(inside, np.array(out_col.split()[3]), 0).astype(np.uint8)))
     if key in FLAT:
         # The artist's preview draws the flat colour layer ON TOP of the hat (see art/hats/color-layer/preview); the game draws it
         # underneath, so the hat is cut out where the layer is.
