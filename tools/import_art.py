@@ -67,11 +67,16 @@ def fit_color(out_base, out_col, key):
     solid = ndi.binary_fill_holes(ndi.binary_closing(np.array(out_base.split()[3]) > 8, structure=np.ones((3, 3)), iterations=3 * k))
     inside = ndi.binary_erosion(solid, iterations=k)                                                            # no colour outside the sprite's outline
     ch = Image.fromarray(np.where(inside, np.array(ch), 0).astype(np.uint8))
+    if key == 'top':                                   # the band is a see-through stripe of the base: use exactly that stripe
+        a = np.array(out_base.split()[3]); near = ndi.binary_dilation(np.array(ch) > 128, iterations=3 * k)
+        stripe = solid & (a < 250) & near & ndi.binary_erosion(solid, iterations=2 * k)
+        stripe = ndi.binary_closing(stripe, structure=np.ones((3, 3)), iterations=k)
+        ch = Image.fromarray((stripe * 255).astype(np.uint8))
     w = Image.new('L', out_col.size, 255)
     return Image.merge('RGBA', (w, w, w, ch))
 
 # After the fit, hats that sit awkwardly on the player's head are moved (pixels of the @2x canvas; the 1x canvas gets half).
-SHIFT = {'TopHat': (15, 0), 'PartyHat': (10, 0), 'PirateHat': (11, -3), 'NurseHat': (6, 0), 'HappyHat': (10, 0), 'SharkFin': (20, 0),
+SHIFT = {'TopHat': (15, 0), 'PartyHat': (10, 0), 'PirateHat': (22, -3), 'NurseHat': (13, 0), 'HappyHat': (17, 0), 'SharkFin': (20, 0),
          'Parasail': (8, 0), 'BaseballHat': (21, -6)}
 
 def shift_image(im, dx, dy):

@@ -90,6 +90,7 @@ int main(int argc, char **argv) {
             if (page) rt_call(0xdef48, &page, 1, NULL);
         }
         if (getenv("GLOG_AT") && i == atoi(getenv("GLOG_AT"))) rt_gl_set_log(getenv("GLOG_N") ? atoi(getenv("GLOG_N")) : 400);
+        if (getenv("USEITEM") && i == atoi(getenv("USEITEM"))) pr3_use_item();
         pr3_input_set(i >= in_f1 && i < in_f2 ? in_mask : 0);
         struct timespec t0, t1; clock_gettime(CLOCK_MONOTONIC, &t0);
         pr3_frame(1000.0 / 30.0);

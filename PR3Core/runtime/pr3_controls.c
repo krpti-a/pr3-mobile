@@ -25,12 +25,17 @@ static uint32_t mainmgr(void) { uint32_t slot = 0x1b7b8 + LD32(0x1b83c); return 
 static double get_x(uint32_t o) { uint64_t u = ((uint64_t)LD32(o + 0x20) << 32) | LD32(o + 0x1c); double v; memcpy(&v, &u, 8); return v; }
 static void put_x(uint32_t o, double v) { if (!o) return; uint64_t u; memcpy(&u, &v, 8); ST32(o + 0x1c, (uint32_t)u); ST32(o + 0x20, (uint32_t)(u >> 32)); }
 
-// Use the held item, like the item button (GamePlayMenu::HandleEvent calls the game page's virtual function at +0x50 with 0).
+// Use the held item by pressing the original item button: its click is what the game acts on. With the shell's own button the
+// original one is parked out of sight (x = 3000) and tapped there. (GamePlayMenu::HandleEvent offers no direct call: its virtual
+// function +0x50 is the retry action.)
+static double g_btn_x = 3000, g_btn_y = 280;
+extern int rt_wide_off;
+void pr3_touch(int phase, int touch_id, float x, float y);
 void pr3_use_item(void) {
-    uint32_t mgr = mainmgr(), page = mgr ? LD32(mgr + 0x104) : 0;
-    if (!page) return;
-    uint32_t a[2] = { page, 0 };
-    rt_call(LD32(LD32(page) + 0x50), a, 2, NULL);
+    if (!rt_in_level()) return;
+    float xp = (float)(320.0 - g_btn_y), yp = (float)(g_btn_x + rt_wide_off);      // game (landscape) point -> the view's portrait point
+    pr3_touch(0, 9100, xp, yp);
+    pr3_touch(3, 9100, xp, yp);
 }
 
 void wrap_GamePlayMenu_UpdateThumbstick(CPU *c) {
@@ -42,6 +47,8 @@ void wrap_GamePlayMenu_UpdateThumbstick(CPU *c) {
     if (!g_show_item) put_x(LD32(menu + 0xdd8), 3000.0);
     else if (g_item_x < 0) { put_x(LD32(menu + 0xdd8), 440.0 + rt_wide_off - rt_safe_right); put_y(LD32(menu + 0xdd8), 280.0); }
     else { put_x(LD32(menu + 0xdd8), g_item_x - rt_wide_off); put_y(LD32(menu + 0xdd8), g_item_y); }
+    g_btn_x = get_x(LD32(menu + 0xdd8));
+    { uint64_t u = ((uint64_t)LD32(LD32(menu + 0xdd8) + 0x28) << 32) | LD32(LD32(menu + 0xdd8) + 0x24); memcpy(&g_btn_y, &u, 8); }
     f_a1660_orig(c);
     uint32_t mgr = mainmgr(), player = mgr ? LD32(mgr + 0x10c) : 0;
     if (!player || LD8(player + 0x18)) return;

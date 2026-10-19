@@ -19,6 +19,7 @@ if [ ! -x "$VENV/bin/python" ]; then python3 -m venv "$VENV"; fi
 PY="$VENV/bin/python"
 "$PY" "$ROOT/tools/fix_data.py" "$DATA"                  # repairs defects of the original data (empty propeller-hat colour layer)
 "$PY" "$ROOT/tools/import_art.py" "$DATA"                # redrawn hats with proper colour layers (art/hats)
+"$PY" "$ROOT/tools/fix_feet.py" "$DATA"                  # penguin second foot, turkey / donkey feet closer together
 "$PY" "$ROOT/tools/make_unlocked_art.py" "$DATA"      # main-menu tile of the "Experimental" single-player mode
 export PR3_BIN="$DATA/PR3.armv7"
 export PR3_SYMS="$TMP/syms.txt"
