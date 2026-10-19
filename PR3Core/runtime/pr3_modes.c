@@ -20,6 +20,7 @@ enum {
     A_SettingsDat = 0x846c, A_SettingsOff = 0x843c,       // Singleton<Settings> slot, as used by -applicationWillResignActive:
 };
 void f_94014_orig(CPU *c);
+void f_aa8d4_orig(CPU *c);
 void f_49aac_orig(CPU *c);
 
 // Calls a guest function from inside another guest call (below the caller's stack pointer).
@@ -97,8 +98,29 @@ static void create_unlocked_profile(CPU *c, uint32_t S) {
     // real level supplies enough medals for every level without marking any of them as completed.
     replace_item(c, json, "campaign", "{\"0\":{\"timeMS\":0,\"medal\":9999}}");
     if (getenv("PR3_DEBUG_HAT")) { char h[32]; snprintf(h, sizeof h, "%d", atoi(getenv("PR3_DEBUG_HAT"))); replace_item(c, json, "hat", h); }   // test aid
+    if (getenv("PR3_DEBUG_PARTS")) { char h[32]; snprintf(h, sizeof h, "%d", atoi(getenv("PR3_DEBUG_PARTS"))); replace_item(c, json, "head", h); replace_item(c, json, "body", h); replace_item(c, json, "feet", h); }   // test aid
     replace_item(c, json, "prizes", "[]");                      // nothing left to win
     gcall(c, A_SaveSettings, &S, 1);
+}
+
+// ---- Donkey: an unreleased body part whose art ships in the original data (DonkeyHead/Body/Foot[_Color]) but which
+// PartDescriptions::Init never registers. Init fills the name vectors (the names double as titles and file-name prefixes)
+// and sizes the sprite caches from them, so after it ran the part is appended to the three name vectors and the six
+// sprite-cache vectors are grown to match. Its ids are the next free ones (26) of head, body and feet.
+void wrap_PartDescriptions_Init(CPU *c) {
+    enum { A_VecStrPushBack = 0xf09c, A_VecSpriteResize = 0x42740 };
+    static const uint32_t names[3] = { 0x18a7bc, 0x18a7ec, 0x18a81c };                         // head, body, feet
+    static const uint32_t caches[3][2] = { { 0x18a7d4, 0x18a7e0 }, { 0x18a804, 0x18a810 }, { 0x18a834, 0x18a840 } };
+    int fresh = (LD32(names[0] + 4) == LD32(names[0]));                                          // Init only does its work once
+    f_aa8d4_orig(c);
+    if (!fresh || LD32(names[0] + 4) == LD32(names[0])) return;
+    uint32_t donkey = guest_string("Donkey");
+    for (int i = 0; i < 3; i++) {
+        uint32_t a[2] = { names[i], donkey };
+        gcall(c, A_VecStrPushBack, a, 2);
+        uint32_t n = (LD32(names[i] + 4) - LD32(names[i])) / 4;
+        for (int k = 0; k < 2; k++) { uint32_t r[3] = { caches[i][k], n, 0 }; gcall(c, A_VecSpriteResize, r, 3); }
+    }
 }
 
 static void switch_profile(CPU *c, int mode) {
