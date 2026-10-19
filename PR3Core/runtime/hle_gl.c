@@ -99,11 +99,11 @@ void hle__glColor4f(CPU *c) { G(glColor4f(AF(c,0), AF(c,1), AF(c,2), AF(c,3))); 
 static uint32_t gl_matrix_mode = 0x1700;
 void hle__glMatrixMode(CPU *c) { gl_matrix_mode = c->r[0]; G(glMatrixMode(c->r[0])); }
 void hle__glLoadIdentity(CPU *c) { (void)c; G(glLoadIdentity()); }
-void hle__glPushMatrix(CPU *c) { (void)c; G(glPushMatrix()); }
-void hle__glPopMatrix(CPU *c) { (void)c; G(glPopMatrix()); }
-void hle__glTranslatef(CPU *c) { G(glTranslatef(AF(c,0), AF(c,1), AF(c,2))); }
-void hle__glScalef(CPU *c) { G(glScalef(AF(c,0), AF(c,1), AF(c,2))); }
-void hle__glRotatef(CPU *c) { G(glRotatef(AF(c,0), AF(c,1), AF(c,2), AF(c,3))); }
+void hle__glPushMatrix(CPU *c) { (void)c; GLOG("glPushMatrix"); G(glPushMatrix()); }
+void hle__glPopMatrix(CPU *c) { (void)c; GLOG("glPopMatrix"); G(glPopMatrix()); }
+void hle__glTranslatef(CPU *c) { GLOG("glTranslatef %g %g %g", AF(c,0), AF(c,1), AF(c,2)); G(glTranslatef(AF(c,0), AF(c,1), AF(c,2))); }
+void hle__glScalef(CPU *c) { GLOG("glScalef %g %g %g", AF(c,0), AF(c,1), AF(c,2)); G(glScalef(AF(c,0), AF(c,1), AF(c,2))); }
+void hle__glRotatef(CPU *c) { GLOG("glRotatef %g %g %g %g", AF(c,0), AF(c,1), AF(c,2), AF(c,3)); G(glRotatef(AF(c,0), AF(c,1), AF(c,2), AF(c,3))); }
 // ---- Widescreen (main branch). The game's screen is 480 x 320 landscape points. On a wider display the framebuffer is
 // 480 + 2*rt_wide_off points wide. In menus the game keeps its 480-point area, centred; while a level is shown the viewport
 // and the projection grow by rt_wide_off points on both sides, so the world is simply drawn wider (the game's coordinates,

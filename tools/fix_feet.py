@@ -28,3 +28,4 @@ for name, fix in FIXES.items():
             f = os.path.join(data, name + part + suffix)
             if not os.path.exists(f): continue
             im = Image.open(f).convert('RGBA'); fix(im, im.width / 256.0).save(f)
+

@@ -43,7 +43,7 @@ def propeller_color(base_path, out_path):
     from scipy import ndimage as ndi
     kk = max(1, int(round(k)))
     solid = ndi.binary_fill_holes(ndi.binary_closing(np.array(base.split()[3]) > 8, structure=np.ones((3, 3)), iterations=3 * kk))
-    inside = ndi.binary_erosion(solid, iterations=3 * kk)
+    inside = ndi.binary_erosion(solid, iterations=kk)
     a = Image.fromarray(np.where(inside, np.array(a), 0).astype(np.uint8))
     out.putalpha(a)
     out.save(out_path)
