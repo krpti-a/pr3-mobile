@@ -18,7 +18,7 @@ def duplicate_front(im, dx, dy):
     out = im.copy(); out.alpha_composite(shifted(im, dx, dy)); return out
 
 FIXES = {'PenguinFoot': lambda im, k: duplicate_front(im, round(22 * k), round(100 * k)),
-         'TurkeyFoot': lambda im, k: move_lower(im, round(130 * k), round(-25 * k), round(-30 * k)),
+         'TurkeyFoot': lambda im, k: move_lower(im, round(130 * k), round(-30 * k), round(-10 * k)),
          'DonkeyFoot': lambda im, k: move_lower(im, round(130 * k), round(-50 * k), round(-17 * k))}
 
 data = sys.argv[1]

@@ -23,8 +23,9 @@ def whiten(im):
 # Hats whose supplied colour layer has the right shape but sits a little off the coloured area of the sprite (the translucent
 # interior, which the game tints from underneath): its position and scale are fitted to that area. The fit is made on the @2x
 # sprite and reused (as fractions of the canvas) for the 1x one.
-FIT = {'top', 'party', 'pirate', 'nurse', 'boundy', 'happy'}
+FIT = set()                                                             # (fitting the layer to the sprite was worse than using the artist's own placement)
 FITS = {}
+FLAT = {'top', 'pirate', 'nurse', 'happy', 'boundy'}
 
 def coloured_area(base, guide):
     """Translucent interior of the sprite near the supplied layer: where the tinted layer shows through."""
@@ -100,11 +101,15 @@ def build(data, key, suffix):
     px = (al['cx'] - al['bx']) / s - bb[0]; py = (al['cy'] - al['by']) / s - bb[1]
     cw, ch = max(1, round(col.width / s * f)), max(1, round(col.height / s * f))
     c = whiten(col).resize((cw, ch), Image.Resampling.LANCZOS)
-    a = c.split()[3].filter(ImageFilter.MinFilter(3)); c.putalpha(a)       # keep it inside the base's outline
     out_col = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     cx, cy = x0 + round(px * f), y0 + round(py * f)
     out_col.alpha_composite(c, (max(cx, 0), max(cy, 0)), (max(-cx, 0), max(-cy, 0))) if True else None
     if key in FIT: out_col = fit_color(out_base, out_col, key)
+    if key in FLAT:
+        # The artist's preview draws the flat colour layer ON TOP of the hat (see art/hats/color-layer/preview); the game draws it
+        # underneath, so the hat is cut out where the layer is.
+        a = np.array(out_base.split()[3]).astype(float) * (1 - np.array(out_col.split()[3]).astype(float) / 255.0)
+        out_base.putalpha(Image.fromarray(a.astype(np.uint8)))
     return out_base, out_col
 
 data = sys.argv[1]

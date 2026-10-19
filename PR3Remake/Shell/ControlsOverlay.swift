@@ -238,9 +238,9 @@ final class DPadView: UIView {
 final class ControlsOverlay: UIView {
     private let joystick = JoystickView()
     private let dpad = DPadView()
-    private let jump = GlassButton(symbol: "arrow.up")
-    private let crouch = GlassButton(symbol: "arrow.down")
-    private let item = GlassButton(symbol: "bag.fill")
+    private let jump = GlassButton(symbol: "xmark")
+    private let crouch = GlassButton(symbol: "circle")
+    private let item = GlassButton(symbol: "square")
     private let gear = GlassButton(symbol: "gearshape.fill")
     private let panel = UIVisualEffectView(effect: UIBlurEffect(style: .systemThinMaterialDark))
     private let movementPicker = UISegmentedControl(items: ["Joystick", "Buttons"])
@@ -267,7 +267,7 @@ final class ControlsOverlay: UIView {
         super.init(frame: frame)
         isMultipleTouchEnabled = true
         for v in [joystick, dpad, jump, crouch, item, gear] as [UIView] { addSubview(v) }
-        jump.symbolScale = 0.42; crouch.symbolScale = 0.4; item.symbolScale = 0.4; gear.symbolScale = 0.5
+        jump.symbolScale = 0.36; crouch.symbolScale = 0.36; item.symbolScale = 0.34; gear.symbolScale = 0.5
         item.onPress = { pr3_use_item() }
         gear.onPress = { [weak self] in self?.togglePanel() }
         buildPanel()

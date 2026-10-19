@@ -38,6 +38,13 @@ def propeller_color(base_path, out_path):
     near_yellow = yel.filter(ImageFilter.MaxFilter(4 * int(round(k)) + 1))    # keep the seam with the yellow wedge closed
     from PIL import ImageChops
     a = ImageChops.lighter(a, ImageChops.multiply(orig, near_yellow))
+    # and keep it well inside the sprite's own silhouette (the sides of the dome showed the colour past the outline)
+    import numpy as np
+    from scipy import ndimage as ndi
+    kk = int(round(k))
+    solid = ndi.binary_fill_holes(ndi.binary_closing(np.array(base.split()[3]) > 8, structure=np.ones((3, 3)), iterations=3 * kk))
+    inside = ndi.binary_erosion(solid, iterations=3 * kk)
+    a = Image.fromarray(np.where(inside, np.array(a), 0).astype(np.uint8))
     out.putalpha(a)
     out.save(out_path)
 
