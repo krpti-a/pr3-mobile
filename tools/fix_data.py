@@ -21,14 +21,24 @@ def propeller_color(base_path, out_path):
         if a > 150 and s > 0.55 and v > 0.3 and 0.07 < hh < 0.20: return 'yellow'
         return 'other'
     out = Image.new('RGBA', (w, h), (0, 0, 0, 0)); op = out.load()
+    yel = Image.new('L', (w, h), 0); yp = yel.load()
     for y in range(int(70 * k), int(152 * k)):
         kinds = [kind(x, y) for x in range(w)]
         xs = [x for x in range(w) if kinds[x] == 'other']
         if not xs: continue
         lo, hi = min(xs), max(xs)
         for x in range(lo, hi + 1):
+            if kinds[x] == 'yellow': yp[x, y] = 255
             if kinds[x] in ('yellow', 'red', 'blue'): continue
             op[x, y] = (255, 255, 255, 255)
+    # pull the colour layer in from the outline so it does not show as a fringe around the sprite's dark edge
+    from PIL import ImageFilter
+    orig = out.split()[3]
+    a = orig.filter(ImageFilter.MinFilter(2 * int(round(k)) + 1))
+    near_yellow = yel.filter(ImageFilter.MaxFilter(4 * int(round(k)) + 1))    # keep the seam with the yellow wedge closed
+    from PIL import ImageChops
+    a = ImageChops.lighter(a, ImageChops.multiply(orig, near_yellow))
+    out.putalpha(a)
     out.save(out_path)
 
 data = sys.argv[1]
