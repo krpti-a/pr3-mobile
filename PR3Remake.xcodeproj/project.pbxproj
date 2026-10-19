@@ -21,6 +21,7 @@
 		266BCB2919DACFD3629A1C68 /* gen_binds.c in Sources */ = {isa = PBXBuildFile; fileRef = 333E2DA00EFDD9412D2E9F9D /* gen_binds.c */; };
 		28013CB1AAD0E177074237F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80682A187638843CB5D250F2 /* Assets.xcassets */; };
 		2C725545F62DEA63B26019CD /* pr3_controls.c in Sources */ = {isa = PBXBuildFile; fileRef = 84F484807AED8D7E8836F5AC /* pr3_controls.c */; };
+		308CB35307528B36CAE0715D /* pr3_hats.c in Sources */ = {isa = PBXBuildFile; fileRef = 12963A3E4DDE7D8E34A4F963 /* pr3_hats.c */; };
 		3A2CD3000ADDE6D527317344 /* gen_016.c in Sources */ = {isa = PBXBuildFile; fileRef = 174D4B0FC6A02B5E219D6BD0 /* gen_016.c */; };
 		41359B7E1AF551BD0B3CDC66 /* gen_013.c in Sources */ = {isa = PBXBuildFile; fileRef = 1FD84A35E5C266FCABC9C34F /* gen_013.c */; };
 		423E9FEFA8F2639783E158C6 /* gen_042.c in Sources */ = {isa = PBXBuildFile; fileRef = 07ACDEF2CD981F47F97D11BF /* gen_042.c */; };
@@ -111,6 +112,7 @@
 		09B53A9ADE52E5F41A3E9312 /* gen_049.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_049.c; sourceTree = "<group>"; };
 		0F5B408ACC5F4950C5A06447 /* gen_060.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_060.c; sourceTree = "<group>"; };
 		10715C8901E0E07F197631D2 /* gen_062.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_062.c; sourceTree = "<group>"; };
+		12963A3E4DDE7D8E34A4F963 /* pr3_hats.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pr3_hats.c; sourceTree = "<group>"; };
 		174D4B0FC6A02B5E219D6BD0 /* gen_016.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_016.c; sourceTree = "<group>"; };
 		1793B62C7F135A73C98056F5 /* gen_006.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_006.c; sourceTree = "<group>"; };
 		17C348D5DC58CF5B4C7A8875 /* gen_001.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gen_001.c; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				827CD9054B077180929C6A6D /* pr3_audio.c */,
 				84F484807AED8D7E8836F5AC /* pr3_controls.c */,
 				1983A8A25592BCB503E04A9E /* pr3_fixes.c */,
+				12963A3E4DDE7D8E34A4F963 /* pr3_hats.c */,
 				E320BDDC87B7E5F8A8892B4A /* pr3_modes.c */,
 				6D0C284C68B981FB13152105 /* pr3_shell.c */,
 				B9A6E262ECE0E88A48729C77 /* pr3_speed.c */,
@@ -515,6 +518,7 @@
 				6F9E4D4700E82D11F06701DC /* pr3_audio.c in Sources */,
 				2C725545F62DEA63B26019CD /* pr3_controls.c in Sources */,
 				B1357D87E6198B460AEB77AF /* pr3_fixes.c in Sources */,
+				308CB35307528B36CAE0715D /* pr3_hats.c in Sources */,
 				89E3EA225F5E327C1ECFC8A1 /* pr3_modes.c in Sources */,
 				9DB91E7B7DEBE4591B3578DB /* pr3_shell.c in Sources */,
 				860E63F48A433CEAF216DF65 /* pr3_speed.c in Sources */,

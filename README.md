@@ -62,6 +62,7 @@ The `original` branch is the faithful port plus bug fixes only. `main` adds, on 
   crouch and use items, and drive a cursor in the menus.
 - **Experimental** profile (all hats, parts and levels), redrawn hats and the Donkey part (`art/`, `tools/import_art.py`).
 - **Faster loading**: the original's LodePNG hot paths are replaced by zlib / plain C (`pr3_speed.c`), output bit-identical.
+- **Santa Hat**: the block landed on takes on ice-block physics and an ice-block sprite for 50 frames; the sprite fades before the block returns to normal (`pr3_hats.c`).
 
 ## What works
 

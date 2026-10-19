@@ -47,11 +47,13 @@ int pr3_boot(const char *binary_path, const char *resource_root, const char *doc
 static void call_f(uint32_t fn, float v) { uint32_t a = BITS_F32(v); rt_call(fn, &a, 1, NULL); }
 
 void rt_objc_fire_timers(double dt_ms);
+void pr3_hats_tick(void);
 void pr3_frame(double dt_ms) {
     if (!g_booted) return;
     // The original measured the time between successive frames; clamp like a stalled display link would.
     if (dt_ms > 100.0) dt_ms = 100.0;
     if (dt_ms > 0) g_update_ms = (float)dt_ms;
+    pr3_hats_tick();
     rt_objc_fire_timers(g_update_ms);          // NSTimers run on the main run loop between frames
     rt_call(A_RK_MAIN_Tick, NULL, 0, NULL);
     for (int i = 0; i < ntouch; ) {
