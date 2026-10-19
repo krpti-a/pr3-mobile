@@ -21,6 +21,9 @@ def main():
     wraps = {}          # addr -> C symbol: the original is kept as f_<addr>_orig and f_<addr> calls the wrapper
     for name, csym in cfg.get('wraps', {}).items():
         wraps[by_name[name]] = csym
+    cpatches = {}       # addr -> [(old, new)]: text replacements in the generated C of a function (widescreen culling limits)
+    for name, reps in cfg.get('cpatches', {}).items():
+        cpatches[by_name[name]] = reps
     roots = []
     for r in cfg['roots']:
         if r == '*':
@@ -42,6 +45,9 @@ def main():
             refs.add(a); continue
         end = recomp.func_end(a)
         body, g = recomp.gen_function(name, a, end)
+        for old, new in cpatches.get(a, []):
+            if body.count(old) != 1: raise SystemExit('cpatch for %s does not match exactly once: %r' % (name, old))
+            body = body.replace(old, new)
         if a in wraps: body = body.replace('void f_%x(CPU *c)' % a, 'void f_%x_orig(CPU *c)' % a, 1)
         done[a] = body
         for m in re.findall(r'UNIMPL\("([^"]*)"\)', body): unsupported.setdefault(a, []).append(m)

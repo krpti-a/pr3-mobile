@@ -28,11 +28,13 @@ static void save_ppm(const char *path, int w, int h) {
 }
 
 // landscape game point -> portrait view-local point (the original rotated its 320x480 view by 90 degrees)
-static void to_portrait(int xl, int yl, float *xp, float *yp) { *xp = (float)(320 - yl); *yp = (float)xl; }
+static int wide_off;
+static void to_portrait(int xl, int yl, float *xp, float *yp) { *xp = (float)(320 - yl); *yp = (float)(xl + wide_off); }
 
 int main(int argc, char **argv) {
     float SC = getenv("SCALE") ? atof(getenv("SCALE")) : 2.0f;
-    int W = (int)(320 * SC), H = (int)(480 * SC);
+    wide_off = getenv("WIDE") ? atoi(getenv("WIDE")) : 0;
+    int W = (int)(320 * SC), H = (int)((480 + 2 * wide_off) * SC);
     CGLPixelFormatAttribute attrs[] = { kCGLPFAAccelerated, kCGLPFAColorSize, (CGLPixelFormatAttribute)24, (CGLPixelFormatAttribute)0 };
     CGLPixelFormatObj pf; GLint n; CGLChoosePixelFormat(attrs, &pf, &n);
     CGLContextObj ctx; CGLCreateContext(pf, NULL, &ctx); CGLSetCurrentContext(ctx);
@@ -44,6 +46,7 @@ int main(int argc, char **argv) {
 
     const char *docs = getenv("PR3_DOCS") ? getenv("PR3_DOCS") : "/tmp/pr3_docs";
     if (pr3_boot(argv[1], getenv("PR3_RES"), docs, SC)) { fprintf(stderr, "boot failed\n"); return 1; }
+    pr3_set_wide(wide_off);
     if (getenv("GLOG")) rt_gl_set_log(atoi(getenv("GLOG")));
     { extern uint32_t rt_watch_lo, rt_watch_len; if (getenv("RT_WATCH")) { rt_watch_lo = (uint32_t)strtoul(getenv("RT_WATCH"), 0, 16); rt_watch_len = 16; } }
     int frames = argc > 2 ? atoi(argv[2]) : 3, every = argc > 3 ? atoi(argv[3]) : 1;

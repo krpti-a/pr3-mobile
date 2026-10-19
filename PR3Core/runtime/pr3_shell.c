@@ -4,6 +4,7 @@
 extern char rt_resource_root[1024];
 extern char rt_documents_root[1024];
 extern float rt_gl_scale;
+extern int rt_wide_off;
 extern void (*rt_shell_start_update)(void);
 extern void (*rt_shell_end_update)(void);
 void rt_run_initializers(void);
@@ -58,7 +59,7 @@ void pr3_frame(double dt_ms) {
         if (touches[i].pending_end) { uint32_t id = touches[i].id; remove_touch(i); release_touch(id); } else i++;
     }
     if (rt_shell_start_update) rt_shell_start_update();
-    { extern void rt_gl_frame_begin(void); rt_gl_frame_begin(); }
+    { extern void rt_gl_frame_begin(void), rt_gl_clear_frame(void); rt_gl_frame_begin(); rt_gl_clear_frame(); }
     rt_call(A_RK_MAIN_Draw, NULL, 0, NULL);
     call_f(A_SetRKFrameTime, g_update_ms);
     if (rt_shell_end_update) rt_shell_end_update();
@@ -73,8 +74,16 @@ static void release_touch(uint32_t id) {
     rt_call(A_ResetTouchPos, &id, 1, NULL);
 }
 
+void pr3_set_wide(int off) { rt_wide_off = off > 0 ? off : 0; }
+// Is a level (a game page) on screen? MainMgr::page (+0x104), as used by OfflineGamePage.
+int rt_in_level(void) {
+    uint32_t slot = 0x1b7b8 + LD32(0x1b83c), mgr = LD32(slot) ? LD32(LD32(slot)) : 0;
+    return g_booted && mgr && LD32(mgr + 0x104) != 0;
+}
+
 void pr3_touch(int phase, int touch_id, float x, float y) {
     if (!g_booted) return;
+    y -= (float)rt_wide_off;           // the view is rt_wide_off points taller on both sides of the game's 480-point screen
     uint32_t id = (uint32_t)touch_id;
     if (phase == 0 && ntouch < MAXT) { touches[ntouch].id = id; touches[ntouch].seen = 0; touches[ntouch].pending_end = 0; ntouch++; }
     if (phase == 0) {

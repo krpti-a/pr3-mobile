@@ -67,6 +67,9 @@ static inline uint32_t ROR(uint32_t x, uint32_t s) { s &= 31; return s ? (x >> s
 // ---- calls --------------------------------------------------------------------
 typedef void (*rt_fn)(CPU *);
 void rt_call_indirect(CPU *c, uint32_t addr);
+// widescreen (main branch): extra block columns / rows BlockMap::Render must draw on each side (see pr3_wide.c)
+int rt_wide_cols(void);
+int rt_wide_rows(uint32_t rows);
 void rt_unimpl(const char *what);
 void rt_missing(uint32_t addr);
 

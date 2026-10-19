@@ -28,6 +28,22 @@
   "PlatformRacing3::HandleEvent(Event*)": "wrap_PlatformRacing3_HandleEvent",
   "Player::ShowHats()": "wrap_Player_ShowHats",
   "PartDescriptions::Init()": "wrap_PartDescriptions_Init",
-  "Minimap::DrawBlocks()": "wrap_Minimap_DrawBlocks"
+  "Minimap::DrawBlocks()": "wrap_Minimap_DrawBlocks",
+  "MainMgr::SetBG(char const*)": "wrap_MainMgr_SetBG",
+  "GamePlayMenu::GamePlayMenu()": "wrap_GamePlayMenu_ctor",
+  "GamePlayMenu::AddRetryButton()": "wrap_GamePlayMenu_AddRetryButton",
+  "ActionContainer::Draw(UIObject*)": "wrap_ActionContainer_Draw"
+ },
+ "cpatches": {
+  "BlockMap::Render()": [
+   [
+    "  r8 = r2 - 0x7u;\n  r2 = r2 + r1;\n",
+    "  r8 = r2 - 0x7u - rt_wide_cols();\n  r2 = r2 + r1 + rt_wide_cols();\n"
+   ],
+   [
+    "  r6 = r2 - r3;\n  r3 = LD32((sp + (uint32_t)(12)));\n  r10 = r2 + r3;\n",
+    "  r6 = r2 - r3 - rt_wide_rows(r3);\n  r3 = LD32((sp + (uint32_t)(12)));\n  r10 = r2 + r3 + rt_wide_rows(r3);\n"
+   ]
+  ]
  }
 }

@@ -16,4 +16,7 @@ void pr3_set_view_hooks(pr3_hook start_update, pr3_hook end_update);
 // Writes Settings.dat (what the original did in applicationWillResignActive). Call when the app leaves the foreground.
 void pr3_save(void);
 float pr3_gl_scale(void);
+// Widescreen: the view is 320 x (480 + 2 * off) points; the game's own 480-point screen sits in the middle of it, and while a
+// level is shown the world is drawn over the whole view. Call before the first frame; touches stay in view coordinates.
+void pr3_set_wide(int off);
 #endif

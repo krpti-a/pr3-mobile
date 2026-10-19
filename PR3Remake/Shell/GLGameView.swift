@@ -16,10 +16,12 @@ final class GLGameView: UIView {
 
     static weak var current: GLGameView?
 
-    static let portraitSize = CGSize(width: 320, height: 480)
+    /// The game's portrait screen is 320 x 480 points. On a wider display the view is `wideOff` points taller on both sides
+    /// (the landscape game area grows to the left and right, see pr3_set_wide).
+    static func portraitSize(wideOff: Int) -> CGSize { CGSize(width: 320, height: 480 + 2 * CGFloat(wideOff)) }
 
-    init(scale: CGFloat) {
-        super.init(frame: CGRect(origin: .zero, size: GLGameView.portraitSize))
+    init(scale: CGFloat, wideOff: Int) {
+        super.init(frame: CGRect(origin: .zero, size: GLGameView.portraitSize(wideOff: wideOff)))
         contentScaleFactor = scale
         isMultipleTouchEnabled = true
         isOpaque = true

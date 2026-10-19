@@ -7,6 +7,8 @@ final class GameViewController: UIViewController {
     private var displayLink: CADisplayLink?
     private var lastTimestamp: CFTimeInterval = 0
     private var booted = false
+    /// Points added on each side of the game's 480 x 320 landscape screen so that it fills the display (0 on 4:3 screens).
+    private var wideOff = 0
 
     override func loadView() { view = UIView(); view.backgroundColor = .black }
     override var prefersStatusBarHidden: Bool { true }
@@ -22,7 +24,7 @@ final class GameViewController: UIViewController {
     private func layoutGameView() {
         guard let gameView else { return }
         let size = view.bounds.size
-        // The game is 480 x 320 (landscape). Fit it inside the screen.
+        // The game is 480 x 320 (landscape). Fit its height to the screen; the width is widened (wideOff) to fill it.
         let k = min(size.width / 480, size.height / 320)
         gameView.center = CGPoint(x: size.width / 2, y: size.height / 2)
         gameView.transform = CGAffineTransform(rotationAngle: -.pi / 2).scaledBy(x: k, y: k)
@@ -31,7 +33,10 @@ final class GameViewController: UIViewController {
     private func boot() {
         booted = true
         let scale: CGFloat = 3
-        gameView = GLGameView(scale: scale)
+        let size = view.bounds.size
+        wideOff = max(0, Int(((size.width / size.height) * 320 - 480) / 2))
+        pr3_set_wide(Int32(wideOff))
+        gameView = GLGameView(scale: scale, wideOff: wideOff)
         view.addSubview(gameView)
         layoutGameView()
 
@@ -81,7 +86,7 @@ final class GameViewController: UIViewController {
         for i in script.indices where !script[i].done {
             let e = script[i]
             // game (landscape) point -> the view's local portrait point, like -[UITouch locationInView:]
-            let px = 320 - e.y, py = e.x
+            let px = 320 - e.y, py = e.x + Float(wideOff)
             if !e.began && scriptTime >= e.start { script[i].began = true; pr3_touch(0, e.id, px, py) }
             else if e.began && scriptTime < e.end { pr3_touch(1, e.id, px, py) }
             else if e.began && scriptTime >= e.end { script[i].done = true; pr3_touch(3, e.id, px, py) }
