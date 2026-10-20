@@ -83,7 +83,9 @@ The `original` branch is the faithful port plus bug fixes only. `main` adds, on 
 
 - Everything the original did without its servers: title, menus, the character screen, all 50 single-player levels
   with the blocks, items, water, teleports, effects, level text, minimap, countdown, timer and medals they use;
-  progress saves; sound and music (OpenAL; checked at the API level — sources play without errors — not by ear).
+  progress saves and sound effects. The supplied menu theme plays in menus and character customization, then pauses
+  during levels. The IPA contains no level-music tracks; tap the music-note button in a level to import an audio file
+  for offline level playback. Audio plays with the phone's Silent switch on.
 - Custom (user-made) blocks: the original asked the Sparkworkz server for them; the app's own offline fake
   server serves the block files that shipped in the IPA, and the art is drawn by the original code.
 - Online play, chat, leaderboards, Facebook/Twitter/Tapjoy: the servers are gone; those paths fail cleanly.

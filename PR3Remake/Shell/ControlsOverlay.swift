@@ -242,6 +242,8 @@ final class ControlsOverlay: UIView {
     private let crouch = GlassButton(symbol: "circle")
     private let item = GlassButton(symbol: "square")
     private let gear = GlassButton(symbol: "gearshape.fill")
+    private let music = GlassButton(symbol: "music.note")
+    var onMusicPress: (() -> Void)?
     private let panel = UIVisualEffectView(effect: UIBlurEffect(style: .systemThinMaterialDark))
     private let movementPicker = UISegmentedControl(items: ["Joystick", "Buttons"])
     private let originalSwitch = UISwitch()
@@ -266,10 +268,11 @@ final class ControlsOverlay: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         isMultipleTouchEnabled = true
-        for v in [joystick, dpad, jump, crouch, item, gear] as [UIView] { addSubview(v) }
+        for v in [joystick, dpad, jump, crouch, item, gear, music] as [UIView] { addSubview(v) }
         jump.symbolScale = 0.36; crouch.symbolScale = 0.36; item.symbolScale = 0.34; gear.symbolScale = 0.5
         item.onPress = { pr3_use_item() }
         gear.onPress = { [weak self] in self?.togglePanel() }
+        music.onPress = { [weak self] in self?.onMusicPress?() }
         buildPanel()
         store.onChange = { [weak self] in self?.settingsChanged() }
         settingsChanged()
@@ -377,6 +380,7 @@ final class ControlsOverlay: UIView {
         let safe = safeAreaInsets
         let show = inLevel && !touchControlsHidden && !s.original
         gear.isHidden = !inLevel
+        music.isHidden = !inLevel
         joystick.isHidden = !(show && s.movement == .joystick)
         dpad.isHidden = !(show && s.movement == .buttons)
         jump.isHidden = !(show && s.showJump)
@@ -388,6 +392,7 @@ final class ControlsOverlay: UIView {
         // Settings gear: right beside the timer (the game draws it at the top right).
         let g = 34 * m.u
         gear.frame = CGRect(x: bounds.width - max(safe.right, 0) - 10 * k - 76 * m.u - g / 2, y: 25 * k - g / 2, width: g, height: g)
+        music.frame = gear.frame.offsetBy(dx: -(g + 10 * m.u), dy: 0)
         if !panel.isHidden {
             let size = panel.contentView.systemLayoutSizeFitting(CGSize(width: 300, height: UIView.layoutFittingCompressedSize.height),
                                                                  withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
@@ -430,7 +435,7 @@ final class ControlsOverlay: UIView {
         if !dpad.isHidden && dpad.frame.contains(point) { return dpad }
         // Round buttons: the touch area is the circle grown by hitSlop; where two overlap the nearer centre wins.
         var best: (UIView, CGFloat)?
-        for v in [jump, crouch, item, gear] as [UIView] where !v.isHidden {
+        for v in [jump, crouch, item, gear, music] as [UIView] where !v.isHidden {
             let grow = v.bounds.width * GlassButton.hitSlop / 2
             guard v.frame.insetBy(dx: -grow, dy: -grow).contains(point) else { continue }
             let d = hypot(point.x - v.frame.midX, point.y - v.frame.midY)

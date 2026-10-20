@@ -1,8 +1,10 @@
 import UIKit
 import SwiftUI
+import AVFAudio
+import UniformTypeIdentifiers
 
 /// Hosts the recompiled original game: boots it, runs the display link and keeps the rotated view letterboxed.
-final class GameViewController: UIViewController {
+final class GameViewController: UIViewController, UIDocumentPickerDelegate {
     private var gameView: GLGameView!
     private var displayLink: CADisplayLink?
     private var lastTimestamp: CFTimeInterval = 0
@@ -15,6 +17,10 @@ final class GameViewController: UIViewController {
     private var cursor = CGPoint.zero
     private var cursorDown = false
     private var itemHeld = false
+    private var menuMusicPlayer: AVAudioPlayer?
+    private var musicPlayer: AVAudioPlayer?
+    private var musicEnabled = UserDefaults.standard.object(forKey: "pr3MusicEnabled") as? Bool ?? true
+    private var isInLevel = false
 
     override func loadView() { view = UIView(); view.backgroundColor = .black }
     override var prefersStatusBarHidden: Bool { true }
@@ -58,6 +64,13 @@ final class GameViewController: UIViewController {
 
     private func boot() {
         booted = true
+        do {
+            let session = AVAudioSession.sharedInstance()
+            try session.setCategory(.playback, mode: .default, options: [.mixWithOthers])
+            try session.setActive(true)
+        } catch {
+            NSLog("PR3: audio session setup failed: %@", String(describing: error))
+        }
         let scale: CGFloat = 3
         let size = view.bounds.size
         wideOff = max(0, Int(((size.width / size.height) * 320 - 480) / 2))
@@ -68,6 +81,7 @@ final class GameViewController: UIViewController {
         updateSafeArea()
         overlay = ControlsOverlay(frame: view.bounds)
         overlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        overlay.onMusicPress = { [weak self] in self?.showMusicOptions() }
         view.addSubview(overlay)
         gameView.onTouchBegan = { [weak self] in self?.overlay.setTouchControlsHidden(false) }
         cursorView.isHidden = true
@@ -91,12 +105,104 @@ final class GameViewController: UIViewController {
         #endif
         let rc = pr3_boot(data + "/PR3.code", data, docs, Float(scale))
         NSLog("PR3: boot returned %d", rc)
+        restoreMenuMusic(data: data)
+        restoreMusic()
+        syncMusic()
         loadScript()
         let link = CADisplayLink(target: self, selector: #selector(tick(_:)))
         // The original ran at a fixed 30 fps (animationInterval = 1/30) and much of its logic counts frames.
         link.preferredFrameRateRange = CAFrameRateRange(minimum: 30, maximum: 30, preferred: 30)
         link.add(to: .main, forMode: .common)
         displayLink = link
+    }
+
+    private func restoreMenuMusic(data: String) {
+        let url = URL(fileURLWithPath: data).appendingPathComponent("MenuTheme.mp3")
+        do {
+            let player = try AVAudioPlayer(contentsOf: url)
+            player.numberOfLoops = -1
+            player.volume = 0.5
+            player.prepareToPlay()
+            menuMusicPlayer = player
+        } catch {
+            NSLog("PR3: menu theme could not be loaded: %@", String(describing: error))
+        }
+    }
+
+    private func restoreMusic() {
+        guard let name = UserDefaults.standard.string(forKey: "pr3MusicFile") else { return }
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(name)
+        guard let player = try? AVAudioPlayer(contentsOf: url) else { return }
+        player.numberOfLoops = -1
+        player.volume = 0.55
+        player.prepareToPlay()
+        musicPlayer = player
+    }
+
+    private func showMusicOptions() {
+        let name = UserDefaults.standard.string(forKey: "pr3MusicFile")
+        let title = name.map { _ in "Music: \(UserDefaults.standard.string(forKey: "pr3MusicTitle") ?? "Selected track")" } ?? "No music selected"
+        let menu = UIAlertController(title: title, message: "Choose an audio file to play during levels.", preferredStyle: .actionSheet)
+        menu.addAction(UIAlertAction(title: "Choose audio file…", style: .default) { [weak self] _ in
+            guard let self else { return }
+            let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.audio], asCopy: true)
+            picker.delegate = self
+            self.present(picker, animated: true)
+        })
+        if name != nil {
+            menu.addAction(UIAlertAction(title: musicEnabled ? "Turn music off" : "Turn music on", style: .default) { [weak self] _ in
+                guard let self else { return }
+                self.musicEnabled.toggle()
+                UserDefaults.standard.set(self.musicEnabled, forKey: "pr3MusicEnabled")
+                self.syncMusic()
+            })
+        }
+        menu.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        menu.popoverPresentationController?.sourceView = overlay
+        menu.popoverPresentationController?.sourceRect = CGRect(x: overlay.bounds.maxX - 150, y: 48, width: 1, height: 1)
+        present(menu, animated: true)
+    }
+
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let source = urls.first else { return }
+        let accessed = source.startAccessingSecurityScopedResource()
+        defer { if accessed { source.stopAccessingSecurityScopedResource() } }
+        let name = "PR3Music-\(UUID().uuidString).\(source.pathExtension.lowercased())"
+        let destination = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(name)
+        do {
+            try FileManager.default.copyItem(at: source, to: destination)
+            let player = try AVAudioPlayer(contentsOf: destination)
+            player.numberOfLoops = -1
+            player.volume = 0.55
+            player.prepareToPlay()
+            musicPlayer?.stop()
+            if let old = UserDefaults.standard.string(forKey: "pr3MusicFile") {
+                let oldURL = destination.deletingLastPathComponent().appendingPathComponent(old)
+                try? FileManager.default.removeItem(at: oldURL)
+            }
+            musicPlayer = player
+            musicEnabled = true
+            UserDefaults.standard.set(name, forKey: "pr3MusicFile")
+            UserDefaults.standard.set(source.deletingPathExtension().lastPathComponent, forKey: "pr3MusicTitle")
+            UserDefaults.standard.set(true, forKey: "pr3MusicEnabled")
+            syncMusic()
+        } catch {
+            try? FileManager.default.removeItem(at: destination)
+            let alert = UIAlertController(title: "Couldn’t open audio", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        }
+    }
+
+    private func syncMusic() {
+        if isInLevel {
+            menuMusicPlayer?.pause()
+            if musicEnabled && musicPlayer?.isPlaying == false { musicPlayer?.play() }
+            else if !musicEnabled { musicPlayer?.pause() }
+        } else {
+            musicPlayer?.pause()
+            if menuMusicPlayer?.isPlaying == false { menuMusicPlayer?.play() }
+        }
     }
 
     // MARK: Debug autopilot: -script "tap@12:240:160;hold@30-60:90:230" (seconds, 480x320 game coordinates)
@@ -137,6 +243,7 @@ final class GameViewController: UIViewController {
     /// Merges touch and game-controller input into the game for this frame; with a controller and no level, a cursor taps the menus.
     private func updateControls(dt: Double) {
         let inLevel = pr3_in_level() != 0
+        if inLevel != isInLevel { isInLevel = inLevel; syncMusic() }
         overlay.update(inLevel: inLevel)
         let pad = gamepad.poll()
         if inLevel {
@@ -176,6 +283,8 @@ final class GameViewController: UIViewController {
         runScript(dt: dt)
         updateControls(dt: dt / 1000)
         pr3_frame(dt)
+        let nowInLevel = pr3_in_level() != 0
+        if nowInLevel != isInLevel { isInLevel = nowInLevel; syncMusic() }
         if now - lastSave >= 10 { lastSave = now; pr3_save() }   // iOS can kill a suspended app without notice
     }
 }

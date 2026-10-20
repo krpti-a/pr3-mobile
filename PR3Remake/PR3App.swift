@@ -1,4 +1,5 @@
 import SwiftUI
+import AVFAudio
 
 @main
 struct PR3App: App {
@@ -14,6 +15,7 @@ struct PR3App: App {
         // The original saved its settings/progress in applicationWillResignActive; iOS may kill a backgrounded app at any time.
         .onChange(of: scenePhase) { phase in
             if phase != .active { pr3_save() }
+            else { try? AVAudioSession.sharedInstance().setActive(true) }
         }
     }
 }

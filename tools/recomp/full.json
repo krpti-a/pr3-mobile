@@ -43,7 +43,8 @@
   "PlayGameSFX(e_GameSfx)": "wrap_PlayGameSFX",
   "ActivePlayer::TouchBlock(Block*, int)": "wrap_ActivePlayer_TouchBlock",
   "Block::Freeze()": "wrap_Block_Freeze",
-  "Block::~Block()": "wrap_Block_dtor"
+  "Block::~Block()": "wrap_Block_dtor",
+  "ActivePlayer::UpdateAnimation()": "wrap_ActivePlayer_UpdateAnimation"
  },
  "cpatches": {
   "BlockMap::Render()": [
