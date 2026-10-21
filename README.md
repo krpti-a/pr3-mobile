@@ -77,13 +77,13 @@ The `original` branch is the faithful port plus bug fixes only. `main` adds, on 
   crouch and use items, and drive a cursor in the menus.
 - **Experimental** profile (all hats, parts and levels), redrawn hats and the Donkey part (`art/`, `tools/import_art.py`).
 - **Faster loading**: the original's LodePNG hot paths are replaced by zlib / plain C (`pr3_speed.c`), output bit-identical.
-- **Santa Hat**: the block landed on takes on ice-block physics and an ice-block sprite for 50 frames; the sprite fades before the block returns to normal (`pr3_hats.c`).
+- **Santa Hat**: the block landed on takes on ice-block physics and an ice-block sprite for 50 frames; the sprite fades before the block returns to normal. Temporary ice cannot replace the last safe return position (`pr3_hats.c`).
 
 ## What works
 
 - Everything the original did without its servers: title, menus, the character screen, all 50 single-player levels
   with the blocks, items, water, teleports, effects, level text, minimap, countdown, timer and medals they use;
-  progress saves and sound effects. The supplied menu theme plays in menus and character customization, then pauses
+  progress saves and sound effects. The supplied menu theme plays more quietly in single-player and Experimental menus and character customization, then pauses
   during levels. The IPA contains no level-music tracks; tap the music-note button in a level to import an audio file
   for offline level playback. Audio plays with the phone's Silent switch on.
 - Custom (user-made) blocks: the original asked the Sparkworkz server for them; the app's own offline fake

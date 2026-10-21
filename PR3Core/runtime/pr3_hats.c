@@ -5,6 +5,7 @@
 
 void f_399c4_orig(CPU *c);
 void f_3ae88_orig(CPU *c);
+void f_3693c_orig(CPU *c);
 void f_39dfc(CPU *c);  // Block::GetVars (returns ice settings while frozen)
 void f_3ede8(CPU *c);  // BlockManager::RequestBlock
 void f_f738(CPU *c);   // RK_OBJECT::SetColor
@@ -14,7 +15,9 @@ void f_104d0(CPU *c);  // RK_SPRITE::Draw
 int rt_in_level(void);
 
 // Block::GetVars reads this singleton slot (literal at 0x39e24 + 0xe484c).
-enum { FREEZE_FRAMES = 50, MAX_FROZEN = 64, BLOCK_MANAGER_GLOBAL = 0x11e670 };
+enum { FREEZE_FRAMES = 50, RECENT_ICE_FRAMES = 5 * 30,
+       MAX_FROZEN = 64, RECENT_ICE_BLOCKS = 3,
+       BLOCK_MANAGER_GLOBAL = 0x11e670 };
 typedef struct {
     uint32_t block;
     uint32_t original_vars;
@@ -24,11 +27,72 @@ typedef struct {
 } FrozenBlock;
 static FrozenBlock frozen_blocks[MAX_FROZEN];
 static int frozen_count;
+// Current block plus the two blocks immediately behind it remain ineligible
+// for another freeze after thawing, but only for five seconds at 30 fps.
+typedef struct {
+    uint32_t block;
+    int frames_left;
+} RecentIceBlock;
+static RecentIceBlock recent_ice_blocks[RECENT_ICE_BLOCKS];
+static int recent_ice_count;
 
 static int find_block(uint32_t block) {
     for (int i = 0; i < frozen_count; i++)
         if (frozen_blocks[i].block == block) return i;
     return -1;
+}
+
+static int recently_iced(uint32_t block) {
+    for (int i = 0; i < recent_ice_count; i++)
+        if (recent_ice_blocks[i].block == block) return 1;
+    return 0;
+}
+
+static void remember_iced_block(uint32_t block) {
+    if (recent_ice_count == RECENT_ICE_BLOCKS) {
+        for (int i = 1; i < RECENT_ICE_BLOCKS; i++)
+            recent_ice_blocks[i - 1] = recent_ice_blocks[i];
+        recent_ice_count--;
+    }
+    recent_ice_blocks[recent_ice_count++] = (RecentIceBlock){block, RECENT_ICE_FRAMES};
+}
+
+static void forget_iced_block(int i) {
+    for (int j = i + 1; j < recent_ice_count; j++)
+        recent_ice_blocks[j - 1] = recent_ice_blocks[j];
+    recent_ice_count--;
+}
+
+static void forget_destroyed_block(uint32_t block) {
+    for (int i = 0; i < recent_ice_count; i++) {
+        if (recent_ice_blocks[i].block != block) continue;
+        forget_iced_block(i);
+        return;
+    }
+}
+
+// Freezing replaces the block's settings before LocalPlayer checks whether it
+// can be a return point. Apply the original TouchBlock safety rule to the saved
+// pre-ice settings instead: water and ordinary solid blocks still count, while
+// safety, crumble, brick/shatter, and other temporary blocks do not.
+static int original_block_is_safe(uint32_t vars) {
+    if (!vars || LD32(vars + 36) == 4) return 0;
+
+    // These are the side types rejected by the native TouchBlock safety check.
+    static const uint32_t side_offsets[] = {44, 64, 84, 104, 124};
+    for (int side = 0; side < 5; side++) {
+        uint32_t type = LD32(vars + side_offsets[side]);
+        if (type == 5 || type == 19 || type == 16 ||
+            type == 2 || type == 4 || type == 17)
+            return 0;
+    }
+    return 1;
+}
+
+void wrap_LocalPlayer_MarkSafeBlock(CPU *c) {
+    int i = find_block(c->r[1]);
+    if (i < 0 || original_block_is_safe(frozen_blocks[i].original_vars))
+        f_3693c_orig(c);
 }
 
 static void thaw(int i) {
@@ -43,6 +107,7 @@ static void thaw(int i) {
 
 void wrap_Block_Freeze(CPU *c) {
     uint32_t block = c->r[0];
+    if (recently_iced(block)) return;
     int i = find_block(block);
     uint32_t original_vars = i >= 0 ? frozen_blocks[i].original_vars : LD32(block + 0x1c);
     f_399c4_orig(c);
@@ -81,20 +146,27 @@ void wrap_Block_Freeze(CPU *c) {
 
     ST32(block + 0x1c, ice_vars);
     frozen_blocks[frozen_count++] = (FrozenBlock){block, original_vars, ice_vars, ice_block, FREEZE_FRAMES};
+    remember_iced_block(block);
 }
 
 void wrap_Block_dtor(CPU *c) {
     int i = find_block(c->r[0]);
     if (i >= 0) thaw(i);
+    forget_destroyed_block(c->r[0]);
     f_3ae88_orig(c);
 }
 
 void pr3_hats_tick(void) {
-    if (!frozen_count) return;
     if (!rt_in_level()) {
         while (frozen_count) thaw(frozen_count - 1);
+        recent_ice_count = 0;
         return;
     }
+    for (int i = 0; i < recent_ice_count; ) {
+        if (--recent_ice_blocks[i].frames_left <= 0) forget_iced_block(i);
+        else i++;
+    }
+    if (!frozen_count) return;
     for (int i = 0; i < frozen_count; ) {
         FrozenBlock *entry = &frozen_blocks[i];
         entry->frames_left--;

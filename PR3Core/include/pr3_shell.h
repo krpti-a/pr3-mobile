@@ -30,4 +30,6 @@ void pr3_use_item(void);
 void pr3_hud_config(int show_stick, int show_item, int stick_x_only);
 void pr3_hud_item_pos(double x, double y);   // item button centre in the widened screen's game points (x < 0: original place)
 int  pr3_in_level(void);
+// True on the single-player / Experimental selection and customization screens.
+int  pr3_in_single_player_menu(void);
 #endif

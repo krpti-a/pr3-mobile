@@ -29,6 +29,8 @@
  "chunk": 60,
  "wraps": {
   "MainMenu::InitThumbList()": "wrap_MainMenu_InitThumbList",
+  "MainMenu::Draw(UIObject*)": "wrap_MainMenu_Draw",
+  "SinglePlayerMenu::Draw(UIObject*)": "wrap_SinglePlayerMenu_Draw",
   "PlatformRacing3::HandleEvent(Event*)": "wrap_PlatformRacing3_HandleEvent",
   "Player::ShowHats()": "wrap_Player_ShowHats",
   "PartDescriptions::Init()": "wrap_PartDescriptions_Init",
@@ -43,6 +45,7 @@
   "PlayGameSFX(e_GameSfx)": "wrap_PlayGameSFX",
   "ActivePlayer::TouchBlock(Block*, int)": "wrap_ActivePlayer_TouchBlock",
   "Block::Freeze()": "wrap_Block_Freeze",
+  "LocalPlayer::MarkSafeBlock(Block*)": "wrap_LocalPlayer_MarkSafeBlock",
   "Block::~Block()": "wrap_Block_dtor",
   "ActivePlayer::UpdateAnimation()": "wrap_ActivePlayer_UpdateAnimation"
  },

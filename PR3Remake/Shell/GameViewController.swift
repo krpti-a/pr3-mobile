@@ -18,6 +18,7 @@ final class GameViewController: UIViewController, UIDocumentPickerDelegate {
     private var cursorDown = false
     private var itemHeld = false
     private var menuMusicPlayer: AVAudioPlayer?
+    private var menuMusicQuiet = false
     private var musicPlayer: AVAudioPlayer?
     private var musicEnabled = UserDefaults.standard.object(forKey: "pr3MusicEnabled") as? Bool ?? true
     private var isInLevel = false
@@ -205,6 +206,13 @@ final class GameViewController: UIViewController, UIDocumentPickerDelegate {
         }
     }
 
+    private func updateMenuMusicVolume() {
+        let quiet = pr3_in_single_player_menu() != 0
+        guard quiet != menuMusicQuiet else { return }
+        menuMusicQuiet = quiet
+        menuMusicPlayer?.setVolume(quiet ? 0.2 : 0.5, fadeDuration: 0.35)
+    }
+
     // MARK: Debug autopilot: -script "tap@12:240:160;hold@30-60:90:230" (seconds, 480x320 game coordinates)
     private struct ScriptEvent { var start: Double; var end: Double; var x: Float; var y: Float; var id: Int32; var began = false; var done = false }
     private var script: [ScriptEvent] = []
@@ -283,6 +291,7 @@ final class GameViewController: UIViewController, UIDocumentPickerDelegate {
         runScript(dt: dt)
         updateControls(dt: dt / 1000)
         pr3_frame(dt)
+        updateMenuMusicVolume()
         let nowInLevel = pr3_in_level() != 0
         if nowInLevel != isInLevel { isInLevel = nowInLevel; syncMusic() }
         if now - lastSave >= 10 { lastSave = now; pr3_save() }   // iOS can kill a suspended app without notice

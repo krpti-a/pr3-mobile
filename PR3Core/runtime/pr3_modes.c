@@ -20,6 +20,8 @@ enum {
     A_SettingsDat = 0x846c, A_SettingsOff = 0x843c,       // Singleton<Settings> slot, as used by -applicationWillResignActive:
 };
 void f_94014_orig(CPU *c);
+void f_94634_orig(CPU *c);
+void f_dc2dc_orig(CPU *c);
 void f_aa8d4_orig(CPU *c);
 void f_49aac_orig(CPU *c);
 
@@ -68,6 +70,8 @@ void pr3_sync_user(CPU *cur) {
 #define NORMAL_FILE   "Settings.dat"
 #define UNLOCKED_FILE "Settings_unlocked.dat"
 static int g_mode;                          // 0 = normal profile, 1 = experimental (everything unlocked)
+static int g_single_player_area;
+int pr3_in_single_player_menu(void) { return g_single_player_area; }
 extern char rt_documents_root[1024];
 
 static int file_exists(const char *p) { FILE *f = fopen(p, "rb"); if (f) { fclose(f); return 1; } return 0; }
@@ -152,21 +156,35 @@ static void switch_profile(CPU *c, int mode) {
 // ---- hooks (see tools/recomp/full.json "wraps") --------------------------------------------------------------------
 void wrap_PlatformRacing3_HandleEvent(CPU *c) {
     uint32_t ev = c->r[1];
+    int entering_single_player = 0;
     if (ev) {
         uint32_t d = LD32(ev + 4);
         const char *name = (d > 0x1000 && d < RT_STACK_TOP) ? rt_cstr(d) : "";
         if (!strcmp(name, "offlinePlayAll")) {
+            entering_single_player = 1;
             uint32_t this_ = c->r[0];
             switch_profile(c, 1);
             c->r[0] = this_; c->r[1] = ev;
             ST32(ev + 4, guest_string_data("offlinePlay"));       // from here on it is the normal single-player event
         } else if (!strcmp(name, "offlinePlay")) {
+            entering_single_player = 1;
             uint32_t this_ = c->r[0];
             switch_profile(c, 0);
             c->r[0] = this_; c->r[1] = ev;
         }
     }
     f_49aac_orig(c);
+    if (entering_single_player) g_single_player_area = 1;
+}
+
+void wrap_MainMenu_Draw(CPU *c) {
+    if (LD8(c->r[0] + 24)) g_single_player_area = 0;
+    f_94634_orig(c);
+}
+
+void wrap_SinglePlayerMenu_Draw(CPU *c) {
+    if (LD8(c->r[0] + 24)) g_single_player_area = 1;
+    f_dc2dc_orig(c);
 }
 
 static uint32_t g_list;
